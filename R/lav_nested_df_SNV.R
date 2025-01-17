@@ -1,10 +1,6 @@
 #' @noRd
-#' @importFrom dplyr tibble
-#' @importFrom dplyr distinct
-#' @importFrom dplyr filter
-#' @importFrom dplyr nest_join
-#' @importFrom stringr str_split_i
-#' @importFrom stringr str_sub
+#' @importFrom dplyr tibble `%>%` distinct filter nest_join
+#' @importFrom stringr str_split_i str_sub
 lav_nested_df_SNV<-function(df){
     df1<-dplyr::tibble(
         Sample=df$sample_index,

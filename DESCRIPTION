@@ -15,5 +15,11 @@ RoxygenNote: 7.2.3
 Imports:
     dplyr
     stringr
+    utils
+    Rsamtools
+    GenomicRanges
+    IRanges
+    vcfR
+    readxl
 BugReports: https://github.com/CTrierMaansson/AvenioUpdate/issues
 URL: https://github.com/CTrierMaansson/AvenioUpdate

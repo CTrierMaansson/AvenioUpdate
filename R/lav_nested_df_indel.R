@@ -1,12 +1,6 @@
 #' @noRd
-#' @importFrom dplyr tibble
-#' @importFrom dplyr distinct
-#' @importFrom dplyr filter
-#' @importFrom dplyr nest_join
-#' @importFrom stringr str_split_i
-#' @importFrom stringr str_sub
-#' @importFrom stringr str_glue
-#' @importFrom string str_extract
+#' @importFrom dplyr tibble distinct filter nest_join `%>%`
+#' @importFrom stringr str_split_i str_sub str_glue str_extract
 lav_nested_df_indel<-function(df){
     df1<-dplyr::tibble(
         Sample=df$sample_index,
