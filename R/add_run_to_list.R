@@ -46,13 +46,16 @@ add_run_to_list <- function(master_list, Directory){
     unlisted_before <- do.call(rbind,master_list) %>% 
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
+    print("Merging run information and patient information")
     samples <- add_samples(Directory)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
         stop("All samples are already part of the dataset. Terminating")
     }
     n_patients_before <- length(master_list)
     n_runs_before <- nrow(unlisted_before)
+    print("Creating list of data.frames for new samples")
     df_list <- create_df_list(samples)
+    print("Merging existing data with the new run and verifies mutations in BAM files")
     reanalyzed <- reanalyze_samples(master_list,df_list)
     if(is.list(reanalyzed)){
         if(length(reanalyzed) >= length(master_list)){
