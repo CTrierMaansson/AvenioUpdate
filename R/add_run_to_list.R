@@ -17,10 +17,10 @@
 #'  has been updated the `.rds` file on the Synology containing the list is 
 #'  automatically updated. 
 #' @examples
-#'  master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-#'  test_path <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O"
-#'  add_run_to_list(master_list = master,
-#'                  Directory = test_path)
+#'  # master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+#'  # test_path <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O"
+#'  # add_run_to_list(master_list = master,
+#'  #                 Directory = test_path)
 #'  @export
 add_run_to_list <- function(master_list, Directory){
     if (!is.list(master_list)) {

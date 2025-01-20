@@ -28,13 +28,13 @@
 #'  has been found in the BAM file and not in the AVENIO output, and/or if the
 #'  mutation also has been found in a BC sample if such sample has been run for
 #'  the patient. If a sample has been analyzed but no mutation was identified 
-#'  `NA` is in all relevant variables. 
+#'  `NA` is in all relevant variables.
 #'  @examples
-#'  master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-#'  names(master)
-#'  create_simple_output(df_list = master,
-#'                       CPR = "1234567890",
-#'                       synonymous = FALSE)
+#'  # master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+#'  # names(master)
+#'  # create_simple_output(df_list = master,
+#'  #                      CPR = "1234567890",
+#'  #                      synonymous = FALSE)
 #'  @export
 create_simple_output <- function(df_list,CPR,synonymous = TRUE){
     if (!is.list(df_list)) {
