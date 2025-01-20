@@ -57,16 +57,16 @@ add_run_to_list <- function(master_list, Directory){
                 dplyr::select(Analysis.Name,Sample.ID) %>% 
                 unique()
             n_runs_after <- nrow(unlisted_after)
-            print("Before the dataset consisted of ",
+            print(paste0("Before the dataset consisted of ",
                   n_patients_before, 
                   " patients and ",
                   n_runs_before, 
-                  " samples analyzed")
-            print("Now the dataset consists of ",
+                  " samples analyzed"))
+            print(paste0("Now the dataset consists of ",
                   n_patients_after, 
                   " patients and ",
                   n_runs_after, 
-                  " samples analyzed")
+                  " samples analyzed"))
             saveRDS(reanalyzed,file = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
         }
     }
