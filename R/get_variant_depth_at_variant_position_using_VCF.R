@@ -14,6 +14,6 @@ get_variant_depth_at_variant_position_using_VCF<-function(VCF,Reads){
     total_depth<-ct_depth+wt_depth
     chrom<-VCF@fix[,1]
     pos<-as.numeric(VCF@fix[,2])
-    position<-string::str_glue("{chrom}:{pos}")
+    position<-stringr::str_glue("{chrom}:{pos}")
     return(c(position,ct_depth,total_depth))
 }
