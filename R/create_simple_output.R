@@ -64,7 +64,7 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE){
     AVENIO_sele <- AVENIO_runs[AVENIO_runs$CPR == CPR,]
     AVENIO_sele <- AVENIO_sele[!is.na(AVENIO_sele$CPR),] %>% 
         dplyr::select(Sample_name, Sample_note, Material, Notes)
-    print("Marging run and variant information")
+    print("Merging run and variant information")
     df <- df %>% 
         dplyr::left_join(AVENIO_sele, by = c("Sample.ID" = "Sample_name")) %>% 
         dplyr::select(sample_index,

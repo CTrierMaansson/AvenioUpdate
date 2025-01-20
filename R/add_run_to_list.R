@@ -25,6 +25,7 @@
 #'                 Directory = test_path)
 #' @export
 add_run_to_list <- function(master_list, Directory){
+    `%ni%` <- Negate(`%in%`)
     if (!is.list(master_list)) {
         stop("df_list has to be a list")
     }
@@ -42,11 +43,14 @@ add_run_to_list <- function(master_list, Directory){
     if (!file.exists(Directory)) {
         stop("The path entered as Directory does not exist")
     }
-    samples <- add_samples(Directory)
-    n_patients_before <- length(master_list)
     unlisted_before <- do.call(rbind,master_list) %>% 
-        dplyr::select(Analysis.Name,Sample.ID) %>% 
+        dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
+    samples <- add_samples(Directory)
+    if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
+        stop("All samples are already part of the dataset. Terminating")
+    }
+    n_patients_before <- length(master_list)
     n_runs_before <- nrow(unlisted_before)
     df_list <- create_df_list(samples)
     reanalyzed <- reanalyze_samples(master_list,df_list)
