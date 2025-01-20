@@ -52,4 +52,4 @@ included_analyses <- function(master_list){
     return(list("Overview:" = combined_sum,
                 "Details:" = res_list))
 }
-included_analyses(master_list)
+
