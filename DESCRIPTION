@@ -4,7 +4,7 @@ Version: 0.99
 Authors@R:
   c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3071-3437")),
-    person(given = "Laerke Rosenlund", family = "Nielsen", , email = "laerke.n@clin.au.dk", role = c("aut", "cre")))
+    person(given = "Laerke Rosenlund", family = "Nielsen", , email = "laerke.n@clin.au.dk", role = c("aut")))
 Description: AvenioUpdate contains simple funcitons to update the list of 
   identified mutations across all samples sequenced at AUH. The data
   can also be explored using patient CPR numbers
