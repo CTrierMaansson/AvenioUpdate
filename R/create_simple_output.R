@@ -30,7 +30,7 @@
 #'  the patient. If a sample has been analyzed but no mutation was identified 
 #'  `NA` is in all relevant variables.
 #'  
-#'  @examples
+#' @examples
 #'  master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 #'  names(master)
 #'  create_simple_output(df_list = master,
