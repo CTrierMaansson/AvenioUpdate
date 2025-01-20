@@ -29,6 +29,7 @@
 #'  mutation also has been found in a BC sample if such sample has been run for
 #'  the patient. If a sample has been analyzed but no mutation was identified 
 #'  `NA` is in all relevant variables.
+#'  
 #'  @examples
 #'  master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 #'  names(master)
