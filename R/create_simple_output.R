@@ -4,7 +4,7 @@
 #' located at "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
 #' and a CPR number (or other unique patient number used for the patient) and 
 #' creates a simple overview of the mutations identified.
-#' @importFrom dplyr left_join select mutate tibble `%>%` filter
+#' @importFrom dplyr left_join select mutate tibble `%>%` filter arrange
 #' @importFrom readxl read_xlsx
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @param df_list The `list` of `data.frames` which contains all information on
@@ -77,6 +77,8 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE){
     colnames(df) <- c("sample_index","Class","Gene","AA","Description",
                       "Flags","MAF","Variant_depth","Unique_depth","Analysis",
                       "Sample.ID","Sample_note","Material","Notes")
+    df <- df %>% 
+        arrange(sample_index,Gene)
     if(synonymous){
         df <- df
     }
