@@ -29,9 +29,8 @@ the new NGS data is added under that patient and all the BAM files for that
 patient is manually checked for mutations.
 }
 \examples{
- # master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
- # test_path <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O"
- # add_run_to_list(master_list = master,
- #                 Directory = test_path)
- @export
+master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+test_path <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O"
+add_run_to_list(master_list = master,
+                Directory = test_path)
 }

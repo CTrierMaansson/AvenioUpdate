@@ -30,12 +30,12 @@
 #'  the patient. If a sample has been analyzed but no mutation was identified 
 #'  `NA` is in all relevant variables.
 #'  @examples
-#'  # master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-#'  # names(master)
-#'  # create_simple_output(df_list = master,
-#'  #                      CPR = "1234567890",
-#'  #                      synonymous = FALSE)
-#'  @export
+#'  master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+#'  names(master)
+#'  create_simple_output(df_list = master,
+#'                       CPR = "1234567890",
+#'                       synonymous = FALSE)
+#' @export
 create_simple_output <- function(df_list,CPR,synonymous = TRUE){
     if (!is.list(df_list)) {
         stop("df_list has to be a list")
