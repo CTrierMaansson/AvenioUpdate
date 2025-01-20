@@ -6,6 +6,7 @@
 #' the new NGS data is added under that patient and all the BAM files for that
 #' patient is manually checked for mutations. 
 #' @importFrom dplyr select `%>%`
+#' @importFrom BiocBaseUtils isScalarCharacter
 #' @param master_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")

@@ -6,6 +6,7 @@
 #' creates a simple overview of the mutations identified.
 #' @importFrom dplyr left_join select mutate tibble `%>%` filter
 #' @importFrom readxl read_xlsx
+#' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @param df_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
