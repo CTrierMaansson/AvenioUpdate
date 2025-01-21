@@ -12,8 +12,7 @@ reanalyze_samples <- function(master_list, df_list){
     }
     else{
         master_sele <- master_list[names(master_list) %in% existing]
-        df_list_sele <- df_list[names(df_list) %in% existing]
-        test_df <- do.call(rbind,append(master_sele,df_list_sele)) %>% 
+        test_df <- do.call(rbind,append(master_sele,df_list)) %>% 
             dplyr::arrange(sample_index,Gene) %>% 
             unique()
     }
@@ -24,7 +23,8 @@ reanalyze_samples <- function(master_list, df_list){
         "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
         col_types = c(rep("guess",4),"date",rep("guess",6)))
     Avenio_sele <- Avenio_runs %>% 
-        dplyr::filter(Run_ID %in% validated_samples$Analysis.ID)
+        dplyr::filter(Run_ID %in% validated_samples$Analysis.ID) %>% 
+        dplyr::filter(Sample_name %in% validated_samples$Sample.ID)
     validated_list <- create_df_list(validated_samples,Avenio_sele)
     for(i in 1:length(validated_list)){
         sample_df <- validated_list[[i]]
