@@ -54,7 +54,7 @@ add_run_to_list <- function(master_list, Directory){
     n_patients_before <- length(master_list)
     n_runs_before <- nrow(unlisted_before)
     print("Creating list of data.frames for new samples")
-    df_list <- create_df_list(samples)
+    df_list <- create_df_list(samples,Directory)
     print("Merging existing data with the new run and verifies mutations in BAM files")
     reanalyzed <- reanalyze_samples(master_list,df_list)
     if(is.list(reanalyzed)){

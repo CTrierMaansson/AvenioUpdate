@@ -207,5 +207,26 @@ master_list <- AvenioUpdate::add_run_to_list(
     Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-Ado7dswg-kdHM5Fwb6dQYWOu")
 analyses <- AvenioUpdate::included_analyses(master_list)
 analyses[[1]]
-names(master_list)
 
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKneBpDc1Q1Ln7Ev-5Iz53rK")
+analyses <- AvenioUpdate::included_analyses(master_list)
+analyses[[1]]
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AajqaHzI9_hCH4wYCbDAIYx4")
+analyses <- AvenioUpdate::included_analyses(master_list)
+analyses[[1]]
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AGwQDzxcqrdDlpzlcS10s1En")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= 30)
+analyses[[2]][["AGwQDzxcqrdDlpzlcS10s1En"]]
+AvenioUpdate::create_simple_output(master_list,CPR = "1903751491")
