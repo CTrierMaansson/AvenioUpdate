@@ -4,11 +4,19 @@
 reanalyze_samples <- function(master_list, df_list){
     `%ni%` <- Negate(`%in%`)
     existing <- names(df_list)[names(df_list) %in% names(master_list)]
-    master_sele <- master_list[names(master_list) %in% existing]
-    df_list_sele <- df_list[names(df_list) %in% existing]
-    test_df <- do.call(rbind,append(master_sele,df_list_sele)) %>% 
-        dplyr::arrange(sample_index,Gene) %>% 
-        unique()
+    if(length(existing)<1){
+        test_df <- do.call(rbind,df_list) %>% 
+            dplyr::arrange(sample_index,Gene) %>% 
+            unique()
+    }
+    else{
+        master_sele <- master_list[names(master_list) %in% existing]
+        df_list_sele <- df_list[names(df_list) %in% existing]
+        test_df <- do.call(rbind,append(master_sele,df_list_sele)) %>% 
+            dplyr::arrange(sample_index,Gene) %>% 
+            unique()
+    }
+    
     rownames(test_df) <- NULL
     validated_samples <- add_variants_from_bam_files(test_df)
     validated_list <- create_df_list(validated_samples)
