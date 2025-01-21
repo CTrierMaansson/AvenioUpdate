@@ -48,8 +48,8 @@ included_analyses <- function(master_list){
         dplyr::group_by(Analysis.ID) %>% 
         dplyr::count() %>% 
         dplyr::left_join(combined_sele, by = "Analysis.ID") %>% 
-        dplyr::ungroup() %>% 
-        dplyr::arrange(Analysis.ID)
+        dplyr::ungroup()
+    combined_sum <- combined_sum[order(combined_sum$Analysis.ID),]
     return(list("Overview:" = combined_sum,
                 "Details:" = res_list))
 }
