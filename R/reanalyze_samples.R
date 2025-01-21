@@ -1,6 +1,7 @@
 #' @noRd
 #' @importFrom dplyr arrange `%>%` filter mutate select
 #' @importFrom stringr str_split_i
+#' @importFrom readxl read_xlsx
 reanalyze_samples <- function(master_list, df_list){
     `%ni%` <- Negate(`%in%`)
     existing <- names(df_list)[names(df_list) %in% names(master_list)]
@@ -19,7 +20,12 @@ reanalyze_samples <- function(master_list, df_list){
     
     rownames(test_df) <- NULL
     validated_samples <- add_variants_from_bam_files(test_df)
-    validated_list <- create_df_list(validated_samples)
+    Avenio_runs <- readxl::read_xlsx(
+        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+        col_types = c(rep("guess",4),"date",rep("guess",6)))
+    Avenio_sele <- Avenio_runs %>% 
+        dplyr::filter(Run_ID %in% validated_samples$Analysis.ID)
+    validated_list <- create_df_list(validated_samples,Avenio_sele)
     for(i in 1:length(validated_list)){
         sample_df <- validated_list[[i]]
         if(any(grepl("_BC",sample_df$sample_index))){
@@ -52,11 +58,11 @@ reanalyze_samples <- function(master_list, df_list){
                         "_",
                         Genomic.Position)) %>% 
                     dplyr::mutate(Flags = 
-                                    ifelse(identifier %in% sample_BC$identifier,
-                                          ifelse(nchar(Flags)>0,
-                                                 paste0(Flags,", BC_mut"),
-                                                 paste0("BC_mut")),
-                                          Flags)) %>% 
+                                      ifelse(identifier %in% sample_BC$identifier,
+                                             ifelse(nchar(Flags)>0,
+                                                    paste0(Flags,", BC_mut"),
+                                                    paste0("BC_mut")),
+                                             Flags)) %>% 
                     dplyr::select(-identifier)
                 sample_BC <- sample_BC %>% 
                     dplyr::select(-identifier)

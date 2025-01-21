@@ -4,7 +4,7 @@
 #' @importFrom dplyr filter select full_join left_join mutate relocate arrange `%>%`
 #' @importFrom stringr str_split_i
 #' @importFrom lubridate ymd
-add_samples <- function(Directory){
+add_samples <- function(Directory,runs){
     `%ni%` <- Negate(`%in%`)
     Run_ID <- gsub(
         "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",
@@ -16,21 +16,7 @@ add_samples <- function(Directory){
           exdir = Directory)
     Filter_variants <- paste0(Directory,"/","VariantMetrics-UserFilterSet.csv")
     variants <- read.csv(Filter_variants)
-    AVENIO_runs <- readxl::read_xlsx(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
-        col_types = c(rep("guess",4),"date",rep("guess",6)))
-    AVENIO_runs_select <- AVENIO_runs %>% 
-        dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 
-        dplyr::mutate(date_check = lubridate::ymd(Sample_date))
-    if(any(is.na(AVENIO_runs_select$date_check))){
-        na_date <- AVENIO_runs_select %>% 
-            dplyr::filter(is.na(date_check))
-        na_date_samples <- paste(na_date$Sample_name,collapse = ", ")
-        warning(paste0("The following samples have lacking date information,",
-                       " or the date is not formatted correctly (YYYY-MM-DD)",
-                       " and will be excluded from the analysis:\n",
-                       na_date_samples))
-    }
+    AVENIO_runs_select <- runs
     variants_select <- variants %>% 
         dplyr::filter(Sample.ID %in% AVENIO_runs_select$Sample_name)
     samples_with_variants <- unique(variants_select$Sample.ID)
@@ -102,16 +88,16 @@ add_samples <- function(Directory){
             dplyr::select(-date_check) %>% 
             dplyr::filter(!is.na(Name_in_project)) %>% 
             dplyr::mutate(sample_index = paste0(Project,"_",
-                                         Name_in_project,"_",
-                                         substr(stringr::str_split_i(
-                                             as.character(Sample_date),"-",1),
-                                             3,4),
-                                         stringr::str_split_i(
-                                             as.character(Sample_date),"-",2),
-                                         stringr::str_split_i(
-                                             as.character(Sample_date),"-",3)
-                                         )
-                   ) %>% 
+                                                Name_in_project,"_",
+                                                substr(stringr::str_split_i(
+                                                    as.character(Sample_date),"-",1),
+                                                    3,4),
+                                                stringr::str_split_i(
+                                                    as.character(Sample_date),"-",2),
+                                                stringr::str_split_i(
+                                                    as.character(Sample_date),"-",3)
+            )
+            ) %>% 
             dplyr::mutate(
                 sample_index = ifelse(Material != "cfDNA",
                                       paste0(sample_index,"_",Material),

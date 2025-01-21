@@ -5,8 +5,9 @@
 #' the patient is added to the list. If a patient ID/CPR is present in the list 
 #' the new NGS data is added under that patient and all the BAM files for that
 #' patient is manually checked for mutations. 
-#' @importFrom dplyr select `%>%`
+#' @importFrom dplyr select `%>%` filter
 #' @importFrom BiocBaseUtils isScalarCharacter
+#' @importFrom readxl read_xlsx
 #' @param master_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
@@ -46,15 +47,43 @@ add_run_to_list <- function(master_list, Directory){
     unlisted_before <- do.call(rbind,master_list) %>% 
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
+    print("Reading run information")
+    ID <- gsub(
+        "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",
+        "",Directory)
+    run_ID_short <- substr(ID,1,8)
+    AVENIO_runs <- readxl::read_xlsx(
+        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+        col_types = c(rep("guess",4),"date",rep("guess",6)))
+    runs_ID <- AVENIO_runs %>% 
+        dplyr::filter(nchar(Run_ID) != 24)
+    if(nrow(runs_ID)>0){
+        failed_ID <- paste(runs_ID$Run_ID,collapse = ", ")
+        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+             "The following run IDs do not contain the mandatory 24 characters: ",
+             failed_ID)
+    }
+    AVENIO_runs_select <- AVENIO_runs %>% 
+        dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 
+        dplyr::mutate(date_check = lubridate::ymd(Sample_date))
+    if(any(is.na(AVENIO_runs_select$date_check))){
+        na_date <- AVENIO_runs_select %>% 
+            dplyr::filter(is.na(date_check))
+        na_date_samples <- paste(na_date$Sample_name,collapse = ", ")
+        warning(paste0("The following samples have lacking date information,",
+                       " or the date is not formatted correctly (YYYY-MM-DD)",
+                       " and will be excluded from the analysis:\n",
+                       na_date_samples))
+    }
     print("Merging run information and patient information")
-    samples <- add_samples(Directory)
+    samples <- add_samples(Directory,AVENIO_runs_select)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
         stop("All samples are already part of the dataset. Terminating")
     }
     n_patients_before <- length(master_list)
     n_runs_before <- nrow(unlisted_before)
     print("Creating list of data.frames for new samples")
-    df_list <- create_df_list(samples,Directory)
+    df_list <- create_df_list(samples,AVENIO_runs_select)
     print("Merging existing data with the new run and verifies mutations in BAM files")
     reanalyzed <- reanalyze_samples(master_list,df_list)
     if(is.list(reanalyzed)){
@@ -65,15 +94,15 @@ add_run_to_list <- function(master_list, Directory){
                 unique()
             n_runs_after <- nrow(unlisted_after)
             print(paste0("Before the dataset consisted of ",
-                  n_patients_before, 
-                  " patients and ",
-                  n_runs_before, 
-                  " samples analyzed"))
+                         n_patients_before, 
+                         " patients and ",
+                         n_runs_before, 
+                         " samples analyzed"))
             print(paste0("Now the dataset consists of ",
-                  n_patients_after, 
-                  " patients and ",
-                  n_runs_after, 
-                  " samples analyzed"))
+                         n_patients_after, 
+                         " patients and ",
+                         n_runs_after, 
+                         " samples analyzed"))
             saveRDS(reanalyzed,file = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
         }
     }

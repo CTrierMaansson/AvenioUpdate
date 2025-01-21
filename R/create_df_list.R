@@ -1,23 +1,12 @@
 #' @noRd
-#' @importFrom readxl read_xlsx
 #' @importFrom dplyr filter `%>%`
-create_df_list <- function(sample_df,Directory){
+create_df_list <- function(sample_df,runs){
     samples <- unique(sample_df$Sample.ID)
-    Run_ID <- gsub(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",
-        "",Directory)
-    run_ID_short <- substr(Run_ID,1,8)
-    AVENIO_runs <- readxl::read_xlsx(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
-        col_types = c(rep("guess",4),"date",rep("guess",6)))
-    AVENIO_runs_select <- AVENIO_runs %>% 
-        dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 
-        dplyr::filter(Sample_name %in% samples)
-    unique_patients <- unique(AVENIO_runs_select$CPR)
+    unique_patients <- unique(runs$CPR)
     df_list <- list()
     for (i in 1:length(unique_patients)){
         CPR_patient <- unique_patients[i]
-        patient_df <- AVENIO_runs_select %>% 
+        patient_df <- runs %>% 
             dplyr::filter(CPR == CPR_patient)
         patient_variants <- sample_df %>% 
             dplyr::filter(Sample.ID %in% patient_df$Sample_name)
