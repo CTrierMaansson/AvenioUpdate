@@ -66,6 +66,30 @@ add_run_to_list <- function(master_list, Directory){
     AVENIO_runs_select <- AVENIO_runs %>% 
         dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 
         dplyr::mutate(date_check = lubridate::ymd(Sample_date))
+    if(any(is.na(AVENIO_runs_select$CPR))){
+        na_CPR <- AVENIO_runs_select %>% 
+            dplyr::filter(is.na(CPR))
+        na_CPR_samples <- paste(na_CPR$Sample_name,collapse = ", ")
+        warning(paste0("The following samples are lacking CPR information",
+                       " and will be excluded from the analysis:\n",
+                       na_CPR_samples))
+    }
+    if(any(is.na(AVENIO_runs_select$Name_in_project))){
+        na_name <- AVENIO_runs_select %>% 
+            dplyr::filter(is.na(Name_in_project))
+        na_name_samples <- paste(na_date$Sample_name,collapse = ", ")
+        warning(paste0("The following samples are lacking project name information",
+                       " and will be excluded from the analysis:\n",
+                       na_name_samples))
+    }
+    if(any(is.na(AVENIO_runs_select$Material))){
+        na_material <- AVENIO_runs_select %>% 
+            dplyr::filter(is.na(Sample_date))
+        na_material_samples <- paste(na_date$Material,collapse = ", ")
+        warning(paste0("The following samples are lacking source material ",
+                       "information and will be excluded from the analysis:\n",
+                       na_material_samples))
+    }
     if(any(is.na(AVENIO_runs_select$date_check))){
         na_date <- AVENIO_runs_select %>% 
             dplyr::filter(is.na(date_check))
@@ -75,6 +99,11 @@ add_run_to_list <- function(master_list, Directory){
                        " and will be excluded from the analysis:\n",
                        na_date_samples))
     }
+    AVENIO_runs_select <- AVENIO_runs_select %>% 
+        dplyr::filter(!is.na(CPR)) %>% 
+        dplyr::filter(!is.na(date_check)) %>% 
+        dplyr::select(-date_check) %>% 
+        dplyr::filter(!is.na(Name_in_project))
     print("Merging run information and patient information")
     samples <- add_samples(Directory,AVENIO_runs_select)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){

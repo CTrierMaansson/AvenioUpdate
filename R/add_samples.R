@@ -58,35 +58,7 @@ add_samples <- function(Directory,runs){
         combined_samples <- variants_select
     }
     if(!"sample_index" %in% colnames(AVENIO_runs_select)){
-        if(any(is.na(AVENIO_runs_select$CPR))){
-            na_CPR <- AVENIO_runs_select %>% 
-                dplyr::filter(is.na(CPR))
-            na_CPR_samples <- paste(na_CPR$Sample_name,collapse = ", ")
-            warning(paste0("The following samples are lacking CPR information",
-                           " and will be excluded from the analysis:\n",
-                           na_CPR_samples))
-        }
-        if(any(is.na(AVENIO_runs_select$Name_in_project))){
-            na_name <- AVENIO_runs_select %>% 
-                dplyr::filter(is.na(Name_in_project))
-            na_name_samples <- paste(na_date$Sample_name,collapse = ", ")
-            warning(paste0("The following samples are lacking project name information",
-                           " and will be excluded from the analysis:\n",
-                           na_name_samples))
-        }
-        if(any(is.na(AVENIO_runs_select$Material))){
-            na_material <- AVENIO_runs_select %>% 
-                dplyr::filter(is.na(Sample_date))
-            na_material_samples <- paste(na_date$Material,collapse = ", ")
-            warning(paste0("The following samples are lacking source material ",
-                           "information and will be excluded from the analysis:\n",
-                           na_material_samples))
-        }
-        AVENIO_runs_select <- AVENIO_runs_select %>%
-            dplyr::filter(!is.na(CPR)) %>% 
-            dplyr::filter(!is.na(date_check)) %>% 
-            dplyr::select(-date_check) %>% 
-            dplyr::filter(!is.na(Name_in_project)) %>% 
+        AVENIO_runs_select <- AVENIO_runs_select %>% 
             dplyr::mutate(sample_index = paste0(Project,"_",
                                                 Name_in_project,"_",
                                                 substr(stringr::str_split_i(
