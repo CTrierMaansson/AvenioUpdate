@@ -3,6 +3,7 @@
 #' @importFrom readxl read_xlsx
 #' @importFrom dplyr filter select full_join left_join mutate relocate arrange `%>%`
 #' @importFrom stringr str_split_i
+#' @importFrom lubridate ymd
 add_samples <- function(Directory){
     `%ni%` <- Negate(`%in%`)
     Run_ID <- gsub(
@@ -19,7 +20,17 @@ add_samples <- function(Directory){
         "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
         col_types = c(rep("guess",4),"date",rep("guess",6)))
     AVENIO_runs_select <- AVENIO_runs %>% 
-        dplyr::filter(grepl(run_ID_short,Run_ID))
+        dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 
+        dplyr::mutate(date_check = lubridate::ymd(Sample_date))
+    if(any(is.na(AVENIO_runs_select$date_check))){
+        na_date <- AVENIO_runs_select %>% 
+            dplyr::filter(is.na(date_check))
+        na_date_samples <- paste(na_date$Sample_name,collapse = ", ")
+        warning(paste0("The following samples have lacking date information,",
+                       " or the date is not formatted correctly (YYYY-MM-DD)",
+                       " and will be excluded from the analysis:\n",
+                       na_date_samples))
+    }
     variants_select <- variants %>% 
         dplyr::filter(Sample.ID %in% AVENIO_runs_select$Sample_name)
     samples_with_variants <- unique(variants_select$Sample.ID)
@@ -61,7 +72,35 @@ add_samples <- function(Directory){
         combined_samples <- variants_select
     }
     if(!"sample_index" %in% colnames(AVENIO_runs_select)){
-        AVENIO_runs_select <- AVENIO_runs_select %>% 
+        if(any(is.na(AVENIO_runs_select$CPR))){
+            na_CPR <- AVENIO_runs_select %>% 
+                dplyr::filter(is.na(CPR))
+            na_CPR_samples <- paste(na_CPR$Sample_name,collapse = ", ")
+            warning(paste0("The following samples are lacking CPR information",
+                           " and will be excluded from the analysis:\n",
+                           na_CPR_samples))
+        }
+        if(any(is.na(AVENIO_runs_select$Name_in_project))){
+            na_name <- AVENIO_runs_select %>% 
+                dplyr::filter(is.na(Name_in_project))
+            na_name_samples <- paste(na_date$Sample_name,collapse = ", ")
+            warning(paste0("The following samples are lacking project name information",
+                           " and will be excluded from the analysis:\n",
+                           na_name_samples))
+        }
+        if(any(is.na(AVENIO_runs_select$Material))){
+            na_material <- AVENIO_runs_select %>% 
+                dplyr::filter(is.na(Sample_date))
+            na_material_samples <- paste(na_date$Material,collapse = ", ")
+            warning(paste0("The following samples are lacking source material ",
+                           "information and will be excluded from the analysis:\n",
+                           na_material_samples))
+        }
+        AVENIO_runs_select <- AVENIO_runs_select %>%
+            dplyr::filter(!is.na(CPR)) %>% 
+            dplyr::filter(!is.na(date_check)) %>% 
+            dplyr::select(-date_check) %>% 
+            dplyr::filter(!is.na(Name_in_project)) %>% 
             dplyr::mutate(sample_index = paste0(Project,"_",
                                          Name_in_project,"_",
                                          substr(stringr::str_split_i(
