@@ -21,22 +21,11 @@ wrapper_tjek_bam_indel<-function(df){
         analyseID<-df_nested$Analysis.ID[i]
         sampleID<-df_nested$Sample.ID[i]
         
-        if (dir.exists(
-          stringr::str_glue(
-            "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance")))
-        {path_sample_mappe<-stringr::str_glue(
-          "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance")}
-        else {
-          if (dir.exists(
-            stringr::str_glue(
-              "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance-v2"))){
-            path_sample_mappe<-stringr::str_glue(
-              "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance-v2")
-          }
-          else{
-            path_sample_mappe<-stringr::str_glue(
-              "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Expanded")
-          }}
+        files <- list.files(stringr::str_glue(
+          "{path_AVENIO_results}/Plasma-{analyseID}/"),
+          pattern = stringr::str_glue("{sampleID}-"),
+          full.names = TRUE)
+        path_sample_mappe <- files[grepl("-Surveillance","-Expanded"),files]
         
         
         #Andre prøver fra samme patient:

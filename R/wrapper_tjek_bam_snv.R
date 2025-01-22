@@ -20,24 +20,11 @@ wrapper_tjek_bam_snv<-function(df){
         #path til Bam fil sample i:
         analyseID<-df_nested$Analysis.ID[i]
         sampleID<-df_nested$Sample.ID[i]
-        
-        if (dir.exists(
-            stringr::str_glue(
-        "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance")))
-        {path_sample_mappe<-stringr::str_glue(
-        "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance")}
-        else {
-            if (dir.exists(
-                stringr::str_glue(
-                    "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance-v2"))){
-                path_sample_mappe<-stringr::str_glue(
-                    "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance-v2")
-            }
-            else{
-                path_sample_mappe<-stringr::str_glue(
-                    "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Expanded")
-            }}
-        
+        files <- list.files(stringr::str_glue(
+            "{path_AVENIO_results}/Plasma-{analyseID}/"),
+            pattern = stringr::str_glue("{sampleID}-"),
+            full.names = TRUE)
+        path_sample_mappe <- files[grepl("-Surveillance","-Expanded"),files]
         #Andre prøver fra samme patient:
         df_patient_other_samples<-df_nested%>%
             dplyr::filter(Patient==df_nested$Patient[i]&Sample!=sample1)
@@ -54,27 +41,13 @@ wrapper_tjek_bam_snv<-function(df){
                 #path til vcf fil sample j:
                 analyseID2<-df_patient_other_samples$Analysis.ID[j]
                 sampleID2<-df_patient_other_samples$Sample.ID[j]
-                if (dir.exists(
-                    stringr::str_glue(
-                        "{path_AVENIO_results}/Plasma-{analyseID2}/{sampleID2}-Surveillance")))
-                {path_VCF_fil<-stringr::str_glue(
-                    "{path_AVENIO_results}/Plasma-{analyseID2}/{sampleID2}-Surveillance/snv-RocheDefault-{sampleID2}.VCF")}
-                else {
-                    if (dir.exists(
-                        stringr::str_glue(
-                            "{path_AVENIO_results}/Plasma-{analyseID}/{sampleID}-Surveillance-v2"))){
-                        path_VCF_fil<-stringr::str_glue(
-                            "{path_AVENIO_results}/Plasma-{analyseID2}/{sampleID2}-Surveillance-v2/snv-RocheDefault-{sampleID2}.VCF")
-                    }
-                    else{
-                        path_VCF_fil<-stringr::str_glue(
-                            "{path_AVENIO_results}/Plasma-{analyseID2}/{sampleID2}-Expanded/snv-RocheDefault-{sampleID2}.VCF")
-                    }}
-                
-                 
-                else{path_VCF_fil<-stringr::str_glue(
-        )}
-                
+                filesID2 <- list.files(stringr::str_glue(
+                    "{path_AVENIO_results}/Plasma-{analyseID2}//"),
+                    pattern = stringr::str_glue("{sampleID2}-"),
+                    full.names = TRUE)
+                path_sample_mappe2 <- filesID2[grepl("-Surveillance","-Expanded"),filesID2]
+                path_VCF_fil<-stringr::str_glue(
+                    "{path_sample_mappe2}/snv-RocheDefault-{sampleID2}.VCF")
                 #gem VCF fil:
                 vcf_fil<-vcfR::read.vcfR(path_VCF_fil)
                 
