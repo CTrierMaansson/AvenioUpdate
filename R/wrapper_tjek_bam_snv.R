@@ -24,14 +24,17 @@ wrapper_tjek_bam_snv<-function(df){
             "{path_AVENIO_results}/Plasma-{analyseID}/"),
             pattern = stringr::str_glue("{sampleID}-"),
             full.names = TRUE)
-        path_sample_mappe <- files[grepl("-Surveillance","-Expanded"),files]
+        path_sample_mappe <- files[grepl(paste(c("-Surveillance","-Expanded"),
+                                               collapse = "|"),
+                                         files)]
+        return(path_sample_mappe)
         #Andre prøver fra samme patient:
         df_patient_other_samples<-df_nested%>%
             dplyr::filter(Patient==df_nested$Patient[i]&Sample!=sample1)
         
         #hvis der er kørt flere prøver på patienten, så tjekkes disse en efter en:
         if (nrow(df_patient_other_samples) == 0) 
-            {print(paste0("No other samples for the patient than ", sample1))}
+        {print(paste0("No other samples for the patient than ", sample1))}
         else{
             #loop over andre prøver:
             for (j in 1:nrow(df_patient_other_samples)){
@@ -45,7 +48,9 @@ wrapper_tjek_bam_snv<-function(df){
                     "{path_AVENIO_results}/Plasma-{analyseID2}//"),
                     pattern = stringr::str_glue("{sampleID2}-"),
                     full.names = TRUE)
-                path_sample_mappe2 <- filesID2[grepl("-Surveillance","-Expanded"),filesID2]
+                path_sample_mappe2 <- filesID2[grepl(paste(c("-Surveillance","-Expanded"),
+                                                           collapse = "|"),
+                                                     filesID2)]
                 path_VCF_fil<-stringr::str_glue(
                     "{path_sample_mappe2}/snv-RocheDefault-{sampleID2}.VCF")
                 #gem VCF fil:
@@ -53,7 +58,7 @@ wrapper_tjek_bam_snv<-function(df){
                 
                 #hvis varianter fundet, tjekkes disse i bam filen en efter en:
                 if (nrow(vcf_fil) == 0) 
-                    {print(paste0("No variants in ", sample2))}
+                {print(paste0("No variants in ", sample2))}
                 else{
                     for (variant in 1:nrow(vcf_fil)){
                         vcf_variant<-vcf_fil[variant]
@@ -65,15 +70,15 @@ wrapper_tjek_bam_snv<-function(df){
                         
                         if (sum(chrom==x$chrom&pos==x$pos)==0){
                             
-        reads_variant_pos<-get_reads_at_variant_position_using_VCF_in_deduped(
-            vcf_variant,sampleID,path_sample_mappe)
-        variant_depth_at_pos<-get_variant_depth_at_variant_position_using_VCF(
-            vcf_variant,reads_variant_pos)
-        liste_variant<-c(c(sample1,sample2),variant_depth_at_pos)
-        #hvis varianten er fundet med mininum 1 read, tilføjes denne:
-        if (liste_variant[4]!="0"){
-            df_varianter_fundet_i_bam<-rbind(df_varianter_fundet_i_bam,
-                                             liste_variant)
+                            reads_variant_pos<-get_reads_at_variant_position_using_VCF_in_deduped(
+                                vcf_variant,sampleID,path_sample_mappe)
+                            variant_depth_at_pos<-get_variant_depth_at_variant_position_using_VCF(
+                                vcf_variant,reads_variant_pos)
+                            liste_variant<-c(c(sample1,sample2),variant_depth_at_pos)
+                            #hvis varianten er fundet med mininum 1 read, tilføjes denne:
+                            if (liste_variant[4]!="0"){
+                                df_varianter_fundet_i_bam<-rbind(df_varianter_fundet_i_bam,
+                                                                 liste_variant)
                             }}
                     }}
             }}

@@ -25,7 +25,9 @@ wrapper_tjek_bam_indel<-function(df){
           "{path_AVENIO_results}/Plasma-{analyseID}/"),
           pattern = stringr::str_glue("{sampleID}-"),
           full.names = TRUE)
-        path_sample_mappe <- files[grepl("-Surveillance","-Expanded"),files]
+        path_sample_mappe <- files[grepl(paste(c("-Surveillance","-Expanded"),
+                                               collapse = "|"),
+                                         files)]
         
         
         #Andre prøver fra samme patient:
