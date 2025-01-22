@@ -76,9 +76,11 @@ add_samples <- function(Directory,runs){
                                       sample_index))
     }
     AVENIO_runs_select_merge <- AVENIO_runs_select %>% 
-        dplyr::select(Sample_name,sample_index)
+        dplyr::select(Sample_name,sample_index) %>% 
+        dplyr::mutate(Sample_name = as.character(Sample_name))
     combined_samples <- combined_samples %>% 
-        dplyr::filter(Sample.ID %in% AVENIO_runs_select$Sample_name) %>% 
+        dplyr::mutate(Sample.ID = as.character(Sample.ID)) %>% 
+        dplyr::filter(Sample.ID %in% AVENIO_runs_select$Sample_name) %>%
         dplyr::left_join(AVENIO_runs_select_merge,
                          by = c("Sample.ID"="Sample_name")) %>% 
         dplyr::relocate(sample_index,.before = Sample.ID) %>% 
