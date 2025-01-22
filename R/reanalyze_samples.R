@@ -75,8 +75,6 @@ reanalyze_samples <- function(master_list, df_list){
     if(length(existing)>0){
         master_list <- master_list[names(master_list) %ni% names(validated_list)]
         master_list <- append(master_list,validated_list)
-        df_list_new <- df_list[names(df_list) %ni% existing]
-        master_list <- append(master_list,df_list_new)
     }
     else{
         master_list <- append(master_list,validated_list)
