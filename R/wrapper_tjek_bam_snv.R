@@ -27,7 +27,6 @@ wrapper_tjek_bam_snv<-function(df){
         path_sample_mappe <- files[grepl(paste(c("-Surveillance","-Expanded"),
                                                collapse = "|"),
                                          files)]
-        return(path_sample_mappe)
         #Andre prøver fra samme patient:
         df_patient_other_samples<-df_nested%>%
             dplyr::filter(Patient==df_nested$Patient[i]&Sample!=sample1)
