@@ -273,3 +273,151 @@ master_list <- AvenioUpdate::add_run_to_list(
     Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AGU232uEYZZKe4oI95IrJu7o")
 analyses <- AvenioUpdate::included_analyses(master_list)
 print(analyses[[1]], n= 30)
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AU-x-KCqRchJPaDwb-utcvvO")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= 30)
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AdA1JN9HI9ZND4LXP8XCfvRZ")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= 30)
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AXVif6nxsixGLZDnsTvDtQLo")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= 30)
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ALsopAc5KC1Bx7pJLiHZ-eJR")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ASZMkYMxgytHgov13wWty29S")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AVhoQhsYxHRPKbWD3ZTc9uCa")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEepGWqCaABI04g5DQESU97x")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ABSYoqHZHR9Gvo_Z0scoIQ8w")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AaRZMuj0NJtNnpZW8SO2dTy7")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AJD93ZaVEQxGcbVGcJdZZW94")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AdYl2rnCR1ZO5JLxgqP9fouS")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKorzNtokqVHNY5ZPcDPHeY3")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AY-MEcYGsnlEp70J19fZmwOJ")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AbZ6pmy7TndM4JOHXTcTCjde")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AeUIQZkyte1MjIyV0h0MS0aI")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AIjmFys4qs9EcrAcPI4IJxkK")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AaJsBOVJsSFO2onZbHBDtn0C")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKY-0douAMNBU7L0NimzcmCS")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ACHSPJ6rFXpCfKO7zOQZOWbz")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AHKsNmy-AFFNupR0Uot9fuks")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_list <- AvenioUpdate::add_run_to_list(
+    master_list = master_list,
+    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AZjnWu5wiDlJapI4CxvEuFnk")
+analyses <- AvenioUpdate::included_analyses(master_list)
+print(analyses[[1]], n= nrow(analyses[[1]]))
+
