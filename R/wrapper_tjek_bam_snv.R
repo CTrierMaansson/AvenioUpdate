@@ -58,7 +58,6 @@ wrapper_tjek_bam_snv<-function(df){
                                      "/snv-RocheDefault-",
                                      sampleID2,
                                      ".VCF")
-                print(path_VCF_fil)
                 #gem VCF fil:
                 vcf_fil<-vcfR::read.vcfR(path_VCF_fil)
                 
