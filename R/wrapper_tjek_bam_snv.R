@@ -20,13 +20,15 @@ wrapper_tjek_bam_snv<-function(df){
         #path til Bam fil sample i:
         analyseID<-df_nested$Analysis.ID[i]
         sampleID<-df_nested$Sample.ID[i]
-        files <- list.files(stringr::str_glue(
-            "{path_AVENIO_results}/Plasma-{analyseID}/"),
-            pattern = stringr::str_glue("{sampleID}-"),
-            full.names = TRUE)
-        path_sample_mappe <- files[grepl(paste(c("-Surveillance","-Expanded"),
-                                               collapse = "|"),
-                                         files)]
+        panelID<-df_nested$Panel[i]
+        panelID<-ifelse(panelID == "Surveillance v2","Surveillance-v2",panelID)
+        path_sample_mappe<-paste0(path_AVENIO_results,
+                                  "/Plasma-",
+                                  analyseID,
+                                  "/",
+                                  sampleID,
+                                  "-",
+                                  panelID)
         #Andre prøver fra samme patient:
         df_patient_other_samples<-df_nested%>%
             dplyr::filter(Patient==df_nested$Patient[i]&Sample!=sample1)
@@ -43,15 +45,20 @@ wrapper_tjek_bam_snv<-function(df){
                 #path til vcf fil sample j:
                 analyseID2<-df_patient_other_samples$Analysis.ID[j]
                 sampleID2<-df_patient_other_samples$Sample.ID[j]
-                filesID2 <- list.files(stringr::str_glue(
-                    "{path_AVENIO_results}/Plasma-{analyseID2}//"),
-                    pattern = stringr::str_glue("{sampleID2}-"),
-                    full.names = TRUE)
-                path_sample_mappe2 <- filesID2[grepl(paste(c("-Surveillance","-Expanded"),
-                                                           collapse = "|"),
-                                                     filesID2)]
-                path_VCF_fil<-stringr::str_glue(
-                    "{path_sample_mappe2}/snv-RocheDefault-{sampleID2}.VCF")
+                panelID2<-df_patient_other_samples$Panel[j]
+                panelID2<-ifelse(panelID2 == "Surveillance v2","Surveillance-v2",panelID2)
+                path_sample_mappe2<-paste0(path_AVENIO_results,
+                                           "/Plasma-",
+                                           analyseID2,
+                                           "/",
+                                           sampleID2,
+                                           "-",
+                                           panelID2)
+                path_VCF_fil<-paste0(path_sample_mappe2,
+                                     "/snv-RocheDefault-",
+                                     sampleID2,
+                                     ".VCF")
+                print(path_VCF_fil)
                 #gem VCF fil:
                 vcf_fil<-vcfR::read.vcfR(path_VCF_fil)
                 
@@ -69,9 +76,9 @@ wrapper_tjek_bam_snv<-function(df){
                         
                         if (sum(chrom==x$chrom&pos==x$pos)==0){
                             
-                            reads_variant_pos<-get_reads_at_variant_position_using_VCF_in_deduped(
+                            reads_variant_pos<-AvenioUpdate:::get_reads_at_variant_position_using_VCF_in_deduped(
                                 vcf_variant,sampleID,path_sample_mappe)
-                            variant_depth_at_pos<-get_variant_depth_at_variant_position_using_VCF(
+                            variant_depth_at_pos<-AvenioUpdate:::get_variant_depth_at_variant_position_using_VCF(
                                 vcf_variant,reads_variant_pos)
                             liste_variant<-c(c(sample1,sample2),variant_depth_at_pos)
                             #hvis varianten er fundet med mininum 1 read, tilføjes denne:

@@ -9,7 +9,8 @@ lav_nested_df_indel<-function(df){
         Subject.ID=df$Subject.ID,
         Date.of.Sample.Collection=df$Date.of.Sample.Collection,
         Analysis.Name=df$Analysis.Name,
-        Analysis.ID=df$Analysis.ID)
+        Analysis.ID=df$Analysis.ID,
+        Panel=df$Panel)
     df1<-dplyr::distinct(df1)
     #kun INDEL:
     df<-df%>%dplyr::filter(Mutation.Class=="INDEL")

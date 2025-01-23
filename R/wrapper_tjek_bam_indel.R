@@ -20,14 +20,15 @@ wrapper_tjek_bam_indel<-function(df){
         #path til Bam fil sample i:
         analyseID<-df_nested$Analysis.ID[i]
         sampleID<-df_nested$Sample.ID[i]
-        
-        files <- list.files(stringr::str_glue(
-          "{path_AVENIO_results}/Plasma-{analyseID}/"),
-          pattern = stringr::str_glue("{sampleID}-"),
-          full.names = TRUE)
-        path_sample_mappe <- files[grepl(paste(c("-Surveillance","-Expanded"),
-                                               collapse = "|"),
-                                         files)]
+        panelID<-df_nested$Panel[i]
+        panelID<-ifelse(panelID == "Surveillance v2","Surveillance-v2",panelID)
+        path_sample_mappe<-paste0(path_AVENIO_results,
+                                  "/Plasma-",
+                                  analyseID,
+                                  "/",
+                                  sampleID,
+                                  "-",
+                                  panelID)
         
         
         #Andre prøver fra samme patient:
