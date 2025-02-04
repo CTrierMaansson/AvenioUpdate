@@ -2,6 +2,7 @@
 
 export(add_run_to_list)
 export(create_simple_output)
+export(explore_AVENIO_runs)
 export(included_analyses)
 importFrom(BiocBaseUtils,isScalarCharacter)
 importFrom(BiocBaseUtils,isScalarLogical)
