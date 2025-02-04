@@ -35,6 +35,6 @@ explore_AVENIO_runs_Info <- function(){
                                               "Samples where the sample name, project name or name in project is missing",
                                               "Samples where the material information is missing"))
     df <- df_current %>% 
-        left_join(explanation,by = "Name")
+        dplyr::left_join(explanation,by = "Name")
     return(df)
 }

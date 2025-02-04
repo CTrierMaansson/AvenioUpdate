@@ -6,11 +6,14 @@
 #' @importFrom dplyr filter `%>%` mutate select group_by ungroup count arrange
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom readxl read_xlsx
-#' @param  Info `Character` string with the
+#' @param  Info `Character` string with the name of the information that should.
+#' be extracted. Possible options can be viewed with explore_AVENIO_runs_Info().
+#' If `NULL` (default) all information is returned as a `list`.
 #' @param silent `Boolean` determining information messages should be displayed 
 #' If `FALSE` (default) messages are displayed. If `TRUE` the messages are
 #' not printed. 
-#' @return A `list` with different information on the AVENIO_runs.xslx
+#' @return A `list` with different information on the AVENIO_runs.xslx 
+#' (`Info` = `NULL`) or the specific object as determined by `Info`.
 #'  
 #' @examples
 #' results <- explore_AVENIO_runs()
@@ -129,6 +132,9 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
     if(!is.null(Info)){
         if(Info %ni% names(result)){
             stop("Info has to a a viable name of the output list. Relevant entries can be viewed with explore_AVENIO_runs_Info()")
+        }
+        if(!silent){
+            message(paste0("Extracting: ",Info))
         }
         output <- result[[Info]]
     }

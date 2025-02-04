@@ -7,7 +7,9 @@
 explore_AVENIO_runs(Info = NULL, silent = FALSE)
 }
 \arguments{
-\item{Info}{\code{Character} string with the}
+\item{Info}{\code{Character} string with the name of the information that should.
+be extracted. Possible options can be viewed with explore_AVENIO_runs_Info().
+If \code{NULL} (default) all information is returned as a \code{list}.}
 
 \item{silent}{\code{Boolean} determining information messages should be displayed
 If \code{FALSE} (default) messages are displayed. If \code{TRUE} the messages are
@@ -15,6 +17,7 @@ not printed.}
 }
 \value{
 A \code{list} with different information on the AVENIO_runs.xslx
+(\code{Info} = \code{NULL}) or the specific object as determined by \code{Info}.
 }
 \description{
 This function explores the AVENIO_runs.xlsx file and performs various tests
