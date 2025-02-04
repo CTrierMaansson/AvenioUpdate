@@ -134,7 +134,7 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
             stop("Info has to a a viable name of the output list. Relevant entries can be viewed with explore_AVENIO_runs_Info()")
         }
         if(!silent){
-            message(paste0("Extracting: ",Info))
+            message(paste0("Outputting: ",Info))
         }
         output <- result[[Info]]
     }

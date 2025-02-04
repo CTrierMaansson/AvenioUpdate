@@ -203,7 +203,7 @@ result_stats <- function(Info = NULL, silent = FALSE){
             stop("Info has to a a viable name of the output list. Relevant entries can be viewed with result_stats_Info()")
         }
         if(!silent){
-            message(paste0("Extracting: ",Info))
+            message(paste0("Outputting: ",Info))
         }
         output <- res[[Info]]
     }
