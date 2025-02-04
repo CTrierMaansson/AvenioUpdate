@@ -124,7 +124,7 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
                   Incomplete_IDs = runs_ID_incomplete,
                   Incomplete_dates = incomplete_dates,
                   Incomplete_names = incomplete_names,
-                  Incomplete_material = incomplete_names)
+                  Incomplete_material = incomplete_material)
     
     if(!is.null(Info)){
         if(Info %ni% names(result)){
