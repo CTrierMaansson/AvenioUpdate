@@ -59,10 +59,19 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
                       Sample_note)
     incomplete_dates <- df %>% 
         dplyr::filter(is.na(date_check))
+    if(nrow(incomplete_dates) == 0){
+        incomplete_dates <- NULL
+    }
     incomplete_names <- df %>% 
         dplyr::filter(is.na(Name_in_project) | is.na(Project) | is.na(Sample_name))
+    if(nrow(incomplete_names) == 0){
+        incomplete_names <- NULL
+    }
     incomplete_material <- df %>% 
         dplyr::filter(is.na(Material))
+    if(nrow(incomplete_material) == 0){
+        incomplete_material <- NULL
+    }
     if(!silent){
         message("Extracting stats")
     }
