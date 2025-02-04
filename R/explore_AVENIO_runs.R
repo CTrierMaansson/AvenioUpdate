@@ -119,7 +119,7 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
     
     if(!is.null(Info)){
         if(Info %ni% names(result)){
-            stop("Info has to a a viable name of the output list. Relevant entries can be viewed with XYZ")
+            stop("Info has to a a viable name of the output list. Relevant entries can be viewed with explore_AVENIO_runs_Info()")
         }
         output <- result[[Info]]
     }
