@@ -47,7 +47,7 @@ add_run_to_list <- function(master_list, Directory){
     unlisted_before <- do.call(rbind,master_list) %>% 
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
-    print("Reading run information")
+    message("Reading run information")
     ID <- gsub(
         "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",
         "",Directory)
@@ -104,16 +104,16 @@ add_run_to_list <- function(master_list, Directory){
         dplyr::filter(!is.na(date_check)) %>% 
         dplyr::select(-date_check) %>% 
         dplyr::filter(!is.na(Name_in_project))
-    print("Merging run information and patient information")
+    message("Merging run information and patient information")
     samples <- add_samples(Directory,AVENIO_runs_select)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
         stop("All samples are already part of the dataset. Terminating")
     }
     n_patients_before <- length(master_list)
     n_runs_before <- nrow(unlisted_before)
-    print("Creating list of data.frames for new samples")
+    message("Creating list of data.frames for new samples")
     df_list <- create_df_list(samples,AVENIO_runs_select)
-    print("Merging existing data with the new run and verifies mutations in BAM files")
+    message("Merging existing data with the new run and verifies mutations in BAM files")
     reanalyzed <- reanalyze_samples(master_list,df_list)
     if(is.list(reanalyzed)){
         if(length(reanalyzed) >= length(master_list)){
@@ -122,12 +122,12 @@ add_run_to_list <- function(master_list, Directory){
                 dplyr::select(Analysis.Name,Sample.ID) %>% 
                 unique()
             n_runs_after <- nrow(unlisted_after)
-            print(paste0("Before the dataset consisted of ",
+            message(paste0("Before the dataset consisted of ",
                          n_patients_before, 
                          " individuals and ",
                          n_runs_before, 
                          " samples analyzed"))
-            print(paste0("Now the dataset consists of ",
+            message(paste0("Now the dataset consists of ",
                          n_patients_after, 
                          " individuals and ",
                          n_runs_after, 

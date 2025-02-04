@@ -6,7 +6,7 @@
 #' @importFrom IRanges IRanges
 get_reads_at_variant_position_using_VCF_in_deduped <- function(VCF, SampleID , Path) {
     #tjek om der er fundet en variant i prøven:
-    if (nrow(VCF) == 0) {print(paste0("No variants in ", SampleID))}
+    if (nrow(VCF) == 0) {message(paste0("No variants in ", SampleID))}
     else {
         #find navn på Deduped bam fil:
         bamfile <- list.files(Path,pattern=utils::glob2rx("Deduped-*.bam"))
@@ -16,7 +16,7 @@ get_reads_at_variant_position_using_VCF_in_deduped <- function(VCF, SampleID , P
         indexx <- indexx[grep(SampleID, indexx)]
         #tjek om der er fundet to filnavne:
         if (length(bamfileP) + length(indexx) != 2) 
-        {print(paste0("BAM file ", 
+        {message(paste0("BAM file ", 
                       SampleID, 
                       " not found, proceeding without."))}
         else {
@@ -24,7 +24,7 @@ get_reads_at_variant_position_using_VCF_in_deduped <- function(VCF, SampleID , P
             bamfile <- Rsamtools::BamFile(
                 stringr::str_glue("{Path}/{bamfileP}"), yieldSize=5e8)
             
-            print(paste0("Processing ", SampleID))
+            message(paste0("Processing ", SampleID))
             #VCF$fix: Column 1 is the chromosome number, 
             #2 is the chromosome position
             #Lav parameter object med positionerne for variaterne:

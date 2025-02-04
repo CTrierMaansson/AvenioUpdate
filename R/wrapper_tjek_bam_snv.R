@@ -15,7 +15,7 @@ wrapper_tjek_bam_snv<-function(df){
     for(i in 1:nrow(df_nested)){
         #get sample1 name:
         sample1<-df_nested$Sample[i]
-        print(paste0("Processing ", sample1))
+        message(paste0("Processing ", sample1))
         
         #path til Bam fil sample i:
         analyseID<-df_nested$Analysis.ID[i]
@@ -35,7 +35,7 @@ wrapper_tjek_bam_snv<-function(df){
         
         #hvis der er kørt flere prøver på patienten, så tjekkes disse en efter en:
         if (nrow(df_patient_other_samples) == 0) 
-        {print(paste0("No other samples for the patient than ", sample1))}
+        {message(paste0("No other samples for the patient than ", sample1))}
         else{
             #loop over andre prøver:
             for (j in 1:nrow(df_patient_other_samples)){
@@ -63,7 +63,7 @@ wrapper_tjek_bam_snv<-function(df){
                 
                 #hvis varianter fundet, tjekkes disse i bam filen en efter en:
                 if (nrow(vcf_fil) == 0) 
-                {print(paste0("No variants in ", sample2))}
+                {message(paste0("No variants in ", sample2))}
                 else{
                     for (variant in 1:nrow(vcf_fil)){
                         vcf_variant<-vcf_fil[variant]

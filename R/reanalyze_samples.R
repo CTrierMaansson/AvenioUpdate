@@ -35,7 +35,7 @@ reanalyze_samples <- function(master_list, df_list){
                 "_",
                 stringr::str_split_i(unique(
                     sample_df$sample_index)[1],"_",2))
-            print(paste0("There is a BC sample for ",
+            message(paste0("There is a BC sample for ",
                          patient_sample,
                          " and variants are marked accordingly"))
             sample_BC <- sample_df %>% 

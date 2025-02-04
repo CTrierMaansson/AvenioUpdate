@@ -15,7 +15,7 @@ wrapper_tjek_bam_indel<-function(df){
     for(i in 1:nrow(df_nested)){
         #get sample1 name:
         sample1<-df_nested$Sample[i]
-        print(paste0("Processing ", sample1))
+        message(paste0("Processing ", sample1))
         
         #path til Bam fil sample i:
         analyseID<-df_nested$Analysis.ID[i]
@@ -37,14 +37,14 @@ wrapper_tjek_bam_indel<-function(df){
         
       #hvis der er kørt flere prøver på patienten, så tjekkes disse en efter en:
         if (nrow(df_patient_other_samples) == 0)
-            {print(paste0("No other samples for the patient than ", sample1))}
+            {message(paste0("No other samples for the patient than ", sample1))}
         else{
             #loop over andre prøver:
             for (j in 1:nrow(df_patient_other_samples)){
                 sample2<-df_patient_other_samples$Sample[j]
                 varianter<-df_patient_other_samples$variants[j][[1]]
                 #Hvis indel fundet, tjekkes disse i BAM:
-                if (nrow(varianter)>0){print(paste0("INDEL in ", sample2))
+                if (nrow(varianter)>0){message(paste0("INDEL in ", sample2))
                     
                     for (v in 1:nrow(varianter)){
                         variant<-varianter[v,]

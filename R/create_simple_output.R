@@ -57,14 +57,14 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE){
     if(is.null(df)){
         stop("CPR number is not in the dataset")
     }
-    print("Reading AVENIO_runs.xlsx file")
+    message("Reading AVENIO_runs.xlsx file")
     AVENIO_runs <- readxl::read_xlsx("//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
                              col_types = c(rep("guess",4),"date",rep("guess",6)))
-    print("Selecting relevant sample")
+    message("Selecting relevant sample")
     AVENIO_sele <- AVENIO_runs[AVENIO_runs$CPR == CPR,]
     AVENIO_sele <- AVENIO_sele[!is.na(AVENIO_sele$CPR),] %>% 
         dplyr::select(Sample_name, Sample_note, Material, Notes)
-    print("Merging run and variant information")
+    message("Merging run and variant information")
     df <- df %>% 
         dplyr::left_join(AVENIO_sele, by = c("Sample.ID" = "Sample_name")) %>% 
         dplyr::select(sample_index,
@@ -83,7 +83,7 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE){
         df <- df
     }
     else{
-        print("Removing Synonymous variants")
+        message("Removing Synonymous variants")
         df <- df %>% 
             dplyr::filter(!grepl("Synonymous",Description))
     }
