@@ -38,20 +38,108 @@ knitr::opts_chunk$set(
 \newpage
 # Introduction
 <img src="AvenioUpdate.png" width="250" align="right">
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This document will describe how to **AvenioUpdate** to update and explore data
+generated with the Avenio pipeline at AUH. The package is dependent on two files
+The first file is an `.rds` file which contains all the Avenio results for 
+each sample. This file can loaded into R where the data is visible. 
+The second file is an excel file (`.xlsx`) which contains all the basic
+information about the samples run on the NGS machine. Both files are located at
+[//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/)
+and will be explained in much greater detail below. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+As of early 2025 the package contains two **main** functions 
+(`add_run_to_list()` & `create_simple_output()`) which are used to update the
+results file and get an overview of the results for a single patient.
+In addition, the package contains and five **smaller** functions which are 
+used to get some statistics on the data we have collected and to make sure the
+results file is updated correctly. 
+which
 
-```{r cars}
-summary(cars)
+# Installation
+
+This package is not a *real* package given it is not published at places like
+CRAN or Bioconductor. However, it can still be installed via my
+[github page](https://github.com/CTrierMaansson/AvenioUpdate) as 
+demonstrated below:
+
+```{r setup_github, message=FALSE, results = 'hide', eval = FALSE,R.options = list(width = 100)}
+if (!require(devtools)) install.packages('devtools')
+
+library(devtools)
+
+devtools::install_github("CTrierMaansson/AvenioUpdate")
+
 ```
 
-## Including Plots
+To check if the package has been installed correctly run the following 
+command:
 
-You can also embed plots, for example:
+```{r testing_installation, message=FALSE, results = 'hide', eval = FALSE,R.options = list(width = 100)}
+library(AvenioUpdate)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+result_stats_Info()
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Which should give an output like this:
+
+```{r testing_installation_output, message=FALSE, echo = FALSE,R.options = list(width = 1000)}
+library(AvenioUpdate)
+
+result_stats_Info()
+```
+
+# How it works
+As mentioned, the package is dependent on two files located on the 
+[Synology](//Synology_m1/Synology_folder/AVENIO/). This means in order to use
+the package you must have access to the Synology folder. How to obtain this 
+is found in 
+[/Dropbox/Lung cancer group/How-to guides](/Dropbox/Lung cancer group/How-to guides)
+Once you have gained access to the Synology you must stay connected using 
+the Ethernet cable connection **IPv4-DNA-server: 10.83.252.137**. 
+
+## The AVENIO_runs.xlsx file
+This file is at 
+[//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/)
+and contains all the relevant information for all NGS samples across different
+projects. 
+The file is used to connect CPR numbers and other relevant information with the
+NGS results from the Avenio output. By updating and using this file we can use it
+as a *key*-file allowing type errors, poorly designed sample names,
+non-unique sample names across different runs, etc. in the Avenio system and
+maintain a system across all our project. Yes! Very neat!
+
+However...
+
+**THIS FILE IS UPDATED MANUALLY**
+
+The file can be opened in excel were the samples can be added accordingly.
+It is **VERY** 
+important that samples/entries are not deleted from the file. Currently, we
+have no backup of the data (given it is sensitive) included in the file. 
+If you make errors when entering your information, no worries, this can be fixed
+without any repercussions. However, it is very difficult to obtain deleted data.
+
+So as long as you don't delete anything or change entries not belonging to 
+you all is fine!
+
+Nevertheless, there are some rules regarding the file:
+
+1. Do not delete anything you are not supposed to
+2. Do not delete anything you are not supposed to
+3. Never move the file from its directory [//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/)
+5. Do not make your own copy of the file and store it locally
+6. Format the information in the correct format (see below)
+7. Try to avoid adding samples with incomplete information
+8. And do not delete anything you are not supposed to
+
+\newpage
+# Session info
+```{r session, echo = FALSE}
+sessioninfo::session_info(
+    pkgs = "attached",
+    include_base = FALSE,
+    dependencies = NA,
+    to_file = FALSE
+)
+
+```
