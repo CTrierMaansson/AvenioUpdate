@@ -13,7 +13,7 @@ result_stats_Info <- function(){
     current_format <- result_stats(silent = TRUE)
     df_current <- data.frame(Name = names(current_format))
     explanation <- data.frame(Name = c("Basestats",
-                                       "Projectstats"
+                                       "Projectstats",
                                        "All_mutations",
                                        "Relevant_SNV",
                                        "Relevant_INDEL",
