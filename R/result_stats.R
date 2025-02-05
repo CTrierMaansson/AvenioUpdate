@@ -208,6 +208,7 @@ result_stats <- function(Info = NULL, silent = FALSE){
         message("Formatting output")
     }
     res <- list(Basestats = basestats,
+                Projectstats = project_df,
                 All_mutations = gene_df_complete,
                 Relevant_SNV = gene_df_SNV_no_BC,
                 Relevant_INDEL = gene_df_INDEL_no_BC,

@@ -13,6 +13,7 @@ result_stats_Info <- function(){
     current_format <- result_stats(silent = TRUE)
     df_current <- data.frame(Name = names(current_format))
     explanation <- data.frame(Name = c("Basestats",
+                                       "Projectstats"
                                        "All_mutations",
                                        "Relevant_SNV",
                                        "Relevant_INDEL",
@@ -22,6 +23,7 @@ result_stats_Info <- function(){
                                        "Reads",
                                        "On_target"),
                               Description = c("Number of samples, runs, patients, different materials etc.",
+                                              "Number of patients and samples in each project",
                                               "Number of times each gene is mutated across all samples",
                                               "Number of SNVs detected not classified as BC or synonymous mutations",
                                               "Number of INDELs detected not classified as BC or synonymous mutations",
