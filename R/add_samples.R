@@ -21,6 +21,15 @@ add_samples <- function(Directory,runs){
         dplyr::filter(Sample.ID %in% AVENIO_runs_select$Sample_name)
     samples_with_variants <- unique(variants_select$Sample.ID)
     samples_of_interest <- unique(AVENIO_runs_select$Sample_name)
+    sample_metrics <- read.csv(sample_file)
+    if(any(samples_of_interest %ni% unique(sample_metrics$Sample.ID))){
+        error_sample <- samples_of_interest[samples_of_interest %ni% 
+                                                unique(sample_metrics$Sample.ID)]
+        error_samples <- paste(error_sample,collapse = ", ")
+        stop(paste0("Sample(s): ",
+                    error_samples,
+                    " have an incorrect name and the sample ID cannot be found"))
+    }
     if(length(samples_with_variants) != length(samples_of_interest)){
         sample_metrics <- read.csv(sample_file) %>% 
             filter(Sample.ID %in% samples_of_interest) %>% 
