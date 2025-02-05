@@ -1,0 +1,57 @@
+---
+title: |-
+  AvenioUpdate
+   \vspace{0.5in}
+author:
+- name: Christoffer Trier Maansson
+  affiliation: 
+    Department of Clinical Biochemistry, Aarhus University Hospital, Denmark
+  email: ctm@clin.au.dk
+- name: Lærke Rosenlund Nielsen
+  affiliation:
+    Department of Clinical Biochemistry, Aarhus University Hospital, Denmark
+date: "`r format(Sys.time(), '%d %b %Y')`"
+output:
+  BiocStyle::html_document:
+    toc: yes
+    toc_depth: 3
+    number_sections: yes
+    highlight: haddock
+subtitle: |-
+  https://github.com/CTrierMaansson/AvenioUpdate
+   \vspace{0.3in}
+abstract: "This is the manual describing how to use AvenioUpdate \n
+to update and extract information for all Avenio runs performed at AUH. \n
+In addition to update the NGS results and explore individual patients overall 
+statistics on the experiments performed at our lab can be investigated. "
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+    tidy.opts = list(width.cutoff=100),
+    tidy = FALSE,
+    message = FALSE,
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+\newpage
+# Introduction
+<img src="AvenioUpdate.png" width="250" align="right">
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -109,6 +109,24 @@ result_stats <- function(Info = NULL, silent = FALSE){
     colnames(note_df)[1] <- "stat"
     basestats <- rbind(basestats, mat_df, note_df)
     if(!silent){
+        message("Extracting project statistics")
+    }
+    project_df_patients <- combined_df %>% 
+        dplyr::select(CPR,Project) %>% 
+        unique() %>% 
+        dplyr::group_by(Project) %>% 
+        dplyr::count()
+    colnames(project_df_patients)[2] <- "n_patients"
+    project_df_samples <- combined_df %>% 
+        dplyr::select(sample_index,Project) %>% 
+        unique() %>% 
+        dplyr::group_by(Project) %>% 
+        dplyr::count()
+    colnames(project_df_samples)[2] <- "n_samples"
+    project_df <- project_df_patients %>% 
+        dplyr::left_join(project_df_samples, by = "Project") %>% 
+        dplyr::ungroup()
+    if(!silent){
         message("Extracting gene mutation statistics")
     }
     gene_df <- combined_df %>% 
@@ -212,3 +230,4 @@ result_stats <- function(Info = NULL, silent = FALSE){
     }
     return(output)
 }
+result_stats()
