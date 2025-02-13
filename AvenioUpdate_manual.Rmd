@@ -800,11 +800,10 @@ The file only works if the AVENIO_runs.xlsx file is not lost.
 Christoffer will make sure this happens relatively regularly. 
 
 When the entire script has been run you should be able to investigate which
-samples that have not been added to the dataset but are present in the 
+runs (if any) that have not been added to the dataset but are present in the 
 AVENIO_runs.xlsx file using:
 
 ```{r, eval=FALSE,message=F}
-
 explore_AVENIO_runs(silent = TRUE,
                     Info = "Unincluded_analyses")
 ```
