@@ -12,20 +12,27 @@ author:
     Department of Clinical Biochemistry, Aarhus University Hospital, Denmark
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
-  BiocStyle::html_document:
-    toc: yes
+  rmarkdown::html_document:
+    toc: true
     toc_depth: 3
-    number_sections: yes
+    number_sections: true
     highlight: haddock
+    theme: flatly
+header-includes:
+  - |
+    <style>
+      .r-message { color: red; font-weight: bold; }
+      .r-output { color: blue; }
+    </style>
 subtitle: |-
   https://github.com/CTrierMaansson/AvenioUpdate
    \vspace{0.3in}
-abstract: "This is the manual describing how to use AvenioUpdate \n
+abstract: "This manual describes how to use AvenioUpdate \n
 to update and extract information for all Avenio runs performed at AUH. \n
-In addition to update the NGS results and explore individual patients overall 
+Besides updating the NGS results and explore individual patients, overall 
 statistics on the experiments performed at our lab can be investigated. "
----
 
+---
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
     tidy.opts = list(width.cutoff=100),
@@ -38,9 +45,10 @@ knitr::opts_chunk$set(
 \newpage
 # Introduction
 <img src="AvenioUpdate.png" width="250" align="right">
-This document will describe how to **AvenioUpdate** to update and explore data
+
+This document will describe how to use **AvenioUpdate** to update and explore data
 generated with the Avenio pipeline at AUH. The package is dependent on two files
-The first file is an `.rds` file which contains all the Avenio results for 
+. The first file is an R file (`.rds`) which contains all the Avenio results for 
 each sample. This file can loaded into R where the data is visible. 
 The second file is an excel file (`.xlsx`) which contains all the basic
 information about the samples run on the NGS machine. Both files are located at
@@ -50,10 +58,9 @@ and will be explained in much greater detail below.
 As of early 2025 the package contains two **main** functions 
 (`add_run_to_list()` & `create_simple_output()`) which are used to update the
 results file and get an overview of the results for a single patient.
-In addition, the package contains and five **smaller** functions which are 
+In addition, the package contains five **smaller** functions which are 
 used to get some statistics on the data we have collected and to make sure the
 results file is updated correctly. 
-which
 
 # Installation
 
@@ -84,6 +91,8 @@ Which should give an output like this:
 
 ```{r testing_installation_output, message=FALSE, echo = FALSE,R.options = list(width = 1000)}
 library(AvenioUpdate)
+library(dplyr)
+library(crayon)
 
 result_stats_Info()
 ```
@@ -91,10 +100,10 @@ result_stats_Info()
 # How it works
 As mentioned, the package is dependent on two files located on the 
 [Synology](//Synology_m1/Synology_folder/AVENIO/). This means in order to use
-the package you must have access to the Synology folder. How to obtain this 
+the package you must have access to the Synology folder. How to obtain this, 
 is found in 
 [/Dropbox/Lung cancer group/How-to guides](/Dropbox/Lung cancer group/How-to guides)
-Once you have gained access to the Synology you must stay connected using 
+. Once you have gained access to the Synology you must stay connected using 
 the Ethernet cable connection **IPv4-DNA-server: 10.83.252.137**. 
 
 ## The AVENIO_runs.xlsx file
@@ -103,16 +112,16 @@ This file is at
 and contains all the relevant information for all NGS samples across different
 projects. 
 The file is used to connect CPR numbers and other relevant information with the
-NGS results from the Avenio output. By updating and using this file we can use it
+NGS results from the Avenio output. By updating and using this file it serves
 as a *key*-file allowing type errors, poorly designed sample names,
 non-unique sample names across different runs, etc. in the Avenio system and
-maintain a system across all our project. Yes! Very neat!
+maintain a consistency across all our project. Yes! Very neat!
 
 However...
 
 **THIS FILE IS UPDATED MANUALLY**
 
-The file can be opened in excel were the samples can be added accordingly.
+The file can be opened in excel where the samples can be added accordingly.
 It is **VERY** 
 important that samples/entries are not deleted from the file. Currently, we
 have no backup of the data (given it is sensitive) included in the file. 
@@ -127,13 +136,665 @@ Nevertheless, there are some rules regarding the file:
 1. Do not delete anything you are not supposed to
 2. Do not delete anything you are not supposed to
 3. Never move the file from its directory [//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/)
-5. Do not make your own copy of the file and store it locally
-6. Format the information in the correct format (see below)
-7. Try to avoid adding samples with incomplete information
+4. Do not make your own copy of the file and store it locally
+5. Format the information in the correct format (see below)
+6. Try to avoid adding samples with incomplete information
+7. Avoid the use of special characters like "ÆØÅ½#$" etc. but "_" is okay
 8. And do not delete anything you are not supposed to
+
+### Formatting entries in AVENIO_runs.xlsx
+
+This is an example of some the entries in the file:
+*To ensure no CPR numbers from real patients are displayed, the CPRs here are*
+*randomly generated and are therefore "useless"*
+
+```{r, echo=FALSE}
+set.seed(9)
+readxl::read_xlsx(
+  "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+  col_types = c(rep("guess",4),"date",rep("guess",6))) %>% 
+  dplyr::mutate(date_check = lubridate::ymd(Sample_date)) %>% 
+  select(CPR,Name_in_project, Project, Sample_date,
+         Run_name, Run_ID, Sample_name, 
+         Sample_note, Material) %>% 
+  na.omit() %>% 
+  dplyr::slice(141,337,338,81,82,83,85,581) %>%
+  group_by(CPR) %>%
+  dplyr::reframe(Name_in_project = Name_in_project,
+                 Project = Project,
+                 Sample_date = Sample_date,
+                 Run_name = Run_name,
+                 Run_ID = Run_ID,
+                 Sample_name = Sample_name,
+                 Sample_note = Sample_note,
+                 Material = Material,
+                 CPR = paste0(floor(runif(1,10,31)),
+                              0,
+                              floor(runif(1,1,10)),
+                              floor(runif(1,20,100)),
+                              floor(runif(1,1000,10000)))) %>%
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12)
+```
+### Variables in AVENIO_runs.xlsx
+
+#### **CPR**
+The CPR number of the patient if such number is known/exists. This number is
+unique to every patient and is used to explore the results.
+The number is used to extract the information from each patient in 
+`create_simple_output()`.
+
+As explained below, AVENIO_results_patients.rds is a named `list` of `data.frames`
+where each `data.frame` is named after the CPR number of the patient.
+
+Therefore you will able to explore all Avenio information, including sample
+metrics using:
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+# Extracting the data for a specific patient using the CPR number
+results$`CPR_number` 
+```
+
+**OR**
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+# Extracting the data for a specific patient using the CPR number
+results[[`CPR_number`]] 
+```
+
+#### **Name_in_project**
+
+This is the name given to a patient in a project. This name **must** be unique
+for the patients within a specific project, but the same name can be used 
+across different projects such as *pt26*, *26*, *patient26* etc.
+
+#### **Project**
+
+This is the project the patient is part of. This is used to group patients as
+unique entries. It can also be used to quickly collect the patient information
+for your specific project by filtering on the project name.
+
+#### **Sample_date**
+
+This is the date of the sample collection. **It is important to format the**
+**date correctly**. The date should be formatted as `YYYY-MM-DD`. 
+It is quite often the sample date for buffy coat (BC) and baseline (BL) samples
+are identical. This is not an issue as long as the **Material** column is also
+filled out correctly.
+
+When the data is collected and analyzed the algorithm checks the format of 
+the date and if it is not correct it will result in an error.
+
+#### **Run_name**
+
+This is the name of the run as it appears in the Avenio system. While this name is 
+not used specifically in the algorithm it is good to have the name in the file
+to have a record of which Run_name matches which Run_ID.
+
+#### **Run_ID**
+
+This is the name of the Run_ID which is randomly generated by the Avenio system.
+This is an important ID because it is the name of the folder where the results
+from Avenio are located on the Synology server. The Run_ID is always 24 
+characters long and starts with an "A". If the algorithm detects a Run_ID that
+is not 24 characters long it will result in an error.
+
+#### **Sample_name**
+
+This is the name of the sample as it appears in the Avenio system. This name 
+is only unique to the specific run and is used in the algorithm to extract the
+BAM files. The algorithm tests if the specific run contains a folder with the
+specific Sample_name and if it does not it will result in an error.
+
+#### **Sample_note**
+
+This is a note that can be added to the sample and it is not used in the
+algorithm. However, it is nice to include to get a quick overview of the samples
+that have been analyzed for the specific patient. In general the variable refers
+to time of blood sampling in relation to treatment initiation.
+There is no limitation on what can
+be included in this column **however it is strongly advised to put in:**
+**"BL","Tx","Unknown", or "BC"**
+
+#### **Material**
+
+**This is a mandatory column**. The variable refers to the source of the material
+analyzed. In most cases this is "cfDNA" or "BC" which reflects purified plasma
+cfDNA or DNA from PBMCs, respectively. Other sources include "size_selection" or
+"cfChIP". This is a mandatory column because it allows the same blood sample
+(same Project, Name_in_project, Sample_date) to be analyzed multiple times. If
+Material is not filled out the algorithm will result in an error.
+
+**The classification of "BC" samples is important because non-BC samples from a
+patient have variants "flagged" according to the variants detected 
+in the BC sample.**
+
+## The AVENIO_results_patients.rds file
+
+This is the other important file located at 
+[//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/),
+however this file is **NOT** updated manually by opening and editing it. Instead,
+this file is updated automatically by the algorithm when `add_run_to_list()`
+is executed.
+This means, when you have updated the AVENIO_runs.xlsx file with new 
+samples and you want to update the results, you run the following:
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+# Example path to the specific run
+test_path <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O" 
+
+# Updating the results file
+results <- add_run_to_list(master_list = results, 
+                           Directory = test_path)
+```
+
+Then `results` will contain all of the information from the 
+AVENIO_runs.xlsx file and AVENIO_results_patients.rds has been updated accordingly.
+
+### More technical note on AVENIO_results_patients.rds
+
+**Not mandatory read**
+
+AVENIO_results_patients.rds is an `.rds` file which means it is a saved R object.
+The file therefore cannot be explored outside of R. However, the file can be
+loaded into R where the data is visible. 
+The file is a named `list` of `data.frames`
+where each `data.frame` is named after the CPR number of the patient.
+
+All the information from the Avenio system is stored in the `data.frames` which
+is extracted from the filtered variants located in the `.csv` files. If no 
+variants have been detected for the sample, all of the other sample metrics such
+as the median depth, fragment length, base quality, etc. are still stored in the
+the `data.frames`.
+This is also to register that the sample has been analyzed and if other samples 
+with detectable variants have been analyzed for that patient these variants are
+being investigated in the original BAM files for the patient.
+
+# Main functions
+
+## `add_run_to_list()`
+
+As mentioned, this is the most important function in the package.
+The function is used to update the AVENIO_results_patients.rds file with any
+new information from the AVENIO_runs.xlsx file. 
+
+How the function works is illustrated below:
+
+```{r, echo=FALSE, fig.cap="Fig 1. Illustration of how `add_run_to_list()` works by mergnig information from different files", out.width='80%'}
+knitr::include_graphics("AvenioUpdate overview.png")
+```
+
+The function takes two mandatory arguments:
+
+1. `master_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+2. `Directory` which is the path to the specific run on the Synology server
+
+As illustrated in the figure above the function will extract the relevant 
+information from the AVENIO_runs.xlsx file. Then it will look through the 
+established results on all the patients (using the CPR numbers) and collect the
+new run with previous runs from patients in the new run. Then it will take all 
+the identified mutations for each patient and look for that mutation in all BAM
+files generated for the patient. After this, if a BC sample exists for the patient,
+all mutations identified in the non-BC samples are flagged as BC mutations if
+they are found the BC sample as well. Then the results dataset is updated with 
+the new runs and existing runs are updated after the BAM files have been
+reanalyzed. 
+
+### Output
+
+The output of the function is the updated `master_list`. This is automatically
+saved as the AVENIO_results_patients.rds file.
+
+### Example
+
+An example of how the function is used is shown below:
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+# Example path to the specific run
+test_path <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O" 
+
+# Updating the results file
+results <- add_run_to_list(master_list = results,
+                           Directory = test_path)
+
+```
+
+### End messages
+
+Several messages are printed during the execution of the function. However, 
+for everyday use only the last few messages are of importance. An example 
+of this could be:
+
+```{r, echo=FALSE,message=TRUE}
+message("1")
+message("Before the dataset consisted of 223 individuals and 572 samples analyzed")
+message("2")
+message("Now the dataset consists of 223 individuals and 586 samples analyzed")
+message("3")
+message("The following projects have been updated with this many samples")
+tibble(Project = "MonAlec",n = 14)
+message("4")
+message("And the following samples have been added to the dataset")
+c("MonAlec_83Z7BF2N4Y12L933_200723_BC",
+  "MonAlec_YZ0PPZ1A5JLCB27C_220211_BC",
+  "MonAlec_K6YFO3FWXOFI99UZ_201123_BC",
+  "MonAlec_CQHQ4QA5K295LU8D_190911_BC",
+  "MonAlec_B14Q10RS3BRU807A_210304_BC",
+  "MonAlec_6KYRWVT7W2KW1U48_220208_BC",
+  "MonAlec_PQ9NESTYL82NBF9B_200813_BC", 
+  "MonAlec_UE2R8PRMAT4T3IXD_190611_BC",
+  "MonAlec_2UCZEDI4F35T6ILM_200728_BC", 
+  "MonAlec_IT8BJVO03C08FV04_191002_BC", 
+  "MonAlec_YBNHFHWVB0HBC3YY_200115_BC", 
+  "MonAlec_9Y6DEL9FY4T37CX7_201202_BC",
+  "MonAlec_4OOA9FR46IB4BXBJ_191101_BC", 
+  "MonAlec_FDEDCZO3IR8TENC0_211119_BC")
+message("5")
+message("Saving updated list of patients")
+
+```
+
+1. The first message explains how many individuals and samples the dataset
+consisted of before the addition of the new run
+2. The second message explains how many individuals and samples the dataset 
+consists of after the addition of the new run
+3. The third message explains which projects have been updated and how many
+samples have been added to each project
+4. The fourth message explains which samples have been added to the dataset
+where the samples are formatted as `Project_SampleName_Date_Material`
+5. The fifth message explains that the updated list of patients has been saved
+
+**It is good practice to look through these messages after `add_run_to_list()`**
+**has been executed, to make sure the data has been updated as expected.**
+
+
+## `create_simple_output()`
+
+This is the second **main** function of the package and is used to get a quick 
+overview of a specific patient. The function takes two **mandatory** arguments:
+
+1. `df_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+2. `CPR_number` which is the CPR number of the patient you want to investigate
+
+If synonymous mutations should be excluded you can set `synonymous = FALSE`.
+As a default synonymous mutations are included in the output 
+(`synonymous = TRUE`).
+
+### Output
+
+The output is a `list` with two entries. The first entry is just the CPR number
+to understand which patient the information is gathered from. 
+The second entry is a `data.frame` with the following 14 variables where each row
+is a gene mutation detected in the patient:
+
+1. **sample_index** - Unique for each sample and reflects Project, Name_in_project, Sample_date, and Material in the AVENIO_runs.xlsx file
+2. **Class** - Classification of the mutation (FUSION,INDEL,SNV)
+3. **Gene** - The gene where the mutation is located
+4. **AA** - The amino acid change
+5. **Description** - Description of the mutation e.g. missense
+6. **Flags** - Flags for the mutation (detailed below)
+7. **MAF** - The mutational allele fraction
+8. **Variant_depth** - The number of identified reads with the variant
+9. **Unique_depth** - The number of unique reads on the position of the variant
+10. **Analysis** - Name of the sequencing run in the Avenio system
+11. **Sample.ID** - Name of the sample in the Avenio system
+12. **Sample.note** - Note of the sample in the AVENIO_runs.xlsx file (BL, Tx, BC, Unknown)
+13. **Material** - Material of the sample in the AVENIO_runs.xlsx file (cfDNA, BC, size_selection, cfChIP)
+14. **Notes** - Any notes manually added in the AVENIO_runs.xlsx file
+
+If no mutations are detected in a sample for a patient the run is still added
+but Gene, AA etc. variables just contain NA. 
+
+For now which variables are included in the output is set to these specific
+variables. However, upon request I will look into ways to modify the output 
+so the many variables in the Avenio `.csv` files also can be extraced in this 
+simple format.
+
+### Example
+
+An example of how the function is used is shown below:
+*Again, the CPR number is not a real CPR number*
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+# Extracting the simple output
+overview <- create_simple_output(master_list = results,
+                                 CPR = "1401362941",
+                                 synonymous = F)
+
+# CPR number
+overview[[1]] 
+
+# Data.frame with the 14 variables
+overview[[2]] 
+
+```
+
+Which gives the following output:
+
+```{r, echo=FALSE,message=FALSE}
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+overview <- create_simple_output(df_list = results,
+                                 CPR = "0106482071",
+                                 synonymous = F)
+overview[[1]] <- "1401362941"
+
+overview[[1]]
+
+overview[[2]] %>%
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12)
+```
+
+### Flags
+
+The **Flags** variable is included to give some context on the mutation. 
+If the mutation is not not found in the Avenio system, but only found when 
+the BAM file is anlyzed the flag is set to "BAM". Then, the **MAF** and 
+**variant depth** is also determined from the BAM file, whereas the standard
+MAF and variant depth is determined from the Avenio system.
+
+If a mutation is found in a BC sample and the identical mutation
+is also found in a non_BC sample the flag is set to "BC_mut" in 
+the non_BC samples. This happens irrespective if the mutation is only found
+in BAM files from the BC or non_BC samples. 
+**Therefore, please be aware that mutations found with as little as one read**
+**in the BC sample will be flagged as BC_mut in the non_BC samples, also when**
+**the mutation is not detected by Avenio.**
+
+# Small functions
+As explained above, I have created some functions which can be used to explore
+the datasets a bit more. These functions are not mandatory to use but can be
+useful in order to get an overview of the samples, runs, etc. 
+
+## `included_analyses()`
+This function is used to get an overview of the runs from AVENIO_runs.xlsx that
+are included in the results dataset. 
+The idea with this function is to use it to check if all the samples from have 
+in fact been included in the dataset.
+
+The function takes one mandatory argument:
+
+1. `master_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+
+### Output
+
+The output is a named `list` of lengths = 2.
+The first entry ("Overview:") is a `data.frame` with three variables:
+
+1. **Analysis.ID** - The run ID from the AVENIO_runs.xlsx file
+2. **n** - Number of samples from that run that are included in the results dataset
+3. **Analysis.Name** - The name of the run in the Avenio system
+
+The second entry ("Details:") is a named `list` of `data.frames` where each 
+`data.frame` is named with the run ID. 
+Each `data.frame` contains four variables:
+
+1. **sample_index** - Unique for each sample and reflects Project, Name_in_project, Sample_date, and Material in the AVENIO_runs.xlsx file
+2. **Sample.ID** - Name of the sample in the Avenio system
+3. **Analysis.Name** - The name of the run in the Avenio system
+4. **Analysis.ID** - The run ID from the AVENIO_runs.xlsx file
+
+Available entries can be shown using the following:
+
+```{r, eval=FALSE,message=F}
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+analyses <- included_analyses(results)
+names(analyses[["Details:"]])
+```
+
+**OR**
+
+```{r, eval=FALSE,message=F}
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+analyses <- included_analyses(results)
+analyses[["Overview:"]]$Analysis.ID
+```
+
+### Example
+
+An example of how the function is used is shown below:
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+# Extract included analyses
+analyses <- included_analyses(results)
+
+# Getting an overview of the analyses
+analyses[["Overview:"]]
+
+```
+
+Which should result in something like this:
+
+```{r, echo=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+# Extract included analyses
+analyses <- included_analyses(results)
+
+# Getting an overview of the analyses
+analyses[["Overview:"]] %>% 
+  dplyr::slice(23:28) %>%
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
+And the second entry is viewed using:
+
+```{r,eval=FALSE,message = FALSE}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+# Extract included analyses
+analyses <- included_analyses(results)
+
+# Exploring specific run
+analyses[["Details:"]][["AGU232uEYZZKe4oI95IrJu7o"]]
+```
+
+Which should result in something like this:
+
+```{r, echo=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+# Extract included analyses
+analyses <- included_analyses(results)
+
+# Getting an overview of the analyses
+analyses[["Details:"]][["AGU232uEYZZKe4oI95IrJu7o"]] %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
+## `explore_AVENIO_runs()`
+
+This function is used to get an overview of the AVENIO_runs.xlsx file and
+explore the sample entries that have been entered. 
+This can be used to get an overview of which samples are missing information, 
+which analyses have not been added to the results dataset, etc.
+
+The function takes **NO** mandatory arguments, but takes two optional arguments:
+
+1. **Info** - name of the information of interest if `Info = NULL` (default) all information is displayed
+2. **silent** - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
+
+### Output
+
+A `list` with different information on the AVENIO_runs.xslx (`Info = NULL`)
+or the specific object as determined by `Info`.
+
+### Example
+
+Two examples of how the function is used is shown below:
+
+```{r, eval=FALSE,message=F}
+# Exploring the AVENIO_runs.xlsx file
+results <- explore_AVENIO_runs(silent = TRUE)
+
+# Getting the information of total entries
+results$Total_entries
+
+```
+
+Should return:
+
+```{r, echo=FALSE,message=F}
+results <- explore_AVENIO_runs(silent = TRUE)
+
+results$Total_entries
+
+```
+
+And:
+
+```{r, eval=FALSE,message=F}
+# Getting the information on the samples with all the required information
+explore_AVENIO_runs(Info = "Required",
+                    silent = TRUE)
+
+```
+
+Should return something like:
+
+```{r, echo=FALSE,message=F}
+head(explore_AVENIO_runs(Info = "Required",
+                         silent = TRUE)) %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12)
+
+```
+
+### Output description
+
+The output of the function is a named `list` with different entries. I
+have included a function (`explore_AVENIO_runs_Info()`) which displays
+a brief explanation of each entry. The function has no mandatory arguments.
+To view the explanations run the following command:
+
+```{r, eval=FALSE,message=F}
+# Getting explanations for entries in explore_AVENIO_runs()
+explore_AVENIO_runs_Info()
+
+```
+
+Should return something like:
+
+```{r, echo=FALSE,message=F}
+explore_AVENIO_runs_Info() %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
+## `result_stats()`
+
+This function is similar to `explore_AVENIO_runs()` but is used to get an
+overview of the results dataset. The function 
+extracts information from the Avenio_results_patients.rds file generates
+some basic statistics on the dataset.
+
+The function takes **NO** mandatory arguments, but takes two optional arguments:
+
+1. **Info** - name of the information of interest if `Info = NULL` (default) all information is displayed
+2. **silent** - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
+
+### Output
+
+A `list` with different stats on AVENIO_results_patients.rds (`Info = NULL`) 
+or the specific object as determined by `Info`.
+
+### Example
+
+Two examples of how the function is used is shown below:
+
+```{r, eval=FALSE,message=F}
+# Exploring the results file
+results <- result_stats(silent = TRUE)
+
+# Getting the information on all mutations
+results$All_mutations
+
+```
+
+Should return:
+
+```{r, echo=FALSE,message=F}
+results <- result_stats(silent = TRUE)
+
+head(results$All_mutations,n = 10) %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
+And:
+
+```{r, eval=FALSE,message=F}
+# Getting the information on the samples with all the required information
+result_stats(silent = TRUE,
+             Info = "Basestats")
+
+```
+
+Should return something like:
+
+```{r, echo=FALSE,message=F}
+result_stats(silent = TRUE,
+             Info = "Basestats") %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+```
+
+### Output description
+
+The output of the function is a named `list` with different entries. I
+have included a function (`result_stats_Info()`) which displays
+a brief explanation of each entry. The function has no mandatory arguments.
+To view the explanations run the following command:
+
+```{r, eval=FALSE,message=F}
+# Getting explanations for entries in result_stats()
+result_stats_Info()
+
+```
+
+Should return something like:
+
+```{r, echo=FALSE,message=F}
+result_stats_Info() %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
 
 \newpage
 # Session info
+It is good practice to include this information in tutorials and manuals to 
+ensure reproducibility and for troubleshooting if something does not work.
+If your code works, discount this section.
+
 ```{r session, echo = FALSE}
 sessioninfo::session_info(
     pkgs = "attached",
@@ -141,5 +802,4 @@ sessioninfo::session_info(
     dependencies = NA,
     to_file = FALSE
 )
-
 ```

@@ -17,7 +17,7 @@
 #' @examples
 #' results <- result_stats()
 #' results$All_mutations
-#' explore_AVENIO_runs(Info = "Basestats")
+#' result_stats(Info = "Basestats")
 #' @export
 result_stats <- function(Info = NULL, silent = FALSE){
     `%ni%` <- Negate(`%in%`)
@@ -231,4 +231,3 @@ result_stats <- function(Info = NULL, silent = FALSE){
     }
     return(output)
 }
-result_stats()

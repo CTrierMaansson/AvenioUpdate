@@ -132,6 +132,32 @@ add_run_to_list <- function(master_list, Directory){
                          " individuals and ",
                          n_runs_after, 
                          " samples analyzed"))
+            samples_export_df <- AVENIO_runs_select %>% 
+                dplyr::mutate(sample_index = paste0(Project,"_",
+                                                    Name_in_project,"_",
+                                                    substr(stringr::str_split_i(
+                                                        as.character(Sample_date),"-",1),
+                                                        3,4),
+                                                    stringr::str_split_i(
+                                                        as.character(Sample_date),"-",2),
+                                                    stringr::str_split_i(
+                                                        as.character(Sample_date),"-",3)
+                )
+                ) %>% 
+                dplyr::mutate(
+                    sample_index = ifelse(Material != "cfDNA",
+                                          paste0(sample_index,"_",Material),
+                                          sample_index)) %>% 
+                dplyr::left_join(samples,by = "sample_index") %>% 
+                dplyr::select(sample_index,Project) %>%
+                unique()
+            samples_count_project <- samples_export_df %>% 
+                dplyr::count(Project)
+            message("The following projects have been updated with this many samples")
+            print(samples_count_project)
+            message("And the following samples have been added to the dataset")
+            print(samples_export_df$sample_index)
+            message("Saving updated list of patients")
             saveRDS(reanalyzed,file = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
         }
     }

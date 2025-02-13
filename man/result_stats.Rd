@@ -26,5 +26,5 @@ different explorative stats on the dataset
 \examples{
 results <- result_stats()
 results$All_mutations
-explore_AVENIO_runs(Info = "Basestats")
+result_stats(Info = "Basestats")
 }

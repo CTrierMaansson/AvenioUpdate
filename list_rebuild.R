@@ -592,7 +592,7 @@ AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>%
 # master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 # master_list <- AvenioUpdate::add_run_to_list(
 #     master_list = master_list,
-#     Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AfGU5cCRLV5CjaCoDbBjdzGN")
+#     Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKDonBGXwm5CdrnHJERU_-c8")
 # analyses <- AvenioUpdate::included_analyses(master_list)
 # print(analyses[[1]], n= nrow(analyses[[1]]))
 # AvenioUpdate::result_stats()$Basestats
