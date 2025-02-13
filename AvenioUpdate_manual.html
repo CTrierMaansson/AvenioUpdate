@@ -747,7 +747,8 @@ AVENIO_results_patients.rds</a></li>
 <li><a href="#output-description-1" id="toc-output-description-1"><span class="toc-section-number">5.3.3</span> Output description</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#session-info" id="toc-session-info"><span class="toc-section-number">6</span> Session info</a></li>
+<li><a href="#list_rebuild.r" id="toc-list_rebuild.r"><span class="toc-section-number">6</span> list_rebuild.R</a></li>
+<li><a href="#session-info" id="toc-session-info"><span class="toc-section-number">7</span> Session info</a></li>
 </ul>
 </div>
 
@@ -3549,12 +3550,31 @@ Distribution of on target percents across different materials
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div id="list_rebuild.r" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> list_rebuild.R</h1>
+<p><strong>Only if absolutely necessary</strong> on the <a href="https://github.com/CTrierMaansson/AvenioUpdate">github page</a>
+there is a file called <code>list_rebuild.R</code>. This file is used to
+rebuild the AVENIO_results_patients.rds in the case the file is
+<strong>lost or corrupted.</strong></p>
+<p>The file only works if the AVENIO_runs.xlsx file is not lost.</p>
+<p><code>list_rebuild.R</code> has to be updated manually alongside
+AVENIO_runs.xlsx, but Christoffer will make sure this happens relatively
+regularly.</p>
+<p>When the entire script has been run you should be able to investigate
+which samples that have not been added to the dataset but are present in
+the AVENIO_runs.xlsx file using:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
+<p>And you can then use <code>add_run_to_list()</code> to add the
+missing runs to the dataset</p>
 <div style="page-break-after: always;"></div>
 </div>
-</div>
-</div>
-<div id="session-info" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Session info</h1>
+<div id="session-info" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Session info</h1>
 <p>It is good practice to include this information in tutorials and
 manuals to ensure reproducibility and for troubleshooting if something
 does not work. If your code works, discount this section.</p>

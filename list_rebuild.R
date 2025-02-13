@@ -1,14 +1,131 @@
+added_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
+                "AajqaHzI9_hCH4wYCbDAIYx4",
+                "ABE9wiNEoilBeYhlV1UO3VRC",
+                "AMw9wjlnV4lHRanHC8-jUnoh",
+                "ANei_Hsi__lGmaJ1k_Ji_d3O",
+                "AIH-1ryzAnFEMJ9R9-KI5_kA",
+                "AXP63fmerZZIn75npxDYZtYT",
+                "ADx0jDAXEJ9Ho7oP9cWlxCB-",
+                "AKr3CLJPqtxPgYm8EWbJ8z_4",
+                "AE5hBlinjEZN6ZZ1L7898Rzc",
+                "AXU04_NAKf5P3I1SrV_5x7oM",
+                "AAMd0bIaeDJOcqthTfVBekrg",
+                "AFzPNBUnw3NMOKplSiKRCqMU",
+                "ABeIKygVYa9ApLIqFBhxueub",
+                "ACi6KICyf0tNSK8b3m4op5O0",
+                "AHKsNmy-AFFNupR0Uot9fuks",
+                "AU-x-KCqRchJPaDwb-utcvvO",
+                "AR_CnOe8BaRPM71AHphnFT5J",
+                "AAMz3RV2Tv1MrI1oA5zynUyG",
+                "AHdh6Q0hlCRO263hSjLFJNQ7",
+                "Ado7dswg-kdHM5Fwb6dQYWOu",
+                "AKneBpDc1Q1Ln7Ev-5Iz53rK",
+                "AGwQDzxcqrdDlpzlcS10s1En",
+                "AU-GJVH_R-RAXa0UUil1MCik",
+                "AYO0H3fNbPBEOKwJA9dv9IH0",
+                "AMzRkv_uPpNMO6_XFokWfBuT",
+                "AVhAZ6wwwchE4IIQa6lOQhN4",
+                "ADNC-IlUdsROnLSz2AnnTpGz",
+                "AGU232uEYZZKe4oI95IrJu7o",
+                "AdA1JN9HI9ZND4LXP8XCfvRZ",
+                "AXVif6nxsixGLZDnsTvDtQLo",
+                "ALsopAc5KC1Bx7pJLiHZ-eJR",
+                "ASZMkYMxgytHgov13wWty29S",
+                "AVhoQhsYxHRPKbWD3ZTc9uCa",
+                "AEepGWqCaABI04g5DQESU97x",
+                "ABSYoqHZHR9Gvo_Z0scoIQ8w",
+                "AaRZMuj0NJtNnpZW8SO2dTy7",
+                "AJD93ZaVEQxGcbVGcJdZZW94",
+                "AdYl2rnCR1ZO5JLxgqP9fouS",
+                "AKorzNtokqVHNY5ZPcDPHeY3",
+                "AY-MEcYGsnlEp70J19fZmwOJ",
+                "AbZ6pmy7TndM4JOHXTcTCjde",
+                "AeUIQZkyte1MjIyV0h0MS0aI",
+                "AIjmFys4qs9EcrAcPI4IJxkK",
+                "AaJsBOVJsSFO2onZbHBDtn0C",
+                "AKY-0douAMNBU7L0NimzcmCS",
+                "ACHSPJ6rFXpCfKO7zOQZOWbz",
+                "AZjnWu5wiDlJapI4CxvEuFnk",
+                "AB2Pm9gToCJPGpSHjZEl7O5I",
+                "AB3ubPmTO1hKvpB3SpZ0JSCj",
+                "AceclBC2q4VHcKhBOYoHrQo9",
+                "AWdzkUCGn0JHYp3dMNlyPyI0",
+                "ASpCbtIIc89Mt4--IHz8OnPB",
+                "APzK4O25DCVD5YVyf63K1oGf",
+                "AW7bfwpDfPRK5ogAOE44LCq_",
+                "AGUZtNtuSiZEW4WOk9lYZtyN",
+                #"AKDonBGXwm5CdrnHJERU_-c8",
+                "AT5xbQo2WQtI2oi_dtrom7dM",
+                "AFWAGp8DS6lNHrlt-I_azKUu",
+                "ANEzevwHG-lNYLnNIR6aTGu9",
+                "AIKiD4XtSL1NtbWtL5wIfq4m",
+                "AXWJJwFGdYJBjbqclsNsl3UA",
+                "ASP86HuqkG5G5KrN1nKqOGSh",
+                "AZL9sfd4ALRFeqYfyNABLq04",
+                "AQ53QFFOszBJZqx056aHcp4g",
+                "AKwjaEnnF1dAKKFcMt9igXXX",
+                "AEHqc78-RkhKwqARpiG9V9Qi",
+                "Aai5AQdklPpMlJfseoQaBysU",
+                "AauPU7MsWE1Dx51FLO3dJg33",
+                "ARBybyYWlGJHUbhbQPibrXGI",
+                "AEjxrRrIVjJGzbUFckTwpTpp",
+                "AGB9eRbQCw9Bj63KZctA4DQe",
+                "ARPd_ATt_oFBNrmQ7Yk_8YCo",
+                "AYPCtGCABftK1I8Ej2WnbTc3",
+                "ARYBp-g_dE9Gra-ukrIXW-zc",
+                "AKoN6VzAOI9HgKcaCj1z9S8v",
+                "AAOnQVP9mUBJk7Ij60bsjc6_",
+                "AEusTCGgvJ1NrKQysOxTwSBe",
+                "AKUURPIxRKxM5LcReW5cvFO9")
+
+library(AvenioUpdate)
+`%ni%` <- Negate(`%in%`)
+
+#### Test completeness of list####
+
+# Test entries not present in the dataset
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+analyses <- AvenioUpdate::included_analyses(master_list)
+if(any(analyses[[1]]$Analysis.ID %ni% added_runs)){
+    print("These run IDs are not included in this file")
+    missing_runs <- analyses[[1]]$Analysis.ID[analyses[[1]]$Analysis.ID %ni% added_runs]
+    missing_runs
+}else{
+    print("All relevant run IDs are in this file")
+}
+
+# Test if all entries are unique
+if(length(added_runs) != length(unique(added_runs))){
+    print("These run IDs are not unique")
+    poor_sample <- table(added_runs)[table(added_runs)!=1]
+    poor_sample
+}else{
+    print("Run IDs are unique")
+}
+
+# Test if some entries not are 24 characters
+if(any(nchar(added_runs) != 24)){
+    poor_sample <- added_runs[nchar(added_runs) != 24]
+    print("These run IDs are not 24 characters")
+    poor_sample
+}else{
+    print("All run IDs are 24 characters")
+}
+
+#### Recreating AVENIO_results_patients.rds ####
+
 #If the "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
 #file should get corrupted or otherwise get lost/missing this script
-#can recreate the file which has been updated as of 21-01-2025
+#can recreate the file which has been updated as of 13-02-2025
 
 #IMPORTANT! DO NOT RUN THIS UNLESS ABSOLUTELY NECESSARY!!!
 
-zip_path1 <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AbpTmAnr_h9DPL1skMvyje5U"
 library(readxl)
 library(dplyr)
 library(stringr)
 `%ni%` <- Negate(`%in%`)
+
+zip_path1 <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_runs[1])
 
 add_samples_mod <- function(Directory){
     Run_ID <- gsub("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-","",Directory)
@@ -90,734 +207,21 @@ create_df_list_mod <- function(sample_df){
 }
 master_list <- create_df_list_mod(combined_samples1)
 
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AajqaHzI9_hCH4wYCbDAIYx4")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ABE9wiNEoilBeYhlV1UO3VRC")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AMw9wjlnV4lHRanHC8-jUnoh")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AIH-1ryzAnFEMJ9R9-KI5_kA")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AXP63fmerZZIn75npxDYZtYT")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ADx0jDAXEJ9Ho7oP9cWlxCB-")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKr3CLJPqtxPgYm8EWbJ8z_4")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AE5hBlinjEZN6ZZ1L7898Rzc")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AXU04_NAKf5P3I1SrV_5x7oM")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AAMd0bIaeDJOcqthTfVBekrg")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AFzPNBUnw3NMOKplSiKRCqMU")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ABeIKygVYa9ApLIqFBhxueub")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ACi6KICyf0tNSK8b3m4op5O0")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AAMz3RV2Tv1MrI1oA5zynUyG")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AHdh6Q0hlCRO263hSjLFJNQ7")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AR_CnOe8BaRPM71AHphnFT5J")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-Ado7dswg-kdHM5Fwb6dQYWOu")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKneBpDc1Q1Ln7Ev-5Iz53rK")
-analyses <- AvenioUpdate::included_analyses(master_list)
-analyses[[1]]
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AGwQDzxcqrdDlpzlcS10s1En")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AU-GJVH_R-RAXa0UUil1MCik")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AYO0H3fNbPBEOKwJA9dv9IH0")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AMzRkv_uPpNMO6_XFokWfBuT")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AVhAZ6wwwchE4IIQa6lOQhN4")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ADNC-IlUdsROnLSz2AnnTpGz")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AGU232uEYZZKe4oI95IrJu7o")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AU-x-KCqRchJPaDwb-utcvvO")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AdA1JN9HI9ZND4LXP8XCfvRZ")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AXVif6nxsixGLZDnsTvDtQLo")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= 30)
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ALsopAc5KC1Bx7pJLiHZ-eJR")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ASZMkYMxgytHgov13wWty29S")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AVhoQhsYxHRPKbWD3ZTc9uCa")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEepGWqCaABI04g5DQESU97x")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ABSYoqHZHR9Gvo_Z0scoIQ8w")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AaRZMuj0NJtNnpZW8SO2dTy7")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AJD93ZaVEQxGcbVGcJdZZW94")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AdYl2rnCR1ZO5JLxgqP9fouS")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKorzNtokqVHNY5ZPcDPHeY3")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
+dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_runs[2])
 
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 master_list <- AvenioUpdate::add_run_to_list(
     master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AY-MEcYGsnlEp70J19fZmwOJ")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
+    Directory = dir)
 
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AbZ6pmy7TndM4JOHXTcTCjde")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AeUIQZkyte1MjIyV0h0MS0aI")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AIjmFys4qs9EcrAcPI4IJxkK")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AaJsBOVJsSFO2onZbHBDtn0C")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKY-0douAMNBU7L0NimzcmCS")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ACHSPJ6rFXpCfKO7zOQZOWbz")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AHKsNmy-AFFNupR0Uot9fuks")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AZjnWu5wiDlJapI4CxvEuFnk")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AB2Pm9gToCJPGpSHjZEl7O5I")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AB3ubPmTO1hKvpB3SpZ0JSCj")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AceclBC2q4VHcKhBOYoHrQo9")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AWdzkUCGn0JHYp3dMNlyPyI0")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ASpCbtIIc89Mt4--IHz8OnPB")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-APzK4O25DCVD5YVyf63K1oGf")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>%
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AW7bfwpDfPRK5ogAOE44LCq_")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AGUZtNtuSiZEW4WOk9lYZtyN")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-# master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-# master_list <- AvenioUpdate::add_run_to_list(
-#     master_list = master_list,
-#     Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKDonBGXwm5CdrnHJERU_-c8")
-# analyses <- AvenioUpdate::included_analyses(master_list)
-# print(analyses[[1]], n= nrow(analyses[[1]]))
-# AvenioUpdate::result_stats()$Basestats
-# tmp <- AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-#     filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AT5xbQo2WQtI2oi_dtrom7dM")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AFWAGp8DS6lNHrlt-I_azKUu")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANEzevwHG-lNYLnNIR6aTGu9")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
 
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AIKiD4XtSL1NtbWtL5wIfq4m")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AXWJJwFGdYJBjbqclsNsl3UA")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ASP86HuqkG5G5KrN1nKqOGSh")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AZL9sfd4ALRFeqYfyNABLq04")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AQ53QFFOszBJZqx056aHcp4g")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKwjaEnnF1dAKKFcMt9igXXX")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEHqc78-RkhKwqARpiG9V9Qi")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-Aai5AQdklPpMlJfseoQaBysU")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AauPU7MsWE1Dx51FLO3dJg33")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ARBybyYWlGJHUbhbQPibrXGI")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEjxrRrIVjJGzbUFckTwpTpp")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AGB9eRbQCw9Bj63KZctA4DQe")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ARPd_ATt_oFBNrmQ7Yk_8YCo")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AYPCtGCABftK1I8Ej2WnbTc3")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ARYBp-g_dE9Gra-ukrIXW-zc")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKoN6VzAOI9HgKcaCj1z9S8v")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AAOnQVP9mUBJk7Ij60bsjc6_")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEusTCGgvJ1NrKQysOxTwSBe")
-analyses <- AvenioUpdate::included_analyses(master_list)
-print(analyses[[1]], n= nrow(analyses[[1]]))
-AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
-
+for(i in 3:length(added_runs)){
+    dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_runs[i])
+    master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+    master_list <- AvenioUpdate::add_run_to_list(
+        master_list = master_list,
+        Directory = dir)
+}
 
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AKUURPIxRKxM5LcReW5cvFO9")
 analyses <- AvenioUpdate::included_analyses(master_list)
 print(analyses[[1]], n= nrow(analyses[[1]]))
 AvenioUpdate::result_stats()$Basestats

@@ -788,6 +788,28 @@ result_stats_Info() %>%
 
 ```
 
+# list_rebuild.R
+**Only if absolutely necessary** on the 
+[github page](https://github.com/CTrierMaansson/AvenioUpdate) there is a
+file called `list_rebuild.R`. This file is used to rebuild the 
+AVENIO_results_patients.rds in the case the file is **lost or corrupted.**
+
+The file only works if the AVENIO_runs.xlsx file is not lost. 
+
+`list_rebuild.R` has to be updated manually alongside AVENIO_runs.xlsx, but
+Christoffer will make sure this happens relatively regularly. 
+
+When the entire script has been run you should be able to investigate which
+samples that have not been added to the dataset but are present in the 
+AVENIO_runs.xlsx file using:
+
+```{r, eval=FALSE,message=F}
+
+explore_AVENIO_runs(silent = TRUE,
+                    Info = "Unincluded_analyses")
+```
+
+And you can then use `add_run_to_list()` to add the missing runs to the dataset
 
 \newpage
 # Session info
