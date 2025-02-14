@@ -1,5 +1,7 @@
-# AvenioUpdate <img src="AvenioUpdate.png" width="200" align="right">
+# AvenioUpdate 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FCTrierMaansson%2FAvenioUpdate&count_bg=%23DAFF3E&title_bg=%23031432&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
+<img src="AvenioUpdate.png" width="200" align="right">
 
 An R package to be used for updating and exploring NGS data generated with 
 the AVENIO pipeline at AUH. 
@@ -33,7 +35,7 @@ result_stats_Info()
 ```
 
 Which will output a `data.frame` containing information about some of the
-information available using the `result_stats()` function
+information available using the `result_stats()` function.
 
 ## Quick guide
 
@@ -69,7 +71,7 @@ The manual is rendered using
 
 ## Issues
 
-If you experience any issues when using the package i refer to the 
+If you experience any issues when using the package I refer to the 
 [issues page](https://github.com/CTrierMaansson/AvenioUpdate/issues) or
 write Christoffer an e-mail at [ctm@clin.au.dk](ctm@clin.au.dk)
 
