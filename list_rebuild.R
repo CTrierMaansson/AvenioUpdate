@@ -54,7 +54,7 @@ added_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                 "APzK4O25DCVD5YVyf63K1oGf",
                 "AW7bfwpDfPRK5ogAOE44LCq_",
                 "AGUZtNtuSiZEW4WOk9lYZtyN",
-                #"AKDonBGXwm5CdrnHJERU_-c8",
+                "AKDonBGXwm5CdrnHJERU_-c8",
                 "AT5xbQo2WQtI2oi_dtrom7dM",
                 "AFWAGp8DS6lNHrlt-I_azKUu",
                 "ANEzevwHG-lNYLnNIR6aTGu9",
@@ -112,6 +112,12 @@ if(any(nchar(added_runs) != 24)){
     print("All run IDs are 24 characters")
 }
 
+#### Adding run ####
+
+master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-"
+master_list <- add_run_to_list(master_list = master_list,
+                               Directory = dir)
 #### Recreating AVENIO_results_patients.rds ####
 
 #If the "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
