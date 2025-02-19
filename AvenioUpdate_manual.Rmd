@@ -58,8 +58,9 @@ and will be explained in much greater detail below.
 As of early 2025 the package contains two **main** functions 
 (`add_run_to_list()` & `create_simple_output()`) which are used to update the
 results file and get an overview of the results for a single patient.
-In addition, the package contains five **smaller** functions which are 
-used to get some statistics on the data we have collected and to make sure the
+In addition, the package contains six **smaller** functions which are 
+used to get some statistics on the data we have collected, to get the 
+results for an entire project and to make sure the
 results file is updated correctly. 
 
 # Installation
@@ -70,11 +71,16 @@ CRAN or Bioconductor. However, it can still be installed via my
 demonstrated below:
 
 ```{r setup_github, message=FALSE, results = 'hide', eval = FALSE,R.options = list(width = 100)}
+# Only needs to be run once
 if (!require(devtools)) install.packages('devtools')
 
 library(devtools)
 
+# Only needs to be run once (Or when the package is updated)
 devtools::install_github("CTrierMaansson/AvenioUpdate")
+
+# Needs to be run every time you open RStudio
+library(AvenioUpdate)
 
 ```
 
@@ -82,8 +88,6 @@ To check if the package has been installed correctly run the following
 command:
 
 ```{r testing_installation, message=FALSE, results = 'hide', eval = FALSE,R.options = list(width = 100)}
-library(AvenioUpdate)
-
 result_stats_Info()
 ```
 
@@ -593,7 +597,7 @@ in BAM files from the BC or non_BC samples.
 
 As explained above, I have created some functions which can be used to explore
 the datasets a bit more. These functions are not mandatory to use but can be
-useful in order to get an overview of the samples, runs, etc. 
+useful in order to get an overview of the projects, samples, runs, etc. 
 
 ## `included_analyses()`
 This function is used to get an overview of the runs from AVENIO_runs.xlsx that
@@ -696,6 +700,87 @@ analyses <- included_analyses(results)
 
 # Getting an overview of the analyses
 analyses[["Details:"]][["AGU232uEYZZKe4oI95IrJu7o"]] %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
+## `extract_project()`
+
+This function is used to extract all the results in a project to be used for
+downstream analyses. Because the output is quite large some understanding
+of how to explore `data.frames` is required to fully explore the results.
+
+The function takes two mandatory arguments:
+
+1. `df_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+2. `project` which is the project name from the AVENIO_runs.xlsx file
+
+If synonymous mutations should be excluded you can set `synonymous = FALSE`.
+As a default synonymous mutations are included in the output 
+(`synonymous = TRUE`).
+If the out should contain all the information from the AVENIO `.csv` files then
+`simple = FALSE` (default). If you want a more simple output similar to the 
+output from `create_simple_output()` then set `simple = FALSE`
+
+### Output
+
+A `tibble` where each row is a mutated gene and 15 or 89 columns. 14 of the 
+columns corresponds to variables explained under `create_simple_output()`.
+The output contains 15 columns if `simple = TRUE` where the last variable 
+represents the patient CPR. If `simple = FALSE` (default) the output contains
+all the variables from the AVENIO `.csv` files coupled to the CPR numbers and
+other information from AVENIO_runs.xlsx
+
+### Example
+
+An example of how the function is used is shown below:
+*Again, the CPR number is not a real CPR number*.
+The output is quite large (many rows) so I have only included 10 rows 
+
+```{r, eval=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+# Extracting project information
+extract_project(df_list = results,
+                project = "Pembrolizumab",
+                synonymous = FALSE,
+                simple = TRUE)
+```
+
+Which gives the following output:
+
+```{r, echo=FALSE,message=F}
+# Reading the results file
+results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+# Extracting project information
+extract_project(df_list = results,
+                project = "Pembrolizumab",
+                synonymous = FALSE,
+                simple = TRUE) %>% 
+  dplyr::slice(1,2,3,4,5,6,31,32,33,40) %>%
+  group_by(CPR) %>%
+  dplyr::reframe(sample_index = sample_index,
+                 CPR = paste0(floor(runif(1,10,31)),
+                              0,
+                              floor(runif(1,1,10)),
+                              floor(runif(1,20,100)),
+                              floor(runif(1,1000,10000))),
+                 Class = Class,
+                 Gene = Gene,
+                 AA = AA,
+                 Description = Description,
+                 Flags = Flags,
+                 MAF = MAF,
+                 Variant_depth = Variant_depth,
+                 Unique_depth = Unique_depth,
+                 Analysis = Analysis,
+                 Sample.ID = Sample.ID,
+                 Sample_note = Sample_note,
+                 Material = Material,
+                 Notes = Notes) %>%
   knitr::kable() %>% 
   kableExtra::kable_paper(font_size = 12,full_width = F)
 

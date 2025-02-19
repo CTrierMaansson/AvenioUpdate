@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2025-02-14" />
+<meta name="date" content="2025-02-19" />
 
 <title>AvenioUpdate </title>
 
@@ -678,7 +678,7 @@ Denmark<br><a class="author_email" href="mailto:#"><a href="mailto:ctm@clin.au.d
 <h4 class="author">Lærke Rosenlund Nielsen</h4>
 <address class="author_afil">
 Department of Clinical Biochemistry, Aarhus University Hospital,
-Denmark<br><h4 class="date">14 feb 2025</h4>
+Denmark<br><h4 class="date">19 feb 2025</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 This manual describes how to use AvenioUpdate to update and extract
@@ -736,18 +736,23 @@ mandatory read</strong>)</a>
 <li><a href="#output-2" id="toc-output-2"><span class="toc-section-number">5.1.1</span> Output</a></li>
 <li><a href="#example-2" id="toc-example-2"><span class="toc-section-number">5.1.2</span> Example</a></li>
 </ul></li>
-<li><a href="#explore_avenio_runs" id="toc-explore_avenio_runs"><span class="toc-section-number">5.2</span>
-<code>explore_AVENIO_runs()</code></a>
+<li><a href="#extract_project" id="toc-extract_project"><span class="toc-section-number">5.2</span> <code>extract_project()</code></a>
 <ul>
 <li><a href="#output-3" id="toc-output-3"><span class="toc-section-number">5.2.1</span> Output</a></li>
 <li><a href="#example-3" id="toc-example-3"><span class="toc-section-number">5.2.2</span> Example</a></li>
-<li><a href="#output-description" id="toc-output-description"><span class="toc-section-number">5.2.3</span> Output description</a></li>
 </ul></li>
-<li><a href="#result_stats" id="toc-result_stats"><span class="toc-section-number">5.3</span> <code>result_stats()</code></a>
+<li><a href="#explore_avenio_runs" id="toc-explore_avenio_runs"><span class="toc-section-number">5.3</span>
+<code>explore_AVENIO_runs()</code></a>
 <ul>
 <li><a href="#output-4" id="toc-output-4"><span class="toc-section-number">5.3.1</span> Output</a></li>
 <li><a href="#example-4" id="toc-example-4"><span class="toc-section-number">5.3.2</span> Example</a></li>
-<li><a href="#output-description-1" id="toc-output-description-1"><span class="toc-section-number">5.3.3</span> Output description</a></li>
+<li><a href="#output-description" id="toc-output-description"><span class="toc-section-number">5.3.3</span> Output description</a></li>
+</ul></li>
+<li><a href="#result_stats" id="toc-result_stats"><span class="toc-section-number">5.4</span> <code>result_stats()</code></a>
+<ul>
+<li><a href="#output-5" id="toc-output-5"><span class="toc-section-number">5.4.1</span> Output</a></li>
+<li><a href="#example-5" id="toc-example-5"><span class="toc-section-number">5.4.2</span> Example</a></li>
+<li><a href="#output-description-1" id="toc-output-description-1"><span class="toc-section-number">5.4.3</span> Output description</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#list_rebuild.r-not-mandatory-read" id="toc-list_rebuild.r-not-mandatory-read"><span class="toc-section-number">6</span> list_rebuild.R (<strong>Not
@@ -774,9 +779,10 @@ and will be explained in much greater detail below.</p>
 functions (<code>add_run_to_list()</code> &amp;
 <code>create_simple_output()</code>) which are used to update the
 results file and get an overview of the results for a single patient. In
-addition, the package contains five <strong>smaller</strong> functions
-which are used to get some statistics on the data we have collected and
-to make sure the results file is updated correctly.</p>
+addition, the package contains six <strong>smaller</strong> functions
+which are used to get some statistics on the data we have collected, to
+get the results for an entire project and to make sure the results file
+is updated correctly.</p>
 </div>
 <div id="installation" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Installation</h1>
@@ -784,16 +790,19 @@ to make sure the results file is updated correctly.</p>
 at places like CRAN or Bioconductor. However, it can still be installed
 via my <a href="https://github.com/CTrierMaansson/AvenioUpdate">github
 page</a> as demonstrated below:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(devtools)) <span class="fu">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;CTrierMaansson/AvenioUpdate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Only needs to be run once</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(devtools)) <span class="fu">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># Only needs to be run once (Or when the package is updated)</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;CTrierMaansson/AvenioUpdate&quot;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># Needs to be run every time you open RStudio</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">library</span>(AvenioUpdate)</span></code></pre></div>
 <p>To check if the package has been installed correctly run the
 following command:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(AvenioUpdate)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
 <p>Which should give an output like this:</p>
 <pre><code>#&gt;              Name                                                                  Description
 #&gt; 1       Basestats                  Number of samples, runs, patients, different materials etc.
@@ -2636,8 +2645,8 @@ Avenio.</strong></p>
 (<strong>Not mandatory read</strong>)</h1>
 <p>As explained above, I have created some functions which can be used
 to explore the datasets a bit more. These functions are not mandatory to
-use but can be useful in order to get an overview of the samples, runs,
-etc.</p>
+use but can be useful in order to get an overview of the projects,
+samples, runs, etc.</p>
 <div id="included_analyses" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span>
 <code>included_analyses()</code></h2>
@@ -2925,8 +2934,574 @@ AGU232uEYZZKe4oI95IrJu7o
 </table>
 </div>
 </div>
-<div id="explore_avenio_runs" class="section level2" number="5.2">
+<div id="extract_project" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span>
+<code>extract_project()</code></h2>
+<p>This function is used to extract all the results in a project to be
+used for downstream analyses. Because the output is quite large some
+understanding of how to explore <code>data.frames</code> is required to
+fully explore the results.</p>
+<p>The function takes two mandatory arguments:</p>
+<ol style="list-style-type: decimal">
+<li><code>df_list</code> which is the AVENIO_results_patients.rds loaded
+in using <code>readRDS()</code></li>
+<li><code>project</code> which is the project name from the
+AVENIO_runs.xlsx file</li>
+</ol>
+<p>If synonymous mutations should be excluded you can set
+<code>synonymous = FALSE</code>. As a default synonymous mutations are
+included in the output (<code>synonymous = TRUE</code>). If the out
+should contain all the information from the AVENIO <code>.csv</code>
+files then <code>simple = FALSE</code> (default). If you want a more
+simple output similar to the output from
+<code>create_simple_output()</code> then set
+<code>simple = FALSE</code></p>
+<div id="output-3" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Output</h3>
+<p>A <code>tibble</code> where each row is a mutated gene and 15 or 89
+columns. 14 of the columns corresponds to variables explained under
+<code>create_simple_output()</code>. The output contains 15 columns if
+<code>simple = TRUE</code> where the last variable represents the
+patient CPR. If <code>simple = FALSE</code> (default) the output
+contains all the variables from the AVENIO <code>.csv</code> files
+coupled to the CPR numbers and other information from
+AVENIO_runs.xlsx</p>
+</div>
+<div id="example-3" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Example</h3>
+<p>An example of how the function is used is shown below: <em>Again, the
+CPR number is not a real CPR number</em>. The output is quite large
+(many rows) so I have only included 10 rows</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Extracting project information</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="fu">extract_project</span>(<span class="at">df_list =</span> results,</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>                <span class="at">project =</span> <span class="st">&quot;Pembrolizumab&quot;</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>                <span class="at">synonymous =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>                <span class="at">simple =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Which gives the following output:</p>
+<table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+CPR
+</th>
+<th style="text-align:left;">
+sample_index
+</th>
+<th style="text-align:left;">
+Class
+</th>
+<th style="text-align:left;">
+Gene
+</th>
+<th style="text-align:left;">
+AA
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Flags
+</th>
+<th style="text-align:left;">
+MAF
+</th>
+<th style="text-align:left;">
+Variant_depth
+</th>
+<th style="text-align:left;">
+Unique_depth
+</th>
+<th style="text-align:left;">
+Analysis
+</th>
+<th style="text-align:left;">
+Sample.ID
+</th>
+<th style="text-align:left;">
+Sample_note
+</th>
+<th style="text-align:left;">
+Material
+</th>
+<th style="text-align:left;">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2801452016
+</td>
+<td style="text-align:left;">
+Pembrolizumab_10_180912
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+SLC39A12
+</td>
+<td style="text-align:left;">
+p.Gly453<em>;p.Gly453</em>
+</td>
+<td style="text-align:left;">
+Stop gained;Stop gained
+</td>
+<td style="text-align:left;">
+BAM
+</td>
+<td style="text-align:left;">
+0.05%
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+4346
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt10_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2801452016
+</td>
+<td style="text-align:left;">
+Pembrolizumab_10_181024
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+SLC39A12
+</td>
+<td style="text-align:left;">
+p.Gly453<em>;p.Gly453</em>
+</td>
+<td style="text-align:left;">
+Stop gained;Stop gained
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.16%
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+5073
+</td>
+<td style="text-align:left;">
+20210205
+</td>
+<td style="text-align:left;">
+OLINK_PT10_BP3
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2109514436
+</td>
+<td style="text-align:left;">
+Pembrolizumab_11_181024
+</td>
+<td style="text-align:left;">
+CNV
+</td>
+<td style="text-align:left;">
+EGFR
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt11_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2109514436
+</td>
+<td style="text-align:left;">
+Pembrolizumab_11_181024
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+EYS
+</td>
+<td style="text-align:left;">
+p.Cys57<em>;p.Cys57</em>;p.Cys57*
+</td>
+<td style="text-align:left;">
+Stop gained;Stop gained;Stop gained
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+4.30%
+</td>
+<td style="text-align:left;">
+200
+</td>
+<td style="text-align:left;">
+4647
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt11_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2109514436
+</td>
+<td style="text-align:left;">
+Pembrolizumab_11_181024
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+FBXL7
+</td>
+<td style="text-align:left;">
+p.Val166Met
+</td>
+<td style="text-align:left;">
+Missense
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+4.25%
+</td>
+<td style="text-align:left;">
+168
+</td>
+<td style="text-align:left;">
+3954
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt11_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2109514436
+</td>
+<td style="text-align:left;">
+Pembrolizumab_11_181024
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+GJA8
+</td>
+<td style="text-align:left;">
+p.Val257Leu
+</td>
+<td style="text-align:left;">
+Missense
+</td>
+<td style="text-align:left;">
+BC_mut
+</td>
+<td style="text-align:left;">
+0.22%
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+5344
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt11_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3008369755
+</td>
+<td style="text-align:left;">
+Pembrolizumab_12_180629
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+LRRTM4
+</td>
+<td style="text-align:left;">
+p.Arg198<em>;p.Arg199</em>;p.Arg198<em>;p.Arg199</em>
+</td>
+<td style="text-align:left;">
+Stop gained;Stop gained;Stop gained;Stop gained
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.21%
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+3797
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt12_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3008369755
+</td>
+<td style="text-align:left;">
+Pembrolizumab_12_180629
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+TP53
+</td>
+<td style="text-align:left;">
+p.Ser215Ile;p.Ser215Ile;p.Ser215Ile;p.Ser215Ile;p.Ser204Ile
+</td>
+<td style="text-align:left;">
+Missense;Missense;Missense;Missense;Missense
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.31%
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+2902
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt12_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3008369755
+</td>
+<td style="text-align:left;">
+Pembrolizumab_12_180629_BC
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+APC
+</td>
+<td style="text-align:left;">
+p.Ser837*
+</td>
+<td style="text-align:left;">
+Stop gained
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.13%
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+976
+</td>
+<td style="text-align:left;">
+20230927
+</td>
+<td style="text-align:left;">
+lunge1388_BC
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3008369755
+</td>
+<td style="text-align:left;">
+Pembrolizumab_12_180817
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+LRRTM4
+</td>
+<td style="text-align:left;">
+p.Arg198<em>;p.Arg199</em>;p.Arg198<em>;p.Arg199</em>
+</td>
+<td style="text-align:left;">
+Stop gained;Stop gained;Stop gained;Stop gained
+</td>
+<td style="text-align:left;">
+BAM
+</td>
+<td style="text-align:left;">
+0.12%
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+7329
+</td>
+<td style="text-align:left;">
+20210216
+</td>
+<td style="text-align:left;">
+OLINK_PT12_BP3
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="explore_avenio_runs" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span>
 <code>explore_AVENIO_runs()</code></h2>
 <p>This function is used to get an overview of the AVENIO_runs.xlsx file
 and explore the sample entries that have been entered. This can be used
@@ -2941,26 +3516,26 @@ two optional arguments:</p>
 messages should be displayed. If <code>silent = FALSE</code> (default)
 messages are displayed</li>
 </ol>
-<div id="output-3" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Output</h3>
+<div id="output-4" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Output</h3>
 <p>A <code>list</code> with different information on the
 AVENIO_runs.xslx (<code>Info = NULL</code>) or the specific object as
 determined by <code>Info</code>.</p>
 </div>
-<div id="example-3" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Example</h3>
+<div id="example-4" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Example</h3>
 <p>Two examples of how the function is used is shown below:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Exploring the AVENIO_runs.xlsx file</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Getting the information of total entries</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>results<span class="sc">$</span>Total_entries</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Exploring the AVENIO_runs.xlsx file</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># Getting the information of total entries</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>results<span class="sc">$</span>Total_entries</span></code></pre></div>
 <p>Should return:</p>
 <pre><code>#&gt; [1] 708</code></pre>
 <p>And:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">Info =</span> <span class="st">&quot;Required&quot;</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>                    <span class="at">silent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">Info =</span> <span class="st">&quot;Required&quot;</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>                    <span class="at">silent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3172,16 +3747,16 @@ Unknown
 </tbody>
 </table>
 </div>
-<div id="output-description" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Output
+<div id="output-description" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Output
 description</h3>
 <p>The output of the function is a named <code>list</code> with
 different entries. I have included a function
 (<code>explore_AVENIO_runs_Info()</code>) which displays a brief
 explanation of each entry. The function has no mandatory arguments. To
 view the explanations run the following command:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in explore_AVENIO_runs()</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs_Info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in explore_AVENIO_runs()</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs_Info</span>()</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3291,8 +3866,8 @@ Samples where the material information is missing
 </table>
 </div>
 </div>
-<div id="result_stats" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span>
+<div id="result_stats" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span>
 <code>result_stats()</code></h2>
 <p>This function is similar to <code>explore_AVENIO_runs()</code> but is
 used to get an overview of the results dataset. The function extracts
@@ -3307,20 +3882,20 @@ two optional arguments:</p>
 messages should be displayed. If <code>silent = FALSE</code> (default)
 messages are displayed</li>
 </ol>
-<div id="output-4" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Output</h3>
+<div id="output-5" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Output</h3>
 <p>A <code>list</code> with different stats on
 AVENIO_results_patients.rds (<code>Info = NULL</code>) or the specific
 object as determined by <code>Info</code>.</p>
 </div>
-<div id="example-4" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Example</h3>
+<div id="example-5" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Example</h3>
 <p>Two examples of how the function is used is shown below:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Exploring the results file</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># Getting the information on all mutations</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>results<span class="sc">$</span>All_mutations</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Exploring the results file</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># Getting the information on all mutations</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>results<span class="sc">$</span>All_mutations</span></code></pre></div>
 <p>Should return:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3403,7 +3978,7 @@ KRAS
 MET
 </td>
 <td style="text-align:right;">
-85
+86
 </td>
 </tr>
 <tr>
@@ -3417,9 +3992,9 @@ BRCA2
 </tbody>
 </table>
 <p>And:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>             <span class="at">Info =</span> <span class="st">&quot;Basestats&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>             <span class="at">Info =</span> <span class="st">&quot;Basestats&quot;</span>)</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3446,7 +4021,7 @@ Patients
 Samples
 </td>
 <td style="text-align:right;">
-586
+587
 </td>
 </tr>
 <tr>
@@ -3454,7 +4029,7 @@ Samples
 Runs
 </td>
 <td style="text-align:right;">
-78
+79
 </td>
 </tr>
 <tr>
@@ -3462,7 +4037,7 @@ Runs
 Mutations
 </td>
 <td style="text-align:right;">
-2359
+2360
 </td>
 </tr>
 <tr>
@@ -3470,7 +4045,7 @@ Mutations
 cfDNA
 </td>
 <td style="text-align:right;">
-445
+446
 </td>
 </tr>
 <tr>
@@ -3502,7 +4077,7 @@ cfChIP
 Tx
 </td>
 <td style="text-align:right;">
-226
+227
 </td>
 </tr>
 <tr>
@@ -3524,16 +4099,16 @@ Unknown
 </tbody>
 </table>
 </div>
-<div id="output-description-1" class="section level3" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> Output
+<div id="output-description-1" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Output
 description</h3>
 <p>The output of the function is a named <code>list</code> with
 different entries. I have included a function
 (<code>result_stats_Info()</code>) which displays a brief explanation of
 each entry. The function has no mandatory arguments. To view the
 explanations run the following command:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in result_stats()</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in result_stats()</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3647,8 +4222,8 @@ regularly.</p>
 <p>When the entire script has been run you should be able to investigate
 which runs (if any) that have not been added to the dataset but are
 present in the AVENIO_runs.xlsx file using:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
 <p>And you can then use <code>add_run_to_list()</code> to add the
 missing runs to the dataset</p>
 <div style="page-break-after: always;"></div>
@@ -3669,12 +4244,12 @@ does not work. If your code works, discount this section.</p>
 #&gt;  collate  Danish_Denmark.utf8
 #&gt;  ctype    Danish_Denmark.utf8
 #&gt;  tz       Europe/Copenhagen
-#&gt;  date     2025-02-14
+#&gt;  date     2025-02-19
 #&gt;  pandoc   3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package      * version date (UTC) lib source
-#&gt;  AvenioUpdate * 1.0.0   2025-02-13 [1] Github (CTrierMaansson/AvenioUpdate@4cbd03a)
+#&gt;  AvenioUpdate * 1.1.1   2025-02-19 [1] Github (CTrierMaansson/AvenioUpdate@8ad7847)
 #&gt;  crayon       * 1.5.3   2024-06-20 [1] CRAN (R 4.4.0)
 #&gt;  dplyr        * 1.1.4   2023-11-17 [1] CRAN (R 4.4.0)
 #&gt; 
