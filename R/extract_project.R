@@ -17,8 +17,12 @@
 #' @param synonymous `Boolean` determining whether synonymous mutations are kept
 #'  in the output. If `TRUE` (default) synonymous mutations are kept in the 
 #'  output. If `FALSE` the synonymous mutations are excluded. 
+#' @param simple `Boolean`. If `TRUE` the output is in a simple format,
+#' similar to the format created by `create_simple_output()`. If `FALSE` 
+#' (default) all information from the AVENIO .csv files are exported. 
 #' @return A `tibble`
-#'  with 15 variables. Each row corresponds to a mutation identified in any 
+#'  with 15 variables (`simple = TRUE`) or many variables (`simple = FALSE`).
+#'  Each row corresponds to a mutation identified in any 
 #'  sample. Important variables include sample_index which shows the project the
 #'  patient is connected to, the name of the patient in that project and the 
 #'  date of of the sample collection. CPR which is the CPR number of the patient,
@@ -39,7 +43,10 @@
 #'                  project = "Pembrolizumab",
 #'                  synonymous = FALSE)
 #' @export
-extract_project <- function(df_list, project, synonymous = TRUE){
+extract_project <- function(df_list,
+                            project,
+                            synonymous = TRUE,
+                            simple = FALSE){
     `%ni%` <- Negate(`%in%`)
     if (!is.list(df_list)) {
         stop("df_list has to be a list")
@@ -51,6 +58,9 @@ extract_project <- function(df_list, project, synonymous = TRUE){
     }
     if (!isScalarLogical(synonymous)) {
         stop("synonymous has to be a TRUE or FALSE")
+    }
+    if (!isScalarLogical(simple)) {
+        stop("simple has to be a TRUE or FALSE")
     }
     if (!isScalarCharacter(project)) {
         stop("project has to be a character")
@@ -90,24 +100,41 @@ extract_project <- function(df_list, project, synonymous = TRUE){
         dplyr::mutate(Variant.Description = gsub(" variant","",Variant.Description)) %>% 
         dplyr::tibble() %>% 
         dplyr::filter(sample_index %in% AVENIO_runs_sele$sample_index) %>% 
-        dplyr::left_join(AVENIO_runs_sele,by = "sample_index") %>% 
-        dplyr::select(sample_index, CPR,
-                      Mutation.Class,Gene,Amino.Acid.Change,
-                      Variant.Description,Flags,Allele.Fraction,
-                      Variant.Depth,Unique.Depth,Analysis.Name,Sample.ID,
-                      Sample_note, Material, Notes)
-    colnames(df) <- c("sample_index","CPR","Class","Gene","AA","Description",
-                      "Flags","MAF","Variant_depth","Unique_depth","Analysis",
-                      "Sample.ID","Sample_note","Material","Notes")
-    df <- df %>% 
-        dplyr::arrange(sample_index,Gene)
-    if(synonymous){
-        df <- df
+        dplyr::left_join(AVENIO_runs_sele,by = "sample_index")
+    if(simple){
+        message("Creating output in simple format")
+        df <- df %>% 
+            dplyr::select(sample_index, CPR,
+                          Mutation.Class,Gene,Amino.Acid.Change,
+                          Variant.Description,Flags,Allele.Fraction,
+                          Variant.Depth,Unique.Depth,Analysis.Name,Sample.ID,
+                          Sample_note, Material, Notes)
+        colnames(df) <- c("sample_index","CPR","Class","Gene","AA","Description",
+                          "Flags","MAF","Variant_depth","Unique_depth","Analysis",
+                          "Sample.ID","Sample_note","Material","Notes")
+        df <- df %>% 
+            dplyr::arrange(sample_index,Gene)
+        if(synonymous){
+            df <- df
+        }
+        else{
+            message("Removing Synonymous variants")
+            df <- df %>% 
+                dplyr::filter(!grepl("Synonymous",Description))
+        }
     }
     else{
-        message("Removing Synonymous variants")
         df <- df %>% 
-            dplyr::filter(!grepl("Synonymous",Description))
+            dplyr::arrange(sample_index,Gene)
+        if(synonymous){
+            df <- df
+        }
+        else{
+            message("Removing Synonymous variants")
+            df <- df %>% 
+                dplyr::filter(!grepl("Synonymous",Variant.Description))
+        }
     }
+    
     return(df)
 }
