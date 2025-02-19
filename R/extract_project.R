@@ -41,7 +41,8 @@
 #'  result_stats(Info = "Projectstats")
 #'  extract_project(df_list = master,
 #'                  project = "Pembrolizumab",
-#'                  synonymous = FALSE)
+#'                  synonymous = FALSE,
+#'                  simple = TRUE)
 #' @export
 extract_project <- function(df_list,
                             project,

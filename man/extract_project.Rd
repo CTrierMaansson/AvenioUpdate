@@ -4,7 +4,7 @@
 \alias{extract_project}
 \title{Get a simple overview for an entire project}
 \usage{
-extract_project(df_list, project, synonymous = TRUE)
+extract_project(df_list, project, synonymous = TRUE, simple = FALSE)
 }
 \arguments{
 \item{df_list}{The \code{list} of \code{data.frames} which contains all information on
@@ -18,10 +18,15 @@ AVENIO_runs.xlsx. Accepted project names are available with
 \item{synonymous}{\code{Boolean} determining whether synonymous mutations are kept
 in the output. If \code{TRUE} (default) synonymous mutations are kept in the
 output. If \code{FALSE} the synonymous mutations are excluded.}
+
+\item{simple}{\code{Boolean}. If \code{TRUE} the output is in a simple format,
+similar to the format created by \code{create_simple_output()}. If \code{FALSE}
+(default) all information from the AVENIO .csv files are exported.}
 }
 \value{
 A \code{tibble}
-with 15 variables. Each row corresponds to a mutation identified in any
+with 15 variables (\code{simple = TRUE}) or many variables (\code{simple = FALSE}).
+Each row corresponds to a mutation identified in any
 sample. Important variables include sample_index which shows the project the
 patient is connected to, the name of the patient in that project and the
 date of of the sample collection. CPR which is the CPR number of the patient,
@@ -46,5 +51,6 @@ for the patients in that project
  result_stats(Info = "Projectstats")
  extract_project(df_list = master,
                  project = "Pembrolizumab",
-                 synonymous = FALSE)
+                 synonymous = FALSE,
+                 simple = TRUE)
 }
