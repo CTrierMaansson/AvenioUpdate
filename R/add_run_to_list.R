@@ -78,7 +78,7 @@ add_run_to_list <- function(master_list, Directory){
     if(any(is.na(AVENIO_runs_select$Name_in_project))){
         na_name <- AVENIO_runs_select %>% 
             dplyr::filter(is.na(Name_in_project))
-        na_name_samples <- paste(na_date$Sample_name,collapse = ", ")
+        na_name_samples <- paste(na_name$Sample_name,collapse = ", ")
         warning(paste0("The following samples are lacking project name information",
                        " and will be excluded from the analysis:\n",
                        na_name_samples))
@@ -86,7 +86,7 @@ add_run_to_list <- function(master_list, Directory){
     if(any(is.na(AVENIO_runs_select$Material))){
         na_material <- AVENIO_runs_select %>% 
             dplyr::filter(is.na(Sample_date))
-        na_material_samples <- paste(na_date$Material,collapse = ", ")
+        na_material_samples <- paste(na_material$Material,collapse = ", ")
         warning(paste0("The following samples are lacking source material ",
                        "information and will be excluded from the analysis:\n",
                        na_material_samples))
