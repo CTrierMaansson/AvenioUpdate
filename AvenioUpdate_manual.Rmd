@@ -549,7 +549,7 @@ An example of how the function is used is shown below:
 results <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
 
 # Extracting the simple output
-overview <- create_simple_output(master_list = results,
+overview <- create_simple_output(df_list = results,
                                  CPR = "1401362941",
                                  synonymous = F)
 
