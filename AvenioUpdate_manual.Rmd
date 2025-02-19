@@ -910,7 +910,7 @@ head(results$All_mutations,n = 10) %>%
 And:
 
 ```{r, eval=FALSE,message=F}
-# Getting the information on the samples with all the required information
+# Getting basic statistics on the NGS results
 result_stats(silent = TRUE,
              Info = "Basestats")
 
