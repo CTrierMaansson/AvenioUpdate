@@ -8,6 +8,7 @@
 #' @importFrom dplyr select `%>%` filter
 #' @importFrom BiocBaseUtils isScalarCharacter
 #' @importFrom readxl read_xlsx
+#' @importFrom stringr str_split_i
 #' @param master_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")

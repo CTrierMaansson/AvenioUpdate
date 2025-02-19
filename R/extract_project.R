@@ -7,6 +7,7 @@
 #' @importFrom dplyr left_join select mutate tibble `%>%` filter arrange
 #' @importFrom readxl read_xlsx
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
+#' @importFrom stringr str_split_i
 #' @param df_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
@@ -89,7 +90,7 @@ extract_project <- function(df_list, project, synonymous = TRUE){
         dplyr::mutate(Variant.Description = gsub(" variant","",Variant.Description)) %>% 
         dplyr::tibble() %>% 
         dplyr::filter(sample_index %in% AVENIO_runs_sele$sample_index) %>% 
-        left_join(AVENIO_runs_sele,by = "sample_index") %>% 
+        dplyr::left_join(AVENIO_runs_sele,by = "sample_index") %>% 
         dplyr::select(sample_index, CPR,
                       Mutation.Class,Gene,Amino.Acid.Change,
                       Variant.Description,Flags,Allele.Fraction,
@@ -99,7 +100,7 @@ extract_project <- function(df_list, project, synonymous = TRUE){
                       "Flags","MAF","Variant_depth","Unique_depth","Analysis",
                       "Sample.ID","Sample_note","Material","Notes")
     df <- df %>% 
-        arrange(sample_index,Gene)
+        dplyr::arrange(sample_index,Gene)
     if(synonymous){
         df <- df
     }

@@ -5,6 +5,7 @@
 #' @importFrom dplyr left_join select mutate `%>%` filter arrange count
 #' @importFrom readxl read_xlsx
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
+#' @importFrom stringr str_split_i
 #' @param  Info `Character` string with the name of the information that should.
 #' be extracted. Possible options can be viewed with result_stats_Info().
 #' If `NULL` (default) all information is returned as a `list`.
