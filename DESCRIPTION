@@ -1,6 +1,7 @@
 Package: AvenioUpdate
 Title: Update and exploration of Avenio data
 Version: 1.1.2
+biocViews: TargetedResequencing, Genetics, Sequencing
 Authors@R:
   c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3071-3437")),
@@ -21,7 +22,8 @@ Imports:
   IRanges,
   vcfR,
   readxl,
-  BiocBaseUtils
+  BiocBaseUtils,
+  lubridate
 Depends:
   R (>= 4.2.0)
 BugReports: https://github.com/CTrierMaansson/AvenioUpdate/issues
