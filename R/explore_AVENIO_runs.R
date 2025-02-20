@@ -6,6 +6,7 @@
 #' @importFrom dplyr filter `%>%` mutate select group_by ungroup count arrange
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom readxl read_xlsx
+#' @importFrom lubridate ymd
 #' @param  Info `Character` string with the name of the information that should.
 #' be extracted. Possible options can be viewed with explore_AVENIO_runs_Info().
 #' If `NULL` (default) all information is returned as a `list`.
