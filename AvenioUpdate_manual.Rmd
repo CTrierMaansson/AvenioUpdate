@@ -143,7 +143,7 @@ you all is fine!
 4. **Do not make your own copy of the file and store it locally**
 5. **Format the information in the correct format (see below)**
 6. **Try to avoid adding samples with incomplete information**
-7. **Avoid the use of special characters like **"ÆØÅ½#$" **etc. but** "_" **is okay**
+7. **Avoid the use of special characters like **"ÆØÅ½#$" **etc. but** "_" **is okay, EXCEPT IN PROJECT!**
 8. **And do not delete anything you are not supposed to**
 
 ### Formatting entries in AVENIO_runs.xlsx
@@ -223,6 +223,9 @@ across different projects such as *pt26*, *26*, *patient26* etc.
 This is the project the patient is part of. This is used to group patients as
 unique entries. It can also be used to quickly collect the patient information
 for your specific project by filtering on the project name.
+**Because of how the package works **"_" **cannot be included in Project**
+
+If any entry in the file contains "_" in Project, it will result in an **ERROR**
 
 #### **Sample_date**
 
@@ -234,6 +237,12 @@ filled out correctly.
 
 When the data is collected and analyzed the algorithm checks the format of 
 the date and if it is not correct it will result in an **ERROR**
+
+#### **Sample_number**
+
+This is number corresponding to the blood sample. This is not used by the code
+but it can be useful to connect sample dates and sample numbers. 
+If the number is unknown you can just write "Unknown".
 
 #### **Run_name**
 

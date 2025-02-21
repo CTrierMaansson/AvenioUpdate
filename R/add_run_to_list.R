@@ -59,6 +59,15 @@ add_run_to_list <- function(master_list, Directory){
         col_types = c(rep("guess",4),"date",rep("guess",6)))
     runs_ID <- AVENIO_runs %>% 
         dplyr::filter(nchar(Run_ID) != 24)
+    runs_project <- AVENIO_runs %>% 
+        filter(grepl("_",Project))
+    if(nrow(runs_project)>0){
+        failed_Pojects <- paste(unique(runs_project$Project),collapse = ", ")
+        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+             "The following projects contain '_' which is not allowed:\n",
+             failed_Pojects,"\n",
+             "Please fix before proceeding.")
+    }
     if(nrow(runs_ID)>0){
         failed_ID <- paste(runs_ID$Run_ID,collapse = ", ")
         stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
@@ -68,6 +77,14 @@ add_run_to_list <- function(master_list, Directory){
     AVENIO_runs_select <- AVENIO_runs %>% 
         dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 
         dplyr::mutate(date_check = lubridate::ymd(Sample_date))
+    if(any(is.na(AVENIO_runs_select$Project))){
+        na_Project <- AVENIO_runs_select %>% 
+            dplyr::filter(is.na(Project))
+        na_Project_samples <- paste(na_Project$Sample_name,collapse = ", ")
+        warning(paste0("The following samples are lacking Project information",
+                       " and will be excluded from the analysis:\n",
+                       na_Project_samples))
+    }
     if(any(is.na(AVENIO_runs_select$CPR))){
         na_CPR <- AVENIO_runs_select %>% 
             dplyr::filter(is.na(CPR))
@@ -105,7 +122,8 @@ add_run_to_list <- function(master_list, Directory){
         dplyr::filter(!is.na(CPR)) %>% 
         dplyr::filter(!is.na(date_check)) %>% 
         dplyr::select(-date_check) %>% 
-        dplyr::filter(!is.na(Name_in_project))
+        dplyr::filter(!is.na(Name_in_project)) %>% 
+        dplyr::filter(is.na(Project))
     message("Merging run information and patient information")
     samples <- add_samples(Directory,AVENIO_runs_select)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
@@ -165,3 +183,6 @@ add_run_to_list <- function(master_list, Directory){
     }
     return(reanalyzed)
 }
+add_run_to_list(master_list = master_list,
+                Directory = Directory)
+
