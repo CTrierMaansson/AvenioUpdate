@@ -183,6 +183,3 @@ add_run_to_list <- function(master_list, Directory){
     }
     return(reanalyzed)
 }
-add_run_to_list(master_list = master_list,
-                Directory = Directory)
-
