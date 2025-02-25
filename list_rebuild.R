@@ -80,7 +80,8 @@ added_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                 "AceCNHniaeJHxYPppCoBA3IC",
                 "AHdPMXCL5MNESr6hZ_jG_ZBb",
                 "AaT_Kpn0jHxPWpaPgfeRfhKv",
-                "AHuZCLmjisVM2rzDksjqeDeY")
+                "AHuZCLmjisVM2rzDksjqeDeY",
+                "ATJcNmDM5ftEq6MGPd9T0jvI")
 
 library(AvenioUpdate)
 `%ni%` <- Negate(`%in%`)
@@ -119,7 +120,7 @@ if(any(nchar(added_runs) != 24)){
 #### Adding run ####
 
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AaT_Kpn0jHxPWpaPgfeRfhKv"
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ATJcNmDM5ftEq6MGPd9T0jvI"
 master_list <- add_run_to_list(master_list = master_list,
                                Directory = dir)
 #### Recreating AVENIO_results_patients.rds ####
