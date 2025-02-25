@@ -123,7 +123,10 @@ add_run_to_list <- function(master_list, Directory){
         dplyr::filter(!is.na(date_check)) %>% 
         dplyr::select(-date_check) %>% 
         dplyr::filter(!is.na(Name_in_project)) %>% 
-        dplyr::filter(is.na(Project))
+        dplyr::filter(!is.na(Project))
+    if(nrow(AVENIO_runs_select) == 0){
+        stop("None of the samples have all the relevant information.\nSee the warnings above for details")
+    }
     message("Merging run information and patient information")
     samples <- add_samples(Directory,AVENIO_runs_select)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
