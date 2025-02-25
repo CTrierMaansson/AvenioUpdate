@@ -61,6 +61,16 @@ add_run_to_list <- function(master_list, Directory){
         dplyr::filter(nchar(Run_ID) != 24)
     runs_project <- AVENIO_runs %>% 
         filter(grepl("_",Project))
+    runs_name_project <- AVENIO_runs %>% 
+        filter(grepl("_",Name_in_project))
+    if(nrow(runs_name_project)>0){
+        failed_name_project <- paste(unique(runs_name_project$Name_in_project),
+                                     collapse = ", ")
+        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+             "The following Name_in_project contain '_' which is not allowed:\n",
+             failed_name_project,"\n",
+             "Please fix before proceeding.")
+    }
     if(nrow(runs_project)>0){
         failed_Pojects <- paste(unique(runs_project$Project),collapse = ", ")
         stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",

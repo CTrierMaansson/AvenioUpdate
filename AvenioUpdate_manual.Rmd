@@ -143,7 +143,7 @@ you all is fine!
 4. **Do not make your own copy of the file and store it locally**
 5. **Format the information in the correct format (see below)**
 6. **Try to avoid adding samples with incomplete information**
-7. **Avoid the use of special characters like **"ÆØÅ½#$" **etc. but** "_" **is okay, EXCEPT IN PROJECT!**
+7. **Avoid the use of special characters like **"ÆØÅ½#$" **etc. but** "_" **is okay, EXCEPT IN PROJECT AND NAME_IN_PROJECT!**
 8. **And do not delete anything you are not supposed to**
 
 ### Formatting entries in AVENIO_runs.xlsx
@@ -217,6 +217,10 @@ results[[`<CPR_number>`]]
 This is the name given to a patient in a project. This name **must** be unique
 for the patients within a specific project, but the same name can be used 
 across different projects such as *pt26*, *26*, *patient26* etc.
+**Because of how the package works **"_" **cannot be included in Name_in_project**
+
+If any entry in the file contains "_" in Name_in_project,
+it will result in an **ERROR**
 
 #### **Project**
 
