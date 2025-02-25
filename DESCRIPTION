@@ -1,6 +1,6 @@
 Package: AvenioUpdate
 Title: Update and exploration of Avenio data
-Version: 1.2.0
+Version: 1.2.1
 biocViews: TargetedResequencing, Genetics, Sequencing
 Authors@R:
   c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),

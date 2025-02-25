@@ -132,7 +132,7 @@ add_run_to_list <- function(master_list, Directory){
     unique_projects <- unique(AVENIO_runs_select$Project)
     unique_sample_notes <- unique(AVENIO_runs_select$Sample_note)
     unique_material <- unique(AVENIO_runs_select$Material)
-    if(any(unique_projects) %ni% keys$Project){
+    if(any(unique_projects %ni% keys$Project)){
         invalid_project <- unique_projects[unique_projects %ni% keys$Project]
         invalid_project_names <- paste(invalid_project,collapse = ", ")
         stop(paste0("The following project names are invalid:\n",
@@ -143,7 +143,7 @@ add_run_to_list <- function(master_list, Directory){
                     "Available names can be viewed with:\n",
                     " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
     }
-    if(any(unique_sample_notes) %ni% keys$Sample_note){
+    if(any(unique_sample_notes %ni% keys$Sample_note)){
         invalid_sample_notes <- unique_sample_notes[unique_sample_notes %ni% keys$Sample_note]
         invalid_sample_notes_names <- paste(invalid_sample_notes,collapse = ", ")
         stop(paste0("The following sample notes are invalid:\n",
@@ -154,7 +154,7 @@ add_run_to_list <- function(master_list, Directory){
                     "Available names can be viewed with:\n",
                     " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
     }
-    if(any(unique_material) %ni% keys$Material){
+    if(any(unique_material %ni% keys$Material)){
         invalid_material <- unique_material[unique_material %ni% keys$Material]
         invalid_material_names <- paste(invalid_material,collapse = ", ")
         stop(paste0("The following materials are invalid:\n",
