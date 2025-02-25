@@ -137,8 +137,8 @@ add_run_to_list <- function(master_list, Directory){
         invalid_project_names <- paste(invalid_project,collapse = ", ")
         stop(paste0("The following project names are invalid:\n",
                     invalid_project_names,"\n",
-                    "Either make sure the project names are spelled correctly ",
-                    "OR add a new project entry with add_new_key()",
+                    "Either make sure the project names are spelled correctly\n",
+                    "OR\nAdd a new project entry with add_new_key()",
                     " and rerun add_run_to_list()\n",
                     "Available names can be viewed with:\n",
                     " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
@@ -148,8 +148,8 @@ add_run_to_list <- function(master_list, Directory){
         invalid_sample_notes_names <- paste(invalid_sample_notes,collapse = ", ")
         stop(paste0("The following sample notes are invalid:\n",
                     invalid_sample_notes_names,"\n",
-                    "Either make sure the sample notes are spelled correctly ",
-                    "OR add a new project entry with add_new_key()",
+                    "Either make sure the sample notes are spelled correctly\n",
+                    "OR\nAdd a new project entry with add_new_key()",
                     " and rerun add_run_to_list()\n",
                     "Available names can be viewed with:\n",
                     " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
@@ -159,8 +159,8 @@ add_run_to_list <- function(master_list, Directory){
         invalid_material_names <- paste(invalid_material,collapse = ", ")
         stop(paste0("The following materials are invalid:\n",
                     invalid_material_names,"\n",
-                    "Either make sure the material names are spelled correctly ",
-                    "OR add a new material entry with add_new_key()",
+                    "Either make sure the material names are spelled correctly\n",
+                    "OR\nAdd a new material entry with add_new_key()",
                     " and rerun add_run_to_list()\n",
                     "Available names can be viewed with:\n",
                     " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
