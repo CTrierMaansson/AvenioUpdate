@@ -128,6 +128,43 @@ add_run_to_list <- function(master_list, Directory){
                        " and will be excluded from the analysis:\n",
                        na_date_samples))
     }
+    keys <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")
+    unique_projects <- unique(AVENIO_runs_select$Project)
+    unique_sample_notes <- unique(AVENIO_runs_select$Sample_note)
+    unique_material <- unique(AVENIO_runs_select$Material)
+    if(any(unique_projects) %ni% keys$Project){
+        invalid_project <- unique_projects[unique_projects %ni% keys$Project]
+        invalid_project_names <- paste(invalid_project,collapse = ", ")
+        stop(paste0("The following project names are invalid:\n",
+                    invalid_project_names,"\n",
+                    "Either make sure the project names are spelled correctly ",
+                    "OR add a new project entry with add_new_key()",
+                    " and rerun add_run_to_list()\n",
+                    "Available names can be viewed with:\n",
+                    " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
+    }
+    if(any(unique_sample_notes) %ni% keys$Sample_note){
+        invalid_sample_notes <- unique_sample_notes[unique_sample_notes %ni% keys$Sample_note]
+        invalid_sample_notes_names <- paste(invalid_sample_notes,collapse = ", ")
+        stop(paste0("The following sample notes are invalid:\n",
+                    invalid_sample_notes_names,"\n",
+                    "Either make sure the sample notes are spelled correctly ",
+                    "OR add a new project entry with add_new_key()",
+                    " and rerun add_run_to_list()\n",
+                    "Available names can be viewed with:\n",
+                    " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
+    }
+    if(any(unique_material) %ni% keys$Material){
+        invalid_material <- unique_material[unique_material %ni% keys$Material]
+        invalid_material_names <- paste(invalid_material,collapse = ", ")
+        stop(paste0("The following materials are invalid:\n",
+                    invalid_material_names,"\n",
+                    "Either make sure the material names are spelled correctly ",
+                    "OR add a new material entry with add_new_key()",
+                    " and rerun add_run_to_list()\n",
+                    "Available names can be viewed with:\n",
+                    " readRDS('//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds')"))
+    }
     AVENIO_runs_select <- AVENIO_runs_select %>% 
         dplyr::filter(!is.na(CPR)) %>% 
         dplyr::filter(!is.na(date_check)) %>% 

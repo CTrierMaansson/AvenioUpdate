@@ -55,8 +55,9 @@ information about the samples run on the NGS machine. Both files are located at
 [//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/)
 and will be explained in much greater detail below. 
 
-As of early 2025 the package contains two **main** functions 
-(`add_run_to_list()` & `create_simple_output()`) which are used to update the
+As of early 2025 the package contains three **main** functions 
+(`add_run_to_list()`, `add_new_key()`, & `create_simple_output()`) 
+which are used to update the
 results file and get an overview of the results for a single patient.
 In addition, the package contains six **smaller** functions which are 
 used to get some statistics on the data we have collected, to get the 
@@ -231,6 +232,10 @@ for your specific project by filtering on the project name.
 
 If any entry in the file contains "_" in Project, it will result in an **ERROR**
 
+To include a new project run: `add_new_key()` (see below) and to see current 
+included projects run: 
+`readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")`
+
 #### **Sample_date**
 
 This is the date of the sample collection. **It is important to format the**
@@ -277,8 +282,11 @@ algorithm. However, it is nice to include to get a quick overview of the samples
 that have been analyzed for the specific patient. In general the variable refers
 to time of blood sampling in relation to treatment initiation.
 There is no limitation on what can
-be included in this column **however it is strongly advised to put in:**
-**"BL","Tx","Unknown", or "BC"**
+be included in this column although new possible entries has to be added with 
+`add_new_key()` 
+
+To see current included Sample_notes run: 
+`readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")`
 
 #### **Material**
 
@@ -292,6 +300,13 @@ Material is not filled out the algorithm will result in an **ERROR**.
 **The classification of "BC" samples is important because non-BC samples from a
 patient have variants "flagged" according to the variants detected 
 in the BC sample.**
+
+There is no limitation on what can
+be included in this column although new possible entries has to be added with 
+`add_new_key()` 
+
+To see current included Materials run: 
+`readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")`
 
 ## The AVENIO_results_patients.rds file
 
@@ -509,10 +524,54 @@ that have been added to the dataset
 **It is good practice to look through these messages after `add_run_to_list()`**
 **has been executed, to make sure the data has been updated as expected.**
 
+## `add_new_key()`
+
+This is the second **main** function of the package and is used to add new 
+possible entries to the Project, Sample_note, and Material columns in the 
+AVENIO_runs.xlsx file. This step is included to ensure typos are spotted 
+so you don't accidentally assign a wrong e.g. project name to a sample. 
+
+The function takes two mandatory arguments
+
+1. `key` which is the key name you want to add as possible entry
+2. `variable` which is the variable name in the AVENIO_runs.xlsx you want to add the key to.
+
+Current included entries for Project, Sample_note, and Material can be viewed
+with:
+
+```{r, eval=FALSE,message=F}
+readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")
+
+```
+
+### Output
+There is no output of this function, just a message telling you what variable
+has been updated with the new key
+
+### Example
+
+An example of how the function can be used
+
+```{r, eval=FALSE,message=F}
+add_new_key(key = "test",
+            variable = "Project")
+
+```
+
+This should print the following messages
+
+```{r, echo=FALSE,message=T}
+key <- "test"
+variable <- "Project"
+message(paste0("Adding the new key: '",key,"' for the variable: '",
+                       variable,"'."))
+message("DONE!")
+
+```
 
 ## `create_simple_output()`
 
-This is the second **main** function of the package and is used to get a quick 
+This is the third **main** function of the package and is used to get a quick 
 overview of a specific patient. The function takes two **mandatory** arguments:
 
 1. `df_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
