@@ -59,10 +59,11 @@ reanalyze_samples <- function(master_list, df_list){
                         Genomic.Position)) %>% 
                     dplyr::mutate(Flags = 
                                       ifelse(identifier %in% sample_BC$identifier,
-                                             ifelse(nchar(Flags)>0,
-                                                    paste0(Flags,", BC_mut"),
-                                                    paste0("BC_mut")),
-                                             Flags)) %>% 
+                                             ifelse(grepl("BC_mut",Flags),
+                                                    Flags,ifelse(nchar(Flags)>0,
+                                                                 paste0(Flags,", BC_mut"),
+                                                                 paste0("BC_mut"))),
+                                             Flags)) %>%  
                     dplyr::select(-identifier)
                 sample_BC <- sample_BC %>% 
                     dplyr::select(-identifier)

@@ -40,6 +40,7 @@ add_bam_mutation<-function(df_mut,Sample1,Sample2,GenomicPosition,
     if (is.na(list_sample1[16])){
         df_mut<-df_mut%>%dplyr::filter(sample_index!=list_sample1[[1]])
     }
+    merged_list <- lapply(merged_list,unique)
     #tilføj den nye række:
     df_mut<-rbind(df_mut,merged_list)
     return(df_mut)
