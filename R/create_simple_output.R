@@ -6,6 +6,7 @@
 #' creates a simple overview of the mutations identified.
 #' @importFrom dplyr left_join select mutate tibble `%>%` filter arrange
 #' @importFrom readxl read_xlsx
+#' @importFrom stringr str_split_i
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @param df_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
@@ -62,11 +63,25 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE){
                              col_types = c(rep("guess",4),"date",rep("guess",6)))
     message("Selecting relevant sample")
     AVENIO_sele <- AVENIO_runs[AVENIO_runs$CPR == CPR,]
-    AVENIO_sele <- AVENIO_sele[!is.na(AVENIO_sele$CPR),] %>% 
-        dplyr::select(Sample_name, Sample_note, Material, Notes)
+    AVENIO_sele <- AVENIO_sele %>% 
+        dplyr::mutate(sample_index = paste0(Project,"_",
+                                            Name_in_project,"_",
+                                            substr(stringr::str_split_i(
+                                                as.character(Sample_date),"-",1),
+                                                3,4),
+                                            stringr::str_split_i(
+                                                as.character(Sample_date),"-",2),
+                                            stringr::str_split_i(
+                                                as.character(Sample_date),"-",3))) %>% 
+        dplyr::mutate(
+            sample_index = ifelse(Material != "cfDNA",
+                                  paste0(sample_index,"_",Material),
+                                  sample_index)) %>% 
+        dplyr::select(sample_index,Sample_note,Material,Notes) %>% 
+        dplyr::filter(!is.na(sample_index))
     message("Merging run and variant information")
     df <- df %>% 
-        dplyr::left_join(AVENIO_sele, by = c("Sample.ID" = "Sample_name")) %>% 
+        dplyr::left_join(AVENIO_sele,by = "sample_index") %>% 
         dplyr::select(sample_index,
                Mutation.Class,Gene,Amino.Acid.Change,
                Variant.Description,Flags,Allele.Fraction,

@@ -5,7 +5,7 @@
 #' the patient is added to the list. If a patient ID/CPR is present in the list 
 #' the new NGS data is added under that patient and all the BAM files for that
 #' patient is manually checked for mutations. 
-#' @importFrom dplyr select `%>%` filter
+#' @importFrom dplyr select `%>%` filter mutate group_by count ungroup left_join
 #' @importFrom BiocBaseUtils isScalarCharacter
 #' @importFrom readxl read_xlsx
 #' @importFrom stringr str_split_i
@@ -83,6 +83,25 @@ add_run_to_list <- function(master_list, Directory){
         stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
              "The following run IDs do not contain the mandatory 24 characters: ",
              failed_ID)
+    }
+    runs_project_cpr_name <- AVENIO_runs %>% 
+        dplyr::select(CPR,Name_in_project,Project) %>% 
+        dplyr::mutate(CPR_project = paste0(CPR,"_",Project)) %>%
+        unique() %>% 
+        na.omit()
+    project_name_counts <- runs_project_cpr_name %>%
+        dplyr::group_by(CPR_project) %>%
+        dplyr::count() %>% 
+        dplyr::ungroup() %>% 
+        dplyr::filter(n > 1) %>% 
+        dplyr::left_join(runs_project_cpr_name,by = "CPR_project")
+    if(nrow(project_name_counts) > 0){
+        failed_name_counts <- paste(project_name_counts$CPR,collapse = ", ")
+        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+             "The following run CPRs have several Name_in_project entries for a",
+             " single Project: ",
+             failed_ID, "\n",
+             "Please only select a single Name_in_project for each CPR within a Project")
     }
     AVENIO_runs_select <- AVENIO_runs %>% 
         dplyr::filter(grepl(run_ID_short,Run_ID)) %>% 

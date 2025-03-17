@@ -135,7 +135,7 @@ if(any(nchar(added_runs) != 24)){
 #### Adding run ####
 
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AdYl2rnCR1ZO5JLxgqP9fouS"
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AL1jsnDnkt1JAaOcrR49GE75"
 master_list <- add_run_to_list(master_list = master_list,
                                Directory = dir)
 #### Recreating AVENIO_results_patients.rds ####
@@ -239,6 +239,7 @@ master_list <- AvenioUpdate::add_run_to_list(
     master_list = master_list,
     Directory = dir)
 
+included_analyses(master_list)
 
 for(i in 3:length(added_runs)){
     dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_runs[i])
@@ -253,3 +254,4 @@ print(analyses[[1]], n= nrow(analyses[[1]]))
 AvenioUpdate::result_stats()$Basestats
 AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
     filter(Project != "SOLUCOM")
+

@@ -57,6 +57,7 @@ reanalyze_samples <- function(master_list, df_list){
                         Coding.Change,
                         "_",
                         Genomic.Position)) %>% 
+                    dplyr::mutate(Flags = ifelse(is.na(Flags),"",Flags)) %>% 
                     dplyr::mutate(Flags = 
                                       ifelse(identifier %in% sample_BC$identifier,
                                              ifelse(grepl("BC_mut",Flags),
