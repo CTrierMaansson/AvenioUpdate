@@ -96,7 +96,7 @@ add_run_to_list <- function(master_list, Directory){
         dplyr::filter(n > 1) %>% 
         dplyr::left_join(runs_project_cpr_name,by = "CPR_project")
     if(nrow(project_name_counts) > 0){
-        failed_name_counts <- paste(project_name_counts$CPR,collapse = ", ")
+        failed_name_counts <- paste(unique(project_name_counts$CPR),collapse = ", ")
         stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
              "The following run CPRs have several Name_in_project entries for a",
              " single Project: ",
