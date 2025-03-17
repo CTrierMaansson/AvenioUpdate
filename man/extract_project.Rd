@@ -4,7 +4,13 @@
 \alias{extract_project}
 \title{Get a simple overview for an entire project}
 \usage{
-extract_project(df_list, project, synonymous = TRUE, simple = FALSE)
+extract_project(
+  df_list,
+  project,
+  synonymous = TRUE,
+  simple = FALSE,
+  synology_path = "//Synology_m1/Synology_folder/AVENIO/"
+)
 }
 \arguments{
 \item{df_list}{The \code{list} of \code{data.frames} which contains all information on
@@ -22,6 +28,10 @@ output. If \code{FALSE} the synonymous mutations are excluded.}
 \item{simple}{\code{Boolean}. If \code{TRUE} the output is in a simple format,
 similar to the format created by \code{create_simple_output()}. If \code{FALSE}
 (default) all information from the AVENIO .csv files are exported.}
+
+\item{synology_path}{\code{Character} string with the full path to the directory
+containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
+"//Synology_m1/Synology_folder/AVENIO/"}
 }
 \value{
 A \code{tibble}

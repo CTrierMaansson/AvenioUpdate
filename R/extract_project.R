@@ -20,6 +20,9 @@
 #' @param simple `Boolean`. If `TRUE` the output is in a simple format,
 #' similar to the format created by `create_simple_output()`. If `FALSE` 
 #' (default) all information from the AVENIO .csv files are exported. 
+#' @param synology_path `Character` string with the full path to the directory 
+#'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
+#'  "//Synology_m1/Synology_folder/AVENIO/" 
 #' @return A `tibble`
 #'  with 15 variables (`simple = TRUE`) or many variables (`simple = FALSE`).
 #'  Each row corresponds to a mutation identified in any 
@@ -47,7 +50,8 @@
 extract_project <- function(df_list,
                             project,
                             synonymous = TRUE,
-                            simple = FALSE){
+                            simple = FALSE,
+                            synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
     `%ni%` <- Negate(`%in%`)
     if (!is.list(df_list)) {
         stop("df_list has to be a list")
@@ -67,7 +71,7 @@ extract_project <- function(df_list,
         stop("project has to be a character")
     }
     message("Reading AVENIO_runs.xlsx file")
-    AVENIO_runs <- readxl::read_xlsx("//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+    AVENIO_runs <- readxl::read_xlsx(paste0(synology_path,"AVENIO_runs.xlsx"),
                                      col_types = c(rep("guess",4),"date",rep("guess",6))) 
     AVENIO_runs <- AVENIO_runs %>% 
         dplyr::mutate(sample_index = paste0(Project,"_",

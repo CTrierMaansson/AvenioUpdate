@@ -2,7 +2,7 @@
 #' @importFrom dplyr arrange `%>%` filter mutate select
 #' @importFrom stringr str_split_i
 #' @importFrom readxl read_xlsx
-reanalyze_samples <- function(master_list, df_list){
+reanalyze_samples <- function(master_list, df_list,synology_path){
     `%ni%` <- Negate(`%in%`)
     existing <- names(df_list)[names(df_list) %in% names(master_list)]
     if(length(existing)<1){
@@ -18,9 +18,9 @@ reanalyze_samples <- function(master_list, df_list){
     }
     
     rownames(test_df) <- NULL
-    validated_samples <- add_variants_from_bam_files(test_df)
+    validated_samples <- add_variants_from_bam_files(test_df,synology_path)
     Avenio_runs <- readxl::read_xlsx(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+        paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6)))
     Avenio_sele <- Avenio_runs %>% 
         dplyr::filter(Run_ID %in% validated_samples$Analysis.ID) %>% 

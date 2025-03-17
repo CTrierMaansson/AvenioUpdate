@@ -4,7 +4,11 @@
 \alias{result_stats}
 \title{Generates an overview different stats in the dataset}
 \usage{
-result_stats(Info = NULL, silent = FALSE)
+result_stats(
+  Info = NULL,
+  silent = FALSE,
+  synology_path = "//Synology_m1/Synology_folder/AVENIO/"
+)
 }
 \arguments{
 \item{Info}{\code{Character} string with the name of the information that should.
@@ -14,6 +18,10 @@ If \code{NULL} (default) all information is returned as a \code{list}.}
 \item{silent}{\code{Boolean} determining information messages should be displayed
 If \code{FALSE} (default) messages are displayed. If \code{TRUE} the messages are
 not printed.}
+
+\item{synology_path}{\code{Character} string with the full path to the directory
+containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
+"//Synology_m1/Synology_folder/AVENIO/"}
 }
 \value{
 A \code{list} with different stats on AVENIO_results_patients.rds

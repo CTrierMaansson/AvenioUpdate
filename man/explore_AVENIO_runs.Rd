@@ -4,7 +4,11 @@
 \alias{explore_AVENIO_runs}
 \title{Explores the .xlsx file with the run information}
 \usage{
-explore_AVENIO_runs(Info = NULL, silent = FALSE)
+explore_AVENIO_runs(
+  Info = NULL,
+  silent = FALSE,
+  synology_path = "//Synology_m1/Synology_folder/AVENIO/"
+)
 }
 \arguments{
 \item{Info}{\code{Character} string with the name of the information that should.
@@ -14,6 +18,10 @@ If \code{NULL} (default) all information is returned as a \code{list}.}
 \item{silent}{\code{Boolean} determining information messages should be displayed
 If \code{FALSE} (default) messages are displayed. If \code{TRUE} the messages are
 not printed.}
+
+\item{synology_path}{\code{Character} string with the full path to the directory
+containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
+"//Synology_m1/Synology_folder/AVENIO/"}
 }
 \value{
 A \code{list} with different information on the AVENIO_runs.xslx

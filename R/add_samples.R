@@ -4,10 +4,10 @@
 #' @importFrom dplyr filter select full_join left_join mutate relocate arrange `%>%`
 #' @importFrom stringr str_split_i
 #' @importFrom lubridate ymd
-add_samples <- function(Directory,runs){
+add_samples <- function(Directory,runs,synology_path){
     `%ni%` <- Negate(`%in%`)
     Run_ID <- gsub(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",
+        paste0(synology_path,"AVENIO_results/Plasma-"),
         "",Directory)
     zip_file <- paste0(Directory,"/","all_CSVs-",Run_ID,".zip")
     sample_file <- paste0(Directory,"/SampleMetrics.csv")

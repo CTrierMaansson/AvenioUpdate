@@ -2,7 +2,7 @@
 #' @importFrom dplyr tibble `%>%` filter
 #' @importFrom stringr str_glue
 #' @importFrom vcfR read.vcfR
-wrapper_tjek_bam_snv<-function(df){
+wrapper_tjek_bam_snv<-function(df,synology_path){
     
     df_varianter_fundet_i_bam<-dplyr::tibble(
         sample_1=c(0),sample_2=c(0),
@@ -10,7 +10,7 @@ wrapper_tjek_bam_snv<-function(df){
         variant_depth=c(0),
         unique_depth=c(0))
     df_nested<-lav_nested_df_SNV(df)
-    path_AVENIO_results<-"//Synology_m1/Synology_folder/AVENIO/AVENIO_results"
+    path_AVENIO_results<-paste0(synology_path,"AVENIO_results")
     
     for(i in 1:nrow(df_nested)){
         #get sample1 name:

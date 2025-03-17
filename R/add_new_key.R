@@ -6,7 +6,10 @@
 #' @importFrom readxl read_xlsx
 #' @param key `Character` of the key name you want to add as possible entry
 #' @param  variable `Character` of the variable name in the AVENIO_runs.xlsx
-#' file you want to add the key to.  
+#' file you want to add the key to.
+#' @param synology_path `Character` string with the full path to the directory 
+#'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
+#'  "//Synology_m1/Synology_folder/AVENIO/"  
 #' @return Nothing is returned. The key is just added to the list of possible
 #' entries
 #'  
@@ -14,7 +17,8 @@
 #' add_new_key(key = "test",
 #'             variable = "Project")
 #' @export
-add_new_key <- function(key,variable){
+add_new_key <- function(key,variable,
+                        synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
     if (!isScalarCharacter(key)) {
         stop("key has to be a character")
     }
@@ -23,9 +27,9 @@ add_new_key <- function(key,variable){
     }
     `%ni%` <- Negate(`%in%`)
     Avenio_runs <- readxl::read_xlsx(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+        paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6)))
-    keys <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")
+    keys <- readRDS(paste0(synology_path,"AVENIO_keys.rds"))
     if(variable %ni% names(keys)){
         key_names <- paste(names(keys),collapse = ", ")
         stop(paste0("variable name: '", variable,
@@ -57,7 +61,7 @@ add_new_key <- function(key,variable){
     if(all(tests)){
         message(paste0("Adding the new key: '",key,"' for the variable: '",
                        variable,"'."))
-        saveRDS(keys_new,"//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")
+        saveRDS(keys_new,paste0(synology_path,"AVENIO_keys.rds"))
         message("DONE!")
     }
 }

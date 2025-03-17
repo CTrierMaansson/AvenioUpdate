@@ -13,6 +13,9 @@
 #' @param silent `Boolean` determining information messages should be displayed 
 #' If `FALSE` (default) messages are displayed. If `TRUE` the messages are
 #' not printed. 
+#' @param synology_path `Character` string with the full path to the directory 
+#'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
+#'  "//Synology_m1/Synology_folder/AVENIO/"  
 #' @return A `list` with different information on the AVENIO_runs.xslx 
 #' (`Info` = `NULL`) or the specific object as determined by `Info`.
 #'  
@@ -21,7 +24,8 @@
 #' results$Total_entries
 #' explore_AVENIO_runs(Info = "Required")
 #' @export
-explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
+explore_AVENIO_runs <- function(Info = NULL, silent = FALSE,
+                                synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
     `%ni%` <- Negate(`%in%`)
     if(!is.null(Info)){
         if (!isScalarCharacter(Info)) {
@@ -35,7 +39,7 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
         message("Reading AVENIO_runs.xlsx")
     }
     df <- readxl::read_xlsx(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+        paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6))) %>% 
         dplyr::mutate(date_check = lubridate::ymd(Sample_date))
     if(!silent){
@@ -94,7 +98,7 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE){
     if(!silent){
         message("Reading AVENIO_results_patients.rds")
     }
-    master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+    master_list <- readRDS(paste0(synology_path,"AVENIO_results_patients.rds"))
     if(!silent){
         message("Investigating AVENIO_results_patients.rds")
     }

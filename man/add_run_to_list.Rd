@@ -4,7 +4,11 @@
 \alias{add_run_to_list}
 \title{Add a new AVENIO run to patient overview}
 \usage{
-add_run_to_list(master_list, Directory)
+add_run_to_list(
+  master_list,
+  Directory,
+  synology_path = "//Synology_m1/Synology_folder/AVENIO/"
+)
 }
 \arguments{
 \item{master_list}{The \code{list} of \code{data.frames} which contains all information on
@@ -13,6 +17,10 @@ readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")}
 
 \item{Directory}{\code{Character} string with the full path to the directory on
 the Synology where the data is located.}
+
+\item{synology_path}{\code{Character} string with the full path to the directory
+containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
+"//Synology_m1/Synology_folder/AVENIO/"}
 }
 \value{
 A \code{list} of \code{data.frames} with similar structure to \code{master_list}.

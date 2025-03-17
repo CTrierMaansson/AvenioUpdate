@@ -15,6 +15,9 @@
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 #' @param  Directory `Character` string with the full path to the directory on
 #'  the Synology where the data is located.
+#' @param synology_path `Character` string with the full path to the directory 
+#'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
+#'  "//Synology_m1/Synology_folder/AVENIO/"
 #' @return A `list` of `data.frames` with similar structure to `master_list`. 
 #'  During the analysis the number of patients and NGS runs present in the 
 #'  dataset before and after the NGS run is printed. If the list successfully 
@@ -27,7 +30,8 @@
 #' add_run_to_list(master_list = master,
 #'                 Directory = test_path)
 #' @export
-add_run_to_list <- function(master_list, Directory){
+add_run_to_list <- function(master_list, Directory, 
+                            synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
     `%ni%` <- Negate(`%in%`)
     if (!is.list(master_list)) {
         stop("df_list has to be a list")
@@ -40,22 +44,26 @@ add_run_to_list <- function(master_list, Directory){
     if (!isScalarCharacter(Directory)) {
         stop("Directory has to be a character")
     }
-    if (!grepl("//Synology",Directory)) {
-        stop("'//Synology' has to be the first characters in the Directory string")
-    }
     if (!file.exists(Directory)) {
         stop("The path entered as Directory does not exist")
+    }
+    if (!dir.exists(synology_path)) {
+        stop("The path entered as synology_path does not exist")
+    }
+    nchar_path <- nchar(synology_path)
+    if(substr(synology_path,nchar_path,nchar_path) != "/"){
+        stop("The synology_path has to end with a '/'")
     }
     unlisted_before <- do.call(rbind,master_list) %>% 
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
     message("Reading run information")
     ID <- gsub(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",
+        paste0(synology_path,"AVENIO_results/Plasma-"),
         "",Directory)
     run_ID_short <- substr(ID,1,8)
     AVENIO_runs <- readxl::read_xlsx(
-        "//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+        paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6)))
     runs_ID <- AVENIO_runs %>% 
         dplyr::filter(nchar(Run_ID) != 24)
@@ -66,21 +74,21 @@ add_run_to_list <- function(master_list, Directory){
     if(nrow(runs_name_project)>0){
         failed_name_project <- paste(unique(runs_name_project$Name_in_project),
                                      collapse = ", ")
-        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+        stop("Error in AVENIO_runs.xlsx\n",
              "The following Name_in_project contain '_' which is not allowed:\n",
              failed_name_project,"\n",
              "Please fix before proceeding.")
     }
     if(nrow(runs_project)>0){
         failed_Pojects <- paste(unique(runs_project$Project),collapse = ", ")
-        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+        stop("Error in AVENIO_runs.xlsx\n",
              "The following projects contain '_' which is not allowed:\n",
              failed_Pojects,"\n",
              "Please fix before proceeding.")
     }
     if(nrow(runs_ID)>0){
         failed_ID <- paste(runs_ID$Run_ID,collapse = ", ")
-        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+        stop("Error in AVENIO_runs.xlsx\n",
              "The following run IDs do not contain the mandatory 24 characters: ",
              failed_ID)
     }
@@ -120,7 +128,7 @@ add_run_to_list <- function(master_list, Directory){
     if(nrow(AVENIO_indeces_count) > 0){
         failed_sample_index <- paste(unique(AVENIO_indeces_count$sample_index),
                                      collapse = ", ")
-        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+        stop("Error in AVENIO_runs.xlsx\n",
              "The following samples have the same name, project, date and ",
              "material: ", failed_sample_index, "\n",
              "Consider changing the Material from ´cfDNA´ to 'reanalyze'",
@@ -129,7 +137,7 @@ add_run_to_list <- function(master_list, Directory){
     }
     if(nrow(project_name_counts) > 0){
         failed_name_counts <- paste(unique(project_name_counts$CPR),collapse = ", ")
-        stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
+        stop("Error in AVENIO_runs.xlsx\n",
              "The following run CPRs have several Name_in_project entries for a",
              " single Project: ",
              failed_name_counts, "\n",
@@ -179,7 +187,7 @@ add_run_to_list <- function(master_list, Directory){
                        " and will be excluded from the analysis:\n",
                        na_date_samples))
     }
-    keys <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds")
+    keys <- readRDS(paste0(synology_path,"AVENIO_keys.rds"))
     unique_projects <- unique(AVENIO_runs_select$Project)
     unique_sample_notes <- unique(AVENIO_runs_select$Sample_note)
     unique_material <- unique(AVENIO_runs_select$Material)
@@ -226,7 +234,7 @@ add_run_to_list <- function(master_list, Directory){
         stop("None of the samples have all the relevant information.\nSee the warnings above for details")
     }
     message("Merging run information and patient information")
-    samples <- add_samples(Directory,AVENIO_runs_select)
+    samples <- add_samples(Directory,AVENIO_runs_select,synology_path)
     if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
         stop("All samples are already part of the dataset. Terminating")
     }
@@ -235,7 +243,7 @@ add_run_to_list <- function(master_list, Directory){
     message("Creating list of data.frames for new samples")
     df_list <- create_df_list(samples,AVENIO_runs_select)
     message("Merging existing data with the new run and verifies mutations in BAM files")
-    reanalyzed <- reanalyze_samples(master_list,df_list)
+    reanalyzed <- reanalyze_samples(master_list,df_list,synology_path)
     if(is.list(reanalyzed)){
         if(length(reanalyzed) >= length(master_list)){
             n_patients_after <- length(reanalyzed)
@@ -279,8 +287,10 @@ add_run_to_list <- function(master_list, Directory){
             message("And the following samples have been added to the dataset")
             print(samples_export_df$sample_index)
             message("Saving updated list of patients")
-            saveRDS(reanalyzed,file = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+            saveRDS(reanalyzed,file = paste0(synology_path,"AVENIO_results_patients.rds"))
         }
     }
     return(reanalyzed)
 }
+
+
