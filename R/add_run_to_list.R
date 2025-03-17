@@ -100,7 +100,7 @@ add_run_to_list <- function(master_list, Directory){
         stop("Error in //Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx\n",
              "The following run CPRs have several Name_in_project entries for a",
              " single Project: ",
-             failed_ID, "\n",
+             failed_name_counts, "\n",
              "Please only select a single Name_in_project for each CPR within a Project")
     }
     AVENIO_runs_select <- AVENIO_runs %>% 
