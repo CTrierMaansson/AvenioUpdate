@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2025-02-25" />
+<meta name="date" content="2025-03-21" />
 
 <title>AvenioUpdate </title>
 
@@ -678,7 +678,7 @@ Denmark<br><a class="author_email" href="mailto:#"><a href="mailto:ctm@clin.au.d
 <h4 class="author">Lærke Rosenlund Nielsen</h4>
 <address class="author_afil">
 Department of Clinical Biochemistry, Aarhus University Hospital,
-Denmark<br><h4 class="date">25 feb 2025</h4>
+Denmark<br><h4 class="date">21 mar 2025</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 This manual describes how to use AvenioUpdate to update and extract
@@ -749,13 +749,12 @@ mandatory read</strong>)</a>
 <li><a href="#explore_avenio_runs" id="toc-explore_avenio_runs"><span class="toc-section-number">5.3</span>
 <code>explore_AVENIO_runs()</code></a>
 <ul>
-<li><a href="#output-5" id="toc-output-5"><span class="toc-section-number">5.3.1</span> Output</a></li>
-<li><a href="#example-5" id="toc-example-5"><span class="toc-section-number">5.3.2</span> Example</a></li>
-<li><a href="#output-description" id="toc-output-description"><span class="toc-section-number">5.3.3</span> Output description</a></li>
+<li><a href="#example-5" id="toc-example-5"><span class="toc-section-number">5.3.1</span> Example</a></li>
+<li><a href="#output-description" id="toc-output-description"><span class="toc-section-number">5.3.2</span> Output description</a></li>
 </ul></li>
 <li><a href="#result_stats" id="toc-result_stats"><span class="toc-section-number">5.4</span> <code>result_stats()</code></a>
 <ul>
-<li><a href="#output-6" id="toc-output-6"><span class="toc-section-number">5.4.1</span> Output</a></li>
+<li><a href="#output-5" id="toc-output-5"><span class="toc-section-number">5.4.1</span> Output</a></li>
 <li><a href="#example-6" id="toc-example-6"><span class="toc-section-number">5.4.2</span> Example</a></li>
 <li><a href="#output-description-1" id="toc-output-description-1"><span class="toc-section-number">5.4.3</span> Output description</a></li>
 </ul></li>
@@ -775,7 +774,7 @@ read</strong>)</a></li>
 to update and explore data generated with the Avenio pipeline at AUH.
 The package is dependent on two files . The first file is an R file
 (<code>.rds</code>) which contains all the Avenio results for each
-sample. This file can loaded into R where the data is visible. The
+sample. This file can be loaded into R where the data is visible. The
 second file is an excel file (<code>.xlsx</code>) which contains all the
 basic information about the samples run on the NGS machine. Both files
 are located at <a href="//Synology_m1/Synology_folder/AVENIO/">//Synology_m1/Synology_folder/AVENIO/</a>
@@ -820,6 +819,22 @@ following command:</p>
 #&gt; 8          Depths                     Distribution of unique depths across different materials
 #&gt; 9           Reads                      Distribution of mapped reads across different materials
 #&gt; 10      On_target                Distribution of on target percents across different materials</code></pre>
+<p><em>Sometimes</em> installing <code>devtools</code> does not
+configure <code>git</code> correctly with R and you therefore have to
+install <code>git</code> manually.</p>
+<p>If you use Windows install git via <a href="https://git-scm.com/downloads/win">https://git-scm.com/downloads/win</a>.
+Use the standalone installer 64-bit version. After you have installed
+<code>git</code> test if git has been installed correctly by opening the
+terminal. Press the <code>windows</code> bottom on your keyboard and
+type <code>cmd</code> and press enter. In the terminal type “git” and
+press enter. If git has been installed correctly you should see “usage:
+git [-v | –version] [-h | –help] …”. If you do not see this message.
+restart your computer and try again.</p>
+<p>If you use Mac install git via <a href="https://git-scm.com/download/mac">https://git-scm.com/download/mac</a>
+and use <code>homebrew</code> for the installation. Test if
+<code>git</code> has been installed correctly like explained above but
+open the terminal by pressing <code>cmd</code> + <code>space</code> and
+type Terminal.</p>
 </div>
 <div id="how-it-works" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> How it works</h1>
@@ -839,7 +854,7 @@ relevant information with the NGS results from the Avenio output. By
 updating and using this file it serves as a <em>key</em>-file allowing
 type errors, poorly designed sample names, non-unique sample names
 across different runs, etc. in the Avenio system and maintain a
-consistency across all our project. Yes! Very neat!</p>
+consistency across all our projects. Yes! Very neat!</p>
 <p>However…</p>
 <p><strong>THIS FILE IS UPDATED MANUALLY</strong></p>
 <p>The file can be opened in excel where the samples can be added
@@ -871,8 +886,8 @@ to</strong></li>
 <div id="formatting-entries-in-avenio_runs.xlsx" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Formatting entries
 in AVENIO_runs.xlsx</h3>
-<p>This is an example of some the entries in the file: <em>To ensure no
-CPR numbers from real patients are displayed, the CPRs here are</em>
+<p>This is an example of some of the entries in the file: <em>To ensure
+no CPR numbers from real patients are displayed, the CPRs here are</em>
 <em>randomly generated and are therefore “useless”</em></p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1179,8 +1194,13 @@ project, but the same name can be used across different projects such as
 <em>pt26</em>, <em>26</em>, <em>patient26</em> etc. <strong>Because of
 how the package works </strong>”_” <strong>cannot be included in
 Name_in_project</strong></p>
-<p>If any entry in the file contains “_” in Name_in_project, it will
-result in an <strong>ERROR</strong></p>
+<p><strong>It is very important</strong> that for a given project a
+single CPR can only be assigned to a single Name_in_project. The same
+CPR can be included in different projects with different
+Name_in_project.</p>
+<p>If any entry in the file contains “_” in Name_in_project or multiple
+Name_in_project are assigned to the same CPR number, it will result in
+an <strong>ERROR</strong></p>
 </div>
 <div id="project" class="section level4" number="3.1.2.3">
 <h4><span class="header-section-number">3.1.2.3</span>
@@ -1271,6 +1291,10 @@ Material is not filled out the algorithm will result in an
 <p><strong>The classification of “BC” samples is important because
 non-BC samples from a patient have variants “flagged” according to the
 variants detected in the BC sample.</strong></p>
+<p><em>reanalyze</em> has been added as a type of Material. This is used
+when a sample has been analyzed more than once. This can be used to
+discriminate between the two analyses which would otherwise have the
+same Project, Name_in_project, and Sample_date.</p>
 <p>There is no limitation on what can be included in this column
 although new possible entries has to be added with
 <code>add_new_key()</code></p>
@@ -1345,8 +1369,13 @@ mergnig information from different files
 <li><code>master_list</code> which is the AVENIO_results_patients.rds
 loaded in using <code>readRDS()</code></li>
 <li><code>Directory</code> which is the <strong>complete</strong> path
-(starts with “//Synology_m1”) to the specific run on the Synology
-server</li>
+to the specific run on the Synology server</li>
+</ol>
+<p>And one optional argument:</p>
+<ol style="list-style-type: decimal">
+<li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
+and AVENIO_results_patients.rds files. (Default:
+“//Synology_m1/Synology_folder/AVENIO/”)</li>
 </ol>
 <p>As illustrated in the figure above the function will extract the
 relevant information from the AVENIO_runs.xlsx file. Then it will look
@@ -1423,7 +1452,7 @@ sample context.</p>
 <div id="output" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Output</h3>
 <p>The output of the function is the updated results
-<code>master_list</code> (names <code>list</code> of
+<code>master_list</code> (named <code>list</code> of
 <code>data.frames</code>). This is automatically saved as the
 AVENIO_results_patients.rds file and now</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
@@ -1502,6 +1531,12 @@ entry</li>
 <li><code>variable</code> which is the variable name in the
 AVENIO_runs.xlsx you want to add the key to.</li>
 </ol>
+<p>And one optional argument:</p>
+<ol style="list-style-type: decimal">
+<li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
+and AVENIO_results_patients.rds files. (Default:
+“//Synology_m1/Synology_folder/AVENIO/”)</li>
+</ol>
 <p>Current included entries for Project, Sample_note, and Material can
 be viewed with:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds&quot;</span>)</span></code></pre></div>
@@ -1532,9 +1567,15 @@ in using <code>readRDS()</code></li>
 <li><code>CPR_number</code> which is the CPR number of the patient you
 want to investigate</li>
 </ol>
-<p>If synonymous mutations should be excluded you can set
-<code>synonymous = FALSE</code>. As a default synonymous mutations are
-included in the output (<code>synonymous = TRUE</code>).</p>
+<p>And two optional argument:</p>
+<ol style="list-style-type: decimal">
+<li><code>synonymous</code> which is a logical variable that determines
+if synonymous mutations should be included in the output. (Default:
+<code>TRUE</code>)</li>
+<li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
+and AVENIO_results_patients.rds files. (Default:
+“//Synology_m1/Synology_folder/AVENIO/”)</li>
+</ol>
 <div id="output-2" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Output</h3>
 <p>The output is a <code>list</code> with two entries. The first entry
@@ -2714,9 +2755,7 @@ samples, runs, etc.</p>
 <h2><span class="header-section-number">5.1</span>
 <code>included_analyses()</code></h2>
 <p>This function is used to get an overview of the runs from
-AVENIO_runs.xlsx that are included in the results dataset. The idea with
-this function is to use it to check if all the samples from have in fact
-been included in the dataset.</p>
+AVENIO_runs.xlsx that are included in the results dataset.</p>
 <p>The function takes one mandatory argument:</p>
 <ol style="list-style-type: decimal">
 <li><code>master_list</code> which is the AVENIO_results_patients.rds
@@ -2787,68 +2826,68 @@ Analysis.Name
 <tbody>
 <tr>
 <td style="text-align:left;">
-AFWAGp8DS6lNHrlt-I_azKUu
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:left;">
-20201201 monbazo fiol prog
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-AFzPNBUnw3NMOKplSiKRCqMU
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:left;">
-20210210
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-AGB9eRbQCw9Bj63KZctA4DQe
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:left;">
-Copy_xKGd_20230328
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-AGUZtNtuSiZEW4WOk9lYZtyN
+AE5hBlinjEZN6ZZ1L7898Rzc
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-Copy_HCgX_20190329_ALK4
+20210204
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-AGwQDzxcqrdDlpzlcS10s1En
+AEepGWqCaABI04g5DQESU97x
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Copy_FaXb_20230112
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AEHqc78-RkhKwqARpiG9V9Qi
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+20211111
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AEjxrRrIVjJGzbUFckTwpTpp
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Copy_hjRD_202008212
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AeUIQZkyte1MjIyV0h0MS0aI
 </td>
 <td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
-Copy_supo_20230303
+20211201
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AEusTCGgvJ1NrKQysOxTwSBe
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+20220413
 </td>
 </tr>
 </tbody>
@@ -2883,34 +2922,6 @@ Analysis.ID
 <tbody>
 <tr>
 <td style="text-align:left;">
-MonAlec_00QWTDYUH1E0VRM8_200217
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MonAlec_SEAVIJ1HQS7PSXM1_200217
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Batezo_pt08_200316
 </td>
 <td style="text-align:left;">
@@ -2939,38 +2950,10 @@ AGU232uEYZZKe4oI95IrJu7o
 </tr>
 <tr>
 <td style="text-align:left;">
-Batezo_pt09_200320
+Batezo_pt05_200204
 </td>
 <td style="text-align:left;">
-14
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MonAlec_YBNHFHWVB0HBC3YY_200211
-</td>
-<td style="text-align:left;">
-5
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Batezo_pt07_200306
-</td>
-<td style="text-align:left;">
-8
+6
 </td>
 <td style="text-align:left;">
 Copy_rceq_Monalec21042020
@@ -2985,6 +2968,20 @@ Batezo_pt10_200325
 </td>
 <td style="text-align:left;">
 10
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt10_200415
+</td>
+<td style="text-align:left;">
+11
 </td>
 <td style="text-align:left;">
 Copy_rceq_Monalec21042020
@@ -3011,14 +3008,19 @@ in using <code>readRDS()</code></li>
 <li><code>project</code> which is the project name from the
 AVENIO_runs.xlsx file</li>
 </ol>
-<p>If synonymous mutations should be excluded you can set
-<code>synonymous = FALSE</code>. As a default synonymous mutations are
-included in the output (<code>synonymous = TRUE</code>). If the out
-should contain all the information from the AVENIO <code>.csv</code>
-files then <code>simple = FALSE</code> (default). If you want a more
-simple output similar to the output from
-<code>create_simple_output()</code> then set
-<code>simple = FALSE</code></p>
+<p>And three optional argument:</p>
+<ol style="list-style-type: decimal">
+<li><code>synonymous</code> which is a logical variable that determines
+if synonymous mutations should be included in the output. (Default:
+<code>TRUE</code>)</li>
+<li><code>simple</code> which is a logical variable that determines if
+the output should contain all information (<code>simple = FALSE</code>,
+default) or simple output (<code>simple = TRUE</code>) which resembles
+the output from <code>create_simple_output()</code></li>
+<li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
+and AVENIO_results_patients.rds files. (Default:
+“//Synology_m1/Synology_folder/AVENIO/”)</li>
+</ol>
 <div id="output-4" class="section level3" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Output</h3>
 <p>A <code>tibble</code> where each row is a mutated gene and 15 or 89
@@ -3125,6 +3127,53 @@ BAM
 </td>
 <td style="text-align:left;">
 4346
+</td>
+<td style="text-align:left;">
+20201217 monbazo olink1
+</td>
+<td style="text-align:left;">
+olink_pt10_prae
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2801452016
+</td>
+<td style="text-align:left;">
+Pembrolizumab_10_180912
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 20201217 monbazo olink1
@@ -3332,40 +3381,85 @@ NA
 2109514436
 </td>
 <td style="text-align:left;">
-Pembrolizumab_11_181024
+Pembrolizumab_11_181228
 </td>
 <td style="text-align:left;">
 SNV
 </td>
 <td style="text-align:left;">
-GJA8
+NRXN1
 </td>
 <td style="text-align:left;">
-p.Val257Leu
+p.Asn190Thr;p.Asn190Thr
 </td>
 <td style="text-align:left;">
-Missense
+Missense;Missense
 </td>
 <td style="text-align:left;">
-BC_mut
 </td>
 <td style="text-align:left;">
-0.22%
+0.69%
 </td>
 <td style="text-align:left;">
-12
+16
 </td>
 <td style="text-align:left;">
-5344
+2313
 </td>
 <td style="text-align:left;">
-20201217 monbazo olink1
+20230818
 </td>
 <td style="text-align:left;">
-olink_pt11_prae
+pembro11week9
 </td>
 <td style="text-align:left;">
-BL
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2109514436
+</td>
+<td style="text-align:left;">
+Pembrolizumab_11_181228
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+TP53
+</td>
+<td style="text-align:left;">
+p.Gln136<em>;p.Gln136</em>;p.Gln136<em>;p.Gln136</em>;p.Gln125*
+</td>
+<td style="text-align:left;">
+Stop gained;Stop gained;Stop gained;Stop gained;Stop gained
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2.32%
+</td>
+<td style="text-align:left;">
+70
+</td>
+<td style="text-align:left;">
+3018
+</td>
+<td style="text-align:left;">
+20230818
+</td>
+<td style="text-align:left;">
+pembro11week9
+</td>
+<td style="text-align:left;">
+Tx
 </td>
 <td style="text-align:left;">
 cfDNA
@@ -3425,76 +3519,30 @@ NA
 3008369755
 </td>
 <td style="text-align:left;">
-Pembrolizumab_12_180629
-</td>
-<td style="text-align:left;">
-SNV
-</td>
-<td style="text-align:left;">
-TP53
-</td>
-<td style="text-align:left;">
-p.Ser215Ile;p.Ser215Ile;p.Ser215Ile;p.Ser215Ile;p.Ser204Ile
-</td>
-<td style="text-align:left;">
-Missense;Missense;Missense;Missense;Missense
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-0.31%
-</td>
-<td style="text-align:left;">
-9
-</td>
-<td style="text-align:left;">
-2902
-</td>
-<td style="text-align:left;">
-20201217 monbazo olink1
-</td>
-<td style="text-align:left;">
-olink_pt12_prae
-</td>
-<td style="text-align:left;">
-BL
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-3008369755
-</td>
-<td style="text-align:left;">
 Pembrolizumab_12_180629_BC
 </td>
 <td style="text-align:left;">
 SNV
 </td>
 <td style="text-align:left;">
-APC
+USP29
 </td>
 <td style="text-align:left;">
-p.Ser837*
+p.Asp790His
 </td>
 <td style="text-align:left;">
-Stop gained
+Missense
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-1.13%
+0.54%
 </td>
 <td style="text-align:left;">
-11
+6
 </td>
 <td style="text-align:left;">
-976
+1121
 </td>
 <td style="text-align:left;">
 20230927
@@ -3512,53 +3560,6 @@ BC
 NA
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-3008369755
-</td>
-<td style="text-align:left;">
-Pembrolizumab_12_180817
-</td>
-<td style="text-align:left;">
-SNV
-</td>
-<td style="text-align:left;">
-LRRTM4
-</td>
-<td style="text-align:left;">
-p.Arg198<em>;p.Arg199</em>;p.Arg198<em>;p.Arg199</em>
-</td>
-<td style="text-align:left;">
-Stop gained;Stop gained;Stop gained;Stop gained
-</td>
-<td style="text-align:left;">
-BAM
-</td>
-<td style="text-align:left;">
-0.12%
-</td>
-<td style="text-align:left;">
-9
-</td>
-<td style="text-align:left;">
-7329
-</td>
-<td style="text-align:left;">
-20210216
-</td>
-<td style="text-align:left;">
-OLINK_PT12_BP3
-</td>
-<td style="text-align:left;">
-Tx
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -3571,22 +3572,22 @@ and explore the sample entries that have been entered. This can be used
 to get an overview of which samples are missing information, which
 analyses have not been added to the results dataset, etc.</p>
 <p>The function takes <strong>NO</strong> mandatory arguments, but takes
-two optional arguments:</p>
+three optional arguments:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Info</strong> - Name of the information of interest, if
+<li><code>Info</code> - Name of the information of interest, if
 <code>Info = NULL</code> (default) all information is displayed</li>
-<li><strong>silent</strong> - A <code>Boolean</code> determining if
-messages should be displayed. If <code>silent = FALSE</code> (default)
-messages are displayed</li>
+<li><code>silent</code> - A <code>Boolean</code> determining if messages
+should be displayed. If <code>silent = FALSE</code> (default) messages
+are displayed</li>
+<li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
+and AVENIO_results_patients.rds files. (Default:
+“//Synology_m1/Synology_folder/AVENIO/”) ### Output</li>
 </ol>
-<div id="output-5" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Output</h3>
 <p>A <code>list</code> with different information on the
 AVENIO_runs.xslx (<code>Info = NULL</code>) or the specific object as
 determined by <code>Info</code>.</p>
-</div>
-<div id="example-5" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Example</h3>
+<div id="example-5" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Example</h3>
 <p>Two examples of how the function is used is shown below:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Exploring the AVENIO_runs.xlsx file</span></span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
@@ -3594,7 +3595,7 @@ determined by <code>Info</code>.</p>
 <span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># Getting the information of total entries</span></span>
 <span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>results<span class="sc">$</span>Total_entries</span></code></pre></div>
 <p>Should return:</p>
-<pre><code>#&gt; [1] 783</code></pre>
+<pre><code>#&gt; [1] 1134</code></pre>
 <p>And:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">Info =</span> <span class="st">&quot;Required&quot;</span>,</span>
@@ -3810,8 +3811,8 @@ Unknown
 </tbody>
 </table>
 </div>
-<div id="output-description" class="section level3" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> Output
+<div id="output-description" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Output
 description</h3>
 <p>The output of the function is a named <code>list</code> with
 different entries. I have included a function
@@ -3937,15 +3938,18 @@ used to get an overview of the results dataset. The function extracts
 information from the Avenio_results_patients.rds file and generates some
 basic statistics on the dataset.</p>
 <p>The function takes <strong>NO</strong> mandatory arguments, but takes
-two optional arguments:</p>
+three optional arguments:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Info</strong> - Name of the information of interest, if
+<li><code>Info</code> - Name of the information of interest, if
 <code>Info = NULL</code> (default) all information is displayed</li>
-<li><strong>silent</strong> - A <code>Boolean</code> determining if
-messages should be displayed. If <code>silent = FALSE</code> (default)
-messages are displayed</li>
+<li><code>silent</code> - A <code>Boolean</code> determining if messages
+should be displayed. If <code>silent = FALSE</code> (default) messages
+are displayed</li>
+<li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
+and AVENIO_results_patients.rds files. (Default:
+“//Synology_m1/Synology_folder/AVENIO/”)</li>
 </ol>
-<div id="output-6" class="section level3" number="5.4.1">
+<div id="output-5" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> Output</h3>
 <p>A <code>list</code> with different stats on
 AVENIO_results_patients.rds (<code>Info = NULL</code>) or the specific
@@ -3977,7 +3981,7 @@ n
 TP53
 </td>
 <td style="text-align:right;">
-297
+426
 </td>
 </tr>
 <tr>
@@ -3985,7 +3989,7 @@ TP53
 EGFR
 </td>
 <td style="text-align:right;">
-258
+355
 </td>
 </tr>
 <tr>
@@ -3993,31 +3997,7 @@ EGFR
 KIT
 </td>
 <td style="text-align:right;">
-121
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-USP29
-</td>
-<td style="text-align:right;">
-119
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PDZRN3
-</td>
-<td style="text-align:right;">
-116
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MET
-</td>
-<td style="text-align:right;">
-110
+181
 </td>
 </tr>
 <tr>
@@ -4025,7 +4005,23 @@ MET
 APC
 </td>
 <td style="text-align:right;">
-109
+179
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+USP29
+</td>
+<td style="text-align:right;">
+170
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PDZRN3
+</td>
+<td style="text-align:right;">
+161
 </td>
 </tr>
 <tr>
@@ -4033,7 +4029,23 @@ APC
 PIK3CG
 </td>
 <td style="text-align:right;">
-99
+155
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MET
+</td>
+<td style="text-align:right;">
+153
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+139
 </td>
 </tr>
 <tr>
@@ -4041,15 +4053,7 @@ PIK3CG
 KRAS
 </td>
 <td style="text-align:right;">
-91
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BRCA2
-</td>
-<td style="text-align:right;">
-79
+129
 </td>
 </tr>
 </tbody>
@@ -4076,7 +4080,7 @@ n
 Patients
 </td>
 <td style="text-align:right;">
-294
+443
 </td>
 </tr>
 <tr>
@@ -4084,7 +4088,7 @@ Patients
 Samples
 </td>
 <td style="text-align:right;">
-662
+1038
 </td>
 </tr>
 <tr>
@@ -4092,7 +4096,7 @@ Samples
 Runs
 </td>
 <td style="text-align:right;">
-84
+112
 </td>
 </tr>
 <tr>
@@ -4100,7 +4104,7 @@ Runs
 Mutations
 </td>
 <td style="text-align:right;">
-2671
+3956
 </td>
 </tr>
 <tr>
@@ -4108,7 +4112,7 @@ Mutations
 cfDNA
 </td>
 <td style="text-align:right;">
-521
+842
 </td>
 </tr>
 <tr>
@@ -4116,7 +4120,7 @@ cfDNA
 BC
 </td>
 <td style="text-align:right;">
-92
+150
 </td>
 </tr>
 <tr>
@@ -4124,7 +4128,7 @@ BC
 size_selection
 </td>
 <td style="text-align:right;">
-33
+26
 </td>
 </tr>
 <tr>
@@ -4137,10 +4141,10 @@ cfChIP
 </tr>
 <tr>
 <td style="text-align:left;">
-BL
+reanalyze
 </td>
 <td style="text-align:right;">
-248
+4
 </td>
 </tr>
 <tr>
@@ -4148,7 +4152,15 @@ BL
 Tx
 </td>
 <td style="text-align:right;">
-230
+444
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:right;">
+350
 </td>
 </tr>
 <tr>
@@ -4156,7 +4168,7 @@ Tx
 Unknown
 </td>
 <td style="text-align:right;">
-92
+94
 </td>
 </tr>
 </tbody>
@@ -4307,12 +4319,12 @@ does not work. If your code works, discount this section.</p>
 #&gt;  collate  Danish_Denmark.utf8
 #&gt;  ctype    Danish_Denmark.utf8
 #&gt;  tz       Europe/Copenhagen
-#&gt;  date     2025-02-25
+#&gt;  date     2025-03-21
 #&gt;  pandoc   3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package      * version date (UTC) lib source
-#&gt;  AvenioUpdate * 1.1.5   2025-02-25 [1] Github (CTrierMaansson/AvenioUpdate@c7e0486)
+#&gt;  AvenioUpdate * 1.4.1   2025-03-21 [1] Github (CTrierMaansson/AvenioUpdate@f62c716)
 #&gt;  crayon       * 1.5.3   2024-06-20 [1] CRAN (R 4.4.0)
 #&gt;  dplyr        * 1.1.4   2023-11-17 [1] CRAN (R 4.4.0)
 #&gt; 

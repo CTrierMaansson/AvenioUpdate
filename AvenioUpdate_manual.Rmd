@@ -49,7 +49,7 @@ knitr::opts_chunk$set(
 This document will describe how to use **AvenioUpdate** to update and explore data
 generated with the Avenio pipeline at AUH. The package is dependent on two files
 . The first file is an R file (`.rds`) which contains all the Avenio results for 
-each sample. This file can loaded into R where the data is visible. 
+each sample. This file can be loaded into R where the data is visible. 
 The second file is an excel file (`.xlsx`) which contains all the basic
 information about the samples run on the NGS machine. Both files are located at
 [//Synology_m1/Synology_folder/AVENIO/](//Synology_m1/Synology_folder/AVENIO/)
@@ -102,6 +102,24 @@ library(crayon)
 result_stats_Info()
 ```
 
+*Sometimes* installing `devtools` does not configure `git` correctly with 
+R and you therefore have to install `git` manually. 
+
+If you use Windows install
+git via [https://git-scm.com/downloads/win](https://git-scm.com/downloads/win).
+Use the standalone installer 64-bit version. After you have installed `git` test
+if git has been installed correctly by opening the terminal. Press the `windows`
+bottom on your keyboard and type `cmd` and press enter. In the terminal type 
+"git" and press enter. If git has been installed correctly you should see 
+"usage: git [-v | --version] [-h | --help] ...". If you do not see this message.
+restart your computer and try again. 
+
+If you use Mac install git via 
+[https://git-scm.com/download/mac](https://git-scm.com/download/mac) and use
+`homebrew` for the installation. Test if `git` has been installed correctly like 
+explained above but open the terminal by pressing `cmd` + `space` and type 
+Terminal. 
+
 # How it works
 As mentioned, the package is dependent on two files located on the 
 [Synology](//Synology_m1/Synology_folder/AVENIO/). This means in order to use
@@ -120,7 +138,7 @@ The file is used to connect CPR numbers and other relevant information with the
 NGS results from the Avenio output. By updating and using this file it serves
 as a *key*-file allowing type errors, poorly designed sample names,
 non-unique sample names across different runs, etc. in the Avenio system and
-maintain a consistency across all our project. Yes! Very neat!
+maintain a consistency across all our projects. Yes! Very neat!
 
 However...
 
@@ -149,7 +167,7 @@ you all is fine!
 
 ### Formatting entries in AVENIO_runs.xlsx
 
-This is an example of some the entries in the file:
+This is an example of some of the entries in the file:
 *To ensure no CPR numbers from real patients are displayed, the CPRs here are*
 *randomly generated and are therefore "useless"*
 
@@ -220,7 +238,12 @@ for the patients within a specific project, but the same name can be used
 across different projects such as *pt26*, *26*, *patient26* etc.
 **Because of how the package works **"_" **cannot be included in Name_in_project**
 
-If any entry in the file contains "_" in Name_in_project,
+**It is very important** that for a given project a single CPR can only
+be assigned to a single Name_in_project. The same CPR can be included in
+different projects with different Name_in_project.
+
+If any entry in the file contains "_" in Name_in_project or multiple 
+Name_in_project are assigned to the same CPR number,
 it will result in an **ERROR**
 
 #### **Project**
@@ -301,6 +324,11 @@ Material is not filled out the algorithm will result in an **ERROR**.
 patient have variants "flagged" according to the variants detected 
 in the BC sample.**
 
+*reanalyze* has been added as a type of Material. This is used when a sample has
+been analyzed more than once. This can be used to discriminate between the two 
+analyses which would otherwise have the same Project, Name_in_project, and
+Sample_date. 
+
 There is no limitation on what can
 be included in this column although new possible entries has to be added with 
 `add_new_key()` 
@@ -369,7 +397,11 @@ knitr::include_graphics("AvenioUpdate overview.png")
 The function takes two mandatory arguments:
 
 1. `master_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
-2. `Directory` which is the **complete** path (starts with "//Synology_m1") to the specific run on the Synology server
+2. `Directory` which is the **complete** path to the specific run on the Synology server
+
+And one optional argument:
+
+1. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
 
 As illustrated in the figure above the function will extract the relevant 
 information from the AVENIO_runs.xlsx file. Then it will look through the 
@@ -448,7 +480,7 @@ explained below to give the best sample context.
 ### Output
 
 The output of the function is the updated results `master_list` 
-(names `list` of `data.frames`). This is automatically
+(named `list` of `data.frames`). This is automatically
 saved as the AVENIO_results_patients.rds file and now
 
 ```{r,eval=FALSE,message=FALSE}
@@ -536,6 +568,10 @@ The function takes two mandatory arguments
 1. `key` which is the key name you want to add as possible entry
 2. `variable` which is the variable name in the AVENIO_runs.xlsx you want to add the key to.
 
+And one optional argument:
+
+1. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
+
 Current included entries for Project, Sample_note, and Material can be viewed
 with:
 
@@ -577,9 +613,10 @@ overview of a specific patient. The function takes two **mandatory** arguments:
 1. `df_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
 2. `CPR_number` which is the CPR number of the patient you want to investigate
 
-If synonymous mutations should be excluded you can set `synonymous = FALSE`.
-As a default synonymous mutations are included in the output 
-(`synonymous = TRUE`).
+And two optional argument:
+
+1. `synonymous` which is a logical variable that determines if synonymous mutations should be included in the output. (Default: `TRUE`)
+2. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
 
 ### Output
 
@@ -674,8 +711,6 @@ useful in order to get an overview of the projects, samples, runs, etc.
 ## `included_analyses()`
 This function is used to get an overview of the runs from AVENIO_runs.xlsx that
 are included in the results dataset. 
-The idea with this function is to use it to check if all the samples from have 
-in fact been included in the dataset.
 
 The function takes one mandatory argument:
 
@@ -788,12 +823,11 @@ The function takes two mandatory arguments:
 1. `df_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
 2. `project` which is the project name from the AVENIO_runs.xlsx file
 
-If synonymous mutations should be excluded you can set `synonymous = FALSE`.
-As a default synonymous mutations are included in the output 
-(`synonymous = TRUE`).
-If the out should contain all the information from the AVENIO `.csv` files then
-`simple = FALSE` (default). If you want a more simple output similar to the 
-output from `create_simple_output()` then set `simple = FALSE`
+And three optional argument:
+
+1. `synonymous` which is a logical variable that determines if synonymous mutations should be included in the output. (Default: `TRUE`)
+2. `simple` which is a logical variable that determines if the output should contain all information (`simple = FALSE`, default) or simple output (`simple = TRUE`) which resembles the output from `create_simple_output()`
+3. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
 
 ### Output
 
@@ -865,11 +899,11 @@ explore the sample entries that have been entered.
 This can be used to get an overview of which samples are missing information, 
 which analyses have not been added to the results dataset, etc.
 
-The function takes **NO** mandatory arguments, but takes two optional arguments:
+The function takes **NO** mandatory arguments, but takes three optional arguments:
 
-1. **Info** - Name of the information of interest, if `Info = NULL` (default) all information is displayed
-2. **silent** - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
-
+1. `Info` - Name of the information of interest, if `Info = NULL` (default) all information is displayed
+2. `silent` - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
+2. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
 ### Output
 
 A `list` with different information on the AVENIO_runs.xslx (`Info = NULL`)
@@ -945,10 +979,11 @@ overview of the results dataset. The function
 extracts information from the Avenio_results_patients.rds file and generates
 some basic statistics on the dataset.
 
-The function takes **NO** mandatory arguments, but takes two optional arguments:
+The function takes **NO** mandatory arguments, but takes three optional arguments:
 
-1. **Info** - Name of the information of interest, if `Info = NULL` (default) all information is displayed
-2. **silent** - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
+1. `Info` - Name of the information of interest, if `Info = NULL` (default) all information is displayed
+2. `silent` - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
+3. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
 
 ### Output
 
