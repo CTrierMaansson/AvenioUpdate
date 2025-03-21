@@ -4,7 +4,12 @@
 \alias{create_simple_output}
 \title{Get a simple overview for a patient}
 \usage{
-create_simple_output(df_list, CPR, synonymous = TRUE)
+create_simple_output(
+  df_list,
+  CPR,
+  synonymous = TRUE,
+  synology_path = "//Synology_m1/Synology_folder/AVENIO/"
+)
 }
 \arguments{
 \item{df_list}{The \code{list} of \code{data.frames} which contains all information on
@@ -17,7 +22,10 @@ using names(\code{df_list})}
 
 \item{synonymous}{\code{Boolean} determining whether synonymous mutations are kept
 in the output. If \code{TRUE} (default) synonymous mutations are kept in the
-output. If \code{FALSE} the synonymous mutations are excluded.}
+output. If \code{FALSE} the synonymous mutations are excluded.
+@param synology_path \code{Character} string with the full path to the directory
+containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
+"//Synology_m1/Synology_folder/AVENIO/"}
 }
 \value{
 A \code{list} of length = 2. The first entry ("Patient CPR:") shows the

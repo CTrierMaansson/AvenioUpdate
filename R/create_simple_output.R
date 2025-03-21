@@ -17,6 +17,9 @@
 #' @param synonymous `Boolean` determining whether synonymous mutations are kept
 #'  in the output. If `TRUE` (default) synonymous mutations are kept in the 
 #'  output. If `FALSE` the synonymous mutations are excluded. 
+#'  @param synology_path `Character` string with the full path to the directory 
+#'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
+#'  "//Synology_m1/Synology_folder/AVENIO/"
 #' @return A `list` of length = 2. The first entry ("Patient CPR:") shows the 
 #'  patient of interest CPR/ID number. The second entry ("Results") is a `tibble`
 #'  with 14 variables. Each row corresponds to a mutation identified in any 
@@ -39,7 +42,8 @@
 #'                       CPR = "1234567890",
 #'                       synonymous = FALSE)
 #' @export
-create_simple_output <- function(df_list,CPR,synonymous = TRUE){
+create_simple_output <- function(df_list,CPR,synonymous = TRUE,
+                                 synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
     if (!is.list(df_list)) {
         stop("df_list has to be a list")
     }
@@ -59,7 +63,7 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE){
         stop("CPR number is not in the dataset")
     }
     message("Reading AVENIO_runs.xlsx file")
-    AVENIO_runs <- readxl::read_xlsx("//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",
+    AVENIO_runs <- readxl::read_xlsx(paste0(synology_path,"AVENIO_runs.xlsx"),
                              col_types = c(rep("guess",4),"date",rep("guess",6)))
     message("Selecting relevant sample")
     AVENIO_sele <- AVENIO_runs[AVENIO_runs$CPR == CPR,]

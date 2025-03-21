@@ -96,7 +96,11 @@ added_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                 "AKMNgjZH5H1Lp6YNlhyH6aBd",
                 "AKmgHQ2-w3RHTqVjtWTKLz60",
                 "AEdiX1AaYJBFM4G7307KEA2u",
-                "ACd87_ia0KFGu7P-NbfKjEjm")
+                "ACd87_ia0KFGu7P-NbfKjEjm",
+                "AceQabkgtrVDvohQ_gcEx7Yf",
+                "Aey6Fc2RkoZOzbYfanisg0qQ",
+                "AQtbNUZTuyhPsILE6IlVA4Pm",
+                "AAWEkxuGQU1JnbavepvVPBsD")
 
 library(AvenioUpdate)
 `%ni%` <- Negate(`%in%`)
@@ -254,4 +258,5 @@ print(analyses[[1]], n= nrow(analyses[[1]]))
 AvenioUpdate::result_stats()$Basestats
 AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
     filter(Project != "SOLUCOM")
+
 
