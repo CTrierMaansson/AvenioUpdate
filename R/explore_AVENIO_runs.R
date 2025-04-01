@@ -35,6 +35,13 @@ explore_AVENIO_runs <- function(Info = NULL, silent = FALSE,
     if (!isScalarLogical(silent)) {
         stop("silent has to be a TRUE or FALSE")
     }
+    if (!dir.exists(synology_path)) {
+        stop("The path entered as synology_path does not exist")
+    }
+    nchar_path <- nchar(synology_path)
+    if(substr(synology_path,nchar_path,nchar_path) != "/"){
+        stop("The synology_path has to end with a '/'")
+    }
     if(!silent){
         message("Reading AVENIO_runs.xlsx")
     }

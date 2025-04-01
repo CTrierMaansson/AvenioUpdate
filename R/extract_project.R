@@ -70,6 +70,13 @@ extract_project <- function(df_list,
     if (!isScalarCharacter(project)) {
         stop("project has to be a character")
     }
+    if (!dir.exists(synology_path)) {
+        stop("The path entered as synology_path does not exist")
+    }
+    nchar_path <- nchar(synology_path)
+    if(substr(synology_path,nchar_path,nchar_path) != "/"){
+        stop("The synology_path has to end with a '/'")
+    }
     message("Reading AVENIO_runs.xlsx file")
     AVENIO_runs <- readxl::read_xlsx(paste0(synology_path,"AVENIO_runs.xlsx"),
                                      col_types = c(rep("guess",4),"date",rep("guess",6))) 

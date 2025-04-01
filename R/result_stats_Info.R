@@ -3,14 +3,25 @@
 #' This functions creates an overview of the different contents in the list
 #' exported by result_stats()
 #' @importFrom dplyr `%>%` left_join
+#' @param synology_path `Character` string with the full path to the directory 
+#'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
+#'  "//Synology_m1/Synology_folder/AVENIO/"
 #' @return A `data.frame` with two variables containing the name and the
 #' description of the entries in the result_stats() output
 #'  
 #' @examples
 #' result_stats_Info()
 #' @export
-result_stats_Info <- function(){
-    current_format <- result_stats(silent = TRUE)
+result_stats_Info <- function(synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
+    if (!dir.exists(synology_path)) {
+        stop("The path entered as synology_path does not exist")
+    }
+    nchar_path <- nchar(synology_path)
+    if(substr(synology_path,nchar_path,nchar_path) != "/"){
+        stop("The synology_path has to end with a '/'")
+    }
+    current_format <- result_stats(silent = TRUE,
+                                   synology_path = synology_path)
     df_current <- data.frame(Name = names(current_format))
     explanation <- data.frame(Name = c("Basestats",
                                        "Projectstats",

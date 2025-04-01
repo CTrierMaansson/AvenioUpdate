@@ -25,6 +25,13 @@ add_new_key <- function(key,variable,
     if (!isScalarCharacter(variable)) {
         stop("variable has to be a character")
     }
+    if (!dir.exists(synology_path)) {
+        stop("The path entered as synology_path does not exist")
+    }
+    nchar_path <- nchar(synology_path)
+    if(substr(synology_path,nchar_path,nchar_path) != "/"){
+        stop("The synology_path has to end with a '/'")
+    }
     `%ni%` <- Negate(`%in%`)
     Avenio_runs <- readxl::read_xlsx(
         paste0(synology_path,"AVENIO_runs.xlsx"),

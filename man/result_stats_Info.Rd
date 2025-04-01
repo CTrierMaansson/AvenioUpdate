@@ -4,7 +4,12 @@
 \alias{result_stats_Info}
 \title{Highlights the parameters to be investigated from result_stats()}
 \usage{
-result_stats_Info()
+result_stats_Info(synology_path = "//Synology_m1/Synology_folder/AVENIO/")
+}
+\arguments{
+\item{synology_path}{\code{Character} string with the full path to the directory
+containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
+"//Synology_m1/Synology_folder/AVENIO/"}
 }
 \value{
 A \code{data.frame} with two variables containing the name and the

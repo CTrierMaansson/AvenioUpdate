@@ -17,7 +17,7 @@
 #' @param synonymous `Boolean` determining whether synonymous mutations are kept
 #'  in the output. If `TRUE` (default) synonymous mutations are kept in the 
 #'  output. If `FALSE` the synonymous mutations are excluded. 
-#'  @param synology_path `Character` string with the full path to the directory 
+#' @param synology_path `Character` string with the full path to the directory 
 #'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
 #'  "//Synology_m1/Synology_folder/AVENIO/"
 #' @return A `list` of length = 2. The first entry ("Patient CPR:") shows the 
@@ -61,6 +61,13 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE,
     df <- df_list[[CPR]]
     if(is.null(df)){
         stop("CPR number is not in the dataset")
+    }
+    if (!dir.exists(synology_path)) {
+        stop("The path entered as synology_path does not exist")
+    }
+    nchar_path <- nchar(synology_path)
+    if(substr(synology_path,nchar_path,nchar_path) != "/"){
+        stop("The synology_path has to end with a '/'")
     }
     message("Reading AVENIO_runs.xlsx file")
     AVENIO_runs <- readxl::read_xlsx(paste0(synology_path,"AVENIO_runs.xlsx"),
