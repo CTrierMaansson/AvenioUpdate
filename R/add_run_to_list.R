@@ -87,7 +87,7 @@ add_run_to_list <- function(master_list, Directory,
              "Please fix before proceeding.")
     }
     if(nrow(runs_ID)>0){
-        failed_ID <- paste(runs_ID$Run_ID,collapse = ", ")
+        failed_ID <- paste(unique(runs_ID$Run_ID),collapse = ", ")
         stop("Error in AVENIO_runs.xlsx\n",
              "The following run IDs do not contain the mandatory 24 characters: ",
              failed_ID)
