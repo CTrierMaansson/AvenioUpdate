@@ -269,7 +269,6 @@ for(i in 3:length(added_runs)){
 analyses <- AvenioUpdate::included_analyses(master_list)
 print(analyses[[1]], n= nrow(analyses[[1]]))
 AvenioUpdate::result_stats()$Basestats
-AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses") %>% 
-    filter(Project != "SOLUCOM")
+AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses")
 
 
