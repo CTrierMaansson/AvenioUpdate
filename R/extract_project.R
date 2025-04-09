@@ -102,17 +102,20 @@ extract_project <- function(df_list,
     message("Selecting relevant sample")
     AVENIO_runs_sele <- AVENIO_runs %>% 
         dplyr::filter(Project == project) %>% 
-        dplyr::select(sample_index,CPR,Sample_note, Material, Notes)
+        dplyr::select(sample_index,CPR,Sample_note, Material, Notes) %>% 
+        dplyr::filter(!is.na(sample_index))
     if(is.null(AVENIO_runs_sele)){
         stop("No patients are available in the selected project")
     }
     combined_df <- do.call(rbind,df_list)
     rownames(combined_df) <- NULL
     df <- combined_df %>% 
-        dplyr::mutate(Variant.Description = gsub(" variant","",Variant.Description)) %>% 
-        dplyr::tibble() %>% 
+        unique() %>% 
         dplyr::filter(sample_index %in% AVENIO_runs_sele$sample_index) %>% 
-        dplyr::left_join(AVENIO_runs_sele,by = "sample_index")
+        dplyr::mutate(Variant.Description = gsub(" variant","",Variant.Description)) %>% 
+        as.data.frame() %>% 
+        dplyr::left_join(AVENIO_runs_sele,by = "sample_index") %>% 
+        filter(grepl("pt01_",sample_index))
     if(simple){
         message("Creating output in simple format")
         df <- df %>% 
