@@ -1,5 +1,5 @@
 #' @noRd
-#' @importFrom dplyr filter `%>%` mutate select
+#' @importFrom dplyr filter `%>%` mutate
 #' @importFrom stringr str_split_i 
 create_df_list <- function(sample_df,runs){
     samples <- unique(sample_df$sample_index)
@@ -24,8 +24,7 @@ create_df_list <- function(sample_df,runs){
         patient_df <- runs %>% 
             dplyr::filter(CPR == CPR_patient)
         patient_variants <- sample_df %>% 
-            dplyr::filter(sample_index %in% patient_df$sample_index) %>% 
-            dplyr::select(-sample_index)
+            dplyr::filter(sample_index %in% patient_df$sample_index)
         df_list[[i]] <- patient_variants 
         names(df_list)[i] <- CPR_patient
     }
