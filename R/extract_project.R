@@ -114,8 +114,7 @@ extract_project <- function(df_list,
         dplyr::filter(sample_index %in% AVENIO_runs_sele$sample_index) %>% 
         dplyr::mutate(Variant.Description = gsub(" variant","",Variant.Description)) %>% 
         as.data.frame() %>% 
-        dplyr::left_join(AVENIO_runs_sele,by = "sample_index") %>% 
-        filter(grepl("pt01_",sample_index))
+        dplyr::left_join(AVENIO_runs_sele,by = "sample_index") 
     if(simple){
         message("Creating output in simple format")
         df <- df %>% 
