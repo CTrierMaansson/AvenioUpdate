@@ -22,8 +22,9 @@ using names(\code{df_list})}
 
 \item{synonymous}{\code{Boolean} determining whether synonymous mutations are kept
 in the output. If \code{TRUE} (default) synonymous mutations are kept in the
-output. If \code{FALSE} the synonymous mutations are excluded.
-@param synology_path \code{Character} string with the full path to the directory
+output. If \code{FALSE} the synonymous mutations are excluded.}
+
+\item{synology_path}{\code{Character} string with the full path to the directory
 containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
 "//Synology_m1/Synology_folder/AVENIO/"}
 }
