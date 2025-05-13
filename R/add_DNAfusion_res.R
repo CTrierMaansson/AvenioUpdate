@@ -95,7 +95,7 @@ add_DNAfusion_res <- function(df,
                                  Unique.Depth = ALK_depth,
                                  Exon.Number = exon)
             sample_info_unique <- sample_info %>% 
-                dplyr::select(colnames(samples)[c(1,4:15,47:84)]) %>% 
+                dplyr::select(colnames(df)[c(1,4:15,47:84)]) %>% 
                 unique() %>% 
                 dplyr::left_join(res_df, by = "sample_index")
             sample_res <- dplyr::bind_rows(sample_info,
