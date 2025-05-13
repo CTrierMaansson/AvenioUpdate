@@ -7,7 +7,8 @@
 add_run_to_list(
   master_list,
   Directory,
-  synology_path = "//Synology_m1/Synology_folder/AVENIO/"
+  synology_path = "//Synology_m1/Synology_folder/AVENIO/",
+  force_execution = FALSE
 )
 }
 \arguments{
@@ -21,6 +22,10 @@ the Synology where the data is located.}
 \item{synology_path}{\code{Character} string with the full path to the directory
 containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is
 "//Synology_m1/Synology_folder/AVENIO/"}
+
+\item{force_execution}{\code{Boolean} Indicating if the execution of the function
+should be forced (\code{TRUE}) even though all samples already have been added to
+the dataset. Default = \code{FALSE}.}
 }
 \value{
 A \code{list} of \code{data.frames} with similar structure to \code{master_list}.

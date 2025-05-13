@@ -174,7 +174,7 @@ master_list <- add_run_to_list(master_list = master_list,
 
 #If the "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
 #file should get corrupted or otherwise get lost/missing this script
-#can recreate the file which has been updated as of 13-02-2025
+#can recreate the file which has been updated as of 13-05-2025
 
 #IMPORTANT! DO NOT RUN THIS UNLESS ABSOLUTELY NECESSARY!!!
 

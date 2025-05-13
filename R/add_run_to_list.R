@@ -6,7 +6,7 @@
 #' the new NGS data is added under that patient and all the BAM files for that
 #' patient is manually checked for mutations. 
 #' @importFrom dplyr select `%>%` filter mutate group_by count ungroup left_join
-#' @importFrom BiocBaseUtils isScalarCharacter
+#' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom readxl read_xlsx
 #' @importFrom stringr str_split_i
 #' @importFrom lubridate ymd
@@ -18,6 +18,9 @@
 #' @param synology_path `Character` string with the full path to the directory 
 #'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
 #'  "//Synology_m1/Synology_folder/AVENIO/"
+#' @param force_execution `Boolean` Indicating if the execution of the function
+#'  should be forced (`TRUE`) even though all samples already have been added to
+#'  the dataset. Default = `FALSE`.
 #' @return A `list` of `data.frames` with similar structure to `master_list`. 
 #'  During the analysis the number of patients and NGS runs present in the 
 #'  dataset before and after the NGS run is printed. If the list successfully 
@@ -31,7 +34,8 @@
 #'                 Directory = test_path)
 #' @export
 add_run_to_list <- function(master_list, Directory, 
-                            synology_path = "//Synology_m1/Synology_folder/AVENIO/"){
+                            synology_path = "//Synology_m1/Synology_folder/AVENIO/",
+                            force_execution = FALSE){
     `%ni%` <- Negate(`%in%`)
     if (!is.list(master_list)) {
         stop("df_list has to be a list")
@@ -53,6 +57,9 @@ add_run_to_list <- function(master_list, Directory,
     nchar_path <- nchar(synology_path)
     if(substr(synology_path,nchar_path,nchar_path) != "/"){
         stop("The synology_path has to end with a '/'")
+    }
+    if (!isScalarLogical(force_execution)) {
+        stop("force_execution has to be a TRUE or FALSE")
     }
     unlisted_before <- do.call(rbind,master_list) %>% 
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
@@ -235,11 +242,23 @@ add_run_to_list <- function(master_list, Directory,
     }
     message("Merging run information and patient information")
     samples <- add_samples(Directory,AVENIO_runs_select,synology_path)
-    if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
-        stop("All samples are already part of the dataset. Terminating")
+    if(!force_execution){
+        if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
+            stop("All samples are already part of the dataset. Terminating")
+        }
+    }
+    if(force_execution){
+        message("force_execution is set as TRUE")
+        if(!any(samples$sample_index %ni% unlisted_before$sample_index)){
+            message("All samples are part of the dataset but function will be executed anyway")
+        }
     }
     n_patients_before <- length(master_list)
     n_runs_before <- nrow(unlisted_before)
+    message("Running DNAfusion on samples")
+    samples <- add_DNAfusion_res(df = samples,
+                                 repo_path = Directory,
+                                 sample_info = AVENIO_runs_select)
     message("Creating list of data.frames for new samples")
     df_list <- create_df_list(samples,AVENIO_runs_select)
     message("Merging existing data with the new run and verifies mutations in BAM files")
