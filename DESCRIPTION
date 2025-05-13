@@ -28,7 +28,8 @@ Imports:
   vcfR,
   readxl,
   BiocBaseUtils,
-  lubridate
+  lubridate,
+  DNAfusion
 Depends:
   R (>= 4.2.0)
 BugReports: https://github.com/CTrierMaansson/AvenioUpdate/issues
