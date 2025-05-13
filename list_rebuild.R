@@ -241,10 +241,14 @@ add_samples_mod <- function(Directory){
         left_join(AVENIO_runs_select_merge,by = c("Sample.ID"="Sample_name")) %>% 
         relocate(sample_index,.before = Sample.ID) %>% 
         arrange(sample_index,Gene)
-    return(combined_samples)
+    return(list(combined_samples,
+                AVENIO_runs_select))
 }
-combined_samples1 <- add_samples_mod(zip_path1)
 
+sample_res_1 <- add_samples_mod(zip_path1)
+combined_samples1 <- AvenioUpdate:::add_DNAfusion_res(sample_res_1[[1]],
+                                                      repo_path = zip_path1,
+                                                      sample_info = sample_res_1[[2]])
 create_df_list_mod <- function(sample_df){
     samples <- unique(sample_df$Sample.ID)
     AVENIO_runs <- read_xlsx("//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx",col_types = c(rep("guess",4),"date",rep("guess",6)))
@@ -269,7 +273,8 @@ dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",adde
 
 master_list <- AvenioUpdate::add_run_to_list(
     master_list = master_list,
-    Directory = dir)
+    Directory = dir,
+    force_execution = TRUE)
 
 included_analyses(master_list)
 
@@ -279,7 +284,8 @@ for(i in 3:length(added_runs)){
     master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
     master_list <- AvenioUpdate::add_run_to_list(
         master_list = master_list,
-        Directory = dir)
+        Directory = dir,
+        force_execution = TRUE)
 }
 
 analyses <- AvenioUpdate::included_analyses(master_list)
