@@ -108,6 +108,6 @@ add_DNAfusion_res <- function(df,
         }
     }
     df <- df %>% 
-        dplyr::arrange(sample_index,Gene) %>% 
-        return(df)
+        dplyr::arrange(sample_index,Gene)
+    return(df)
 }
