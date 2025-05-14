@@ -33,6 +33,7 @@ add_DNAfusion_res <- function(df,
         bam_file <- paste0(repo_path,"/",sampleID,"-",panelID,"/PosDeduped-",sampleID,".bam")
         DNAfusion_res <- DNAfusion::EML4_ALK_analysis(bam_file)
         if(length(DNAfusion_res) != 0){
+            message(paste0("EML4-ALK fusion detected with DNAfusion for sample: ", sample_ind))
             clipped_reads <- max(c(as.numeric(max(DNAfusion_res$breakpoint_ALK)),
                                    as.numeric(max(DNAfusion_res$breakpoint_EML4))),
                                  na.rm = T)
