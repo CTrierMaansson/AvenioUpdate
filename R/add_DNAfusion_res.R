@@ -37,7 +37,7 @@ add_DNAfusion_res <- function(df,
             clipped_reads <- max(c(as.numeric(max(DNAfusion_res$breakpoint_ALK)),
                                    as.numeric(max(DNAfusion_res$breakpoint_EML4))),
                                  na.rm = T)
-            if(is.character(names(DNAfusion_res$breakpoint_ALK))){
+            if(is.character(names(which.max(DNAfusion_res$breakpoint_ALK)))){
                 logic_ALK_breakpoint = T
                 fusion_position_1 <- paste0("chr2:",
                                             names(which.max(DNAfusion_res$breakpoint_ALK)))
