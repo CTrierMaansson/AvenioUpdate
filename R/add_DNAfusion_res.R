@@ -105,6 +105,10 @@ add_DNAfusion_res <- function(df,
                 dplyr::left_join(res_df, by = "sample_index")
             sample_res <- sample_info %>% 
                 dplyr::mutate(Variant.Depth = as.character(Variant.Depth)) %>% 
+                dplyr::mutate(
+                    Paired.Reads.Spanning.Fusion.Breakpoint = 
+                        as.character(Paired.Reads.Spanning.Fusion.Breakpoint)) %>% 
+                dplyr::mutate(Unique.Depth = as.character(Unique.Depth)) %>% 
                 dplyr::bind_rows(sample_info_unique) %>% 
                 dplyr::arrange(Gene) %>% 
                 dplyr::filter(!is.na(Gene))
