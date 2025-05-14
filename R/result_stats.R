@@ -121,6 +121,19 @@ result_stats <- function(Info = NULL, silent = FALSE,
     colnames(mat_df)[1] <- "stat"
     colnames(note_df)[1] <- "stat"
     basestats <- rbind(basestats, mat_df, note_df)
+    
+    if(!silent){
+        message("Finding unincluded samples")
+    }
+    total_df <- do.call(rbind,master_list)
+    rownames(total_df) <- NULL
+    added_samples <- unique(total_df$sample_index)
+    xlsx_samples <- unique(Avenio_runs$sample_index)
+    missing_samples <- xlsx_samples[xlsx_samples %ni% added_samples]
+    problematic_df <- Avenio_runs %>% 
+        dplyr::filter(sample_index %in% missing_samples) %>% 
+        dplyr::select(sample_index, Run_ID,Sample_name) %>% 
+        as.data.frame()
     if(!silent){
         message("Extracting project statistics")
     }
@@ -222,6 +235,7 @@ result_stats <- function(Info = NULL, silent = FALSE,
     }
     res <- list(Basestats = basestats,
                 Projectstats = project_df,
+                Missing = problematic_df,
                 All_mutations = gene_df_complete,
                 Relevant_SNV = gene_df_SNV_no_BC,
                 Relevant_INDEL = gene_df_INDEL_no_BC,

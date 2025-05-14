@@ -25,6 +25,7 @@ result_stats_Info <- function(synology_path = "//Synology_m1/Synology_folder/AVE
     df_current <- data.frame(Name = names(current_format))
     explanation <- data.frame(Name = c("Basestats",
                                        "Projectstats",
+                                       "Missing",
                                        "All_mutations",
                                        "Relevant_SNV",
                                        "Relevant_INDEL",
@@ -35,6 +36,7 @@ result_stats_Info <- function(synology_path = "//Synology_m1/Synology_folder/AVE
                                        "On_target"),
                               Description = c("Number of samples, runs, patients, different materials etc.",
                                               "Number of patients and samples in each project",
+                                              "Samples present in AVENIO_runs.xlsx but not present in the results data set",
                                               "Number of times each gene is mutated across all samples",
                                               "Number of SNVs detected not classified as BC or synonymous mutations",
                                               "Number of INDELs detected not classified as BC or synonymous mutations",
