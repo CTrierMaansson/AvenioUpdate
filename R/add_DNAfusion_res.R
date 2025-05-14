@@ -122,7 +122,3 @@ add_DNAfusion_res <- function(df,
         dplyr::arrange(sample_index,Gene)
     return(df)
 }
-
-add_DNAfusion_res(df = samples,
-                  repo_path = Directory,
-                  sample_info = AVENIO_runs_select)
