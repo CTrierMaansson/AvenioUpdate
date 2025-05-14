@@ -103,8 +103,9 @@ add_DNAfusion_res <- function(df,
                 dplyr::select(colnames(df)[c(1,4:15,47:84)]) %>% 
                 unique() %>% 
                 dplyr::left_join(res_df, by = "sample_index")
-            sample_res <- dplyr::bind_rows(sample_info,
-                                           sample_info_unique) %>% 
+            sample_res <- sample_info %>% 
+                dplyr::mutate(Variant.Depth = as.character(Variant.Depth))
+                dplyr::bind_rows(sample_info_unique) %>% 
                 dplyr::arrange(Gene) %>% 
                 dplyr::filter(!is.na(Gene))
             df <- df %>% 
