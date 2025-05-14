@@ -77,6 +77,11 @@ add_DNAfusion_res <- function(df,
                     exon <- paste0("ALK_i",fusion_variant_res$ALK_intron,
                                    ";EML4_i",fusion_variant_res$EML4_intron)
                 }
+            } 
+            else{
+                fusion_variant <- fusion_variant_res
+                exon <- paste0("ALK_i",NA,
+                               ";EML4_i",NA)
             }
             res_df <- data.frame(sample_index = sample_ind,
                                  Sample.ID = sampleID,
