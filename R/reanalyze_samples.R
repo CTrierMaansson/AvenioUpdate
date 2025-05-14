@@ -23,8 +23,20 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
         paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6)))
     Avenio_sele <- Avenio_runs %>% 
-        dplyr::filter(Run_ID %in% validated_samples$Analysis.ID) %>% 
-        dplyr::filter(Sample_name %in% validated_samples$Sample.ID)
+        dplyr::mutate(sample_index = paste0(Project,"_",
+                                            Name_in_project,"_",
+                                            substr(stringr::str_split_i(
+                                                as.character(Sample_date),"-",1),
+                                                3,4),
+                                            stringr::str_split_i(
+                                                as.character(Sample_date),"-",2),
+                                            stringr::str_split_i(
+                                                as.character(Sample_date),"-",3))) %>% 
+        dplyr::mutate(
+            sample_index = ifelse(Material != "cfDNA",
+                                  paste0(sample_index,"_",Material),
+                                  sample_index)) %>% 
+        dplyr::filter(sample_index %in% validated_samples$sample_index)
     validated_list <- create_df_list(validated_samples,Avenio_sele)
     for(i in 1:length(validated_list)){
         sample_df <- validated_list[[i]]

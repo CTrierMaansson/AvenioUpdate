@@ -128,7 +128,8 @@ added_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                 "AfFlyWo37FtN16uRv8pFLCBp",
                 "AKOq_6jg8QBEtJ56mdDQRhCY",
                 "ALiWTGK4o89L_p-HAAVLa-g6",
-                "AQ7WUkiPdghLrbVZxFDZgvTx")
+                "AQ7WUkiPdghLrbVZxFDZgvTx",
+                "AS9tve0kT4dHr6nyDAvSIeN2")
 
 library(AvenioUpdate)
 `%ni%` <- Negate(`%in%`)
@@ -167,7 +168,7 @@ if(any(nchar(added_runs) != 24)){
 #### Adding run ####
 
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AdA1JN9HI9ZND4LXP8XCfvRZ"
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AajqaHzI9_hCH4wYCbDAIYx4"
 master_list <- add_run_to_list(master_list = master_list,
                                Directory = dir)
 #### Recreating AVENIO_results_patients.rds ####
@@ -290,11 +291,12 @@ for(i in 3:length(added_runs)){
         force_execution = TRUE)
     re_added_analyses[i] <- added_runs[i]
 }
-re_added_analyses
-added_runs[32]
+re_added_analyses == added_runs
+
 analyses <- AvenioUpdate::included_analyses(master_list)
 print(analyses[[1]], n= nrow(analyses[[1]]))
 AvenioUpdate::result_stats()$Basestats
+AvenioUpdate::result_stats()$Missing
 AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses")
 
 
