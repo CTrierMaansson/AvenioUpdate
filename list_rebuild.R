@@ -278,6 +278,8 @@ master_list <- AvenioUpdate::add_run_to_list(
 
 included_analyses(master_list)
 
+re_added_analyses <- added_runs[1:2]
+
 for(i in 3:length(added_runs)){
     message(paste0("Adding run ",i," of ",length(added_runs)))
     dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_runs[i])
@@ -286,6 +288,7 @@ for(i in 3:length(added_runs)){
         master_list = master_list,
         Directory = dir,
         force_execution = TRUE)
+    re_added_analyses[i] <- added_runs[i]
 }
 
 analyses <- AvenioUpdate::included_analyses(master_list)
