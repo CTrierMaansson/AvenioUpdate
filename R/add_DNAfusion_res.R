@@ -128,34 +128,3 @@ add_DNAfusion_res <- function(df,
         dplyr::arrange(sample_index,Gene)
     return(df)
 }
-add_DNAfusion_res(df = samples,
-                  repo_path = Directory,
-                  sample_info = AVENIO_runs_select)
-clipped_reads <- max(c(as.numeric(max(res$breakpoint_ALK)),
-                       as.numeric(max(res$breakpoint_EML4))),
-                     na.rm = T)
-if(is.character(names(which.max(res$breakpoint_ALK)))){
-    logic_ALK_breakpoint = T
-    fusion_position_1 <- paste0("chr2:",
-                                names(which.max(res$breakpoint_ALK)))
-}else{
-    fusion_position_1 <- paste0("chr2:","NA")
-    logic_ALK_breakpoint = F
-}
-if(is.character(names(which.max(res$breakpoint_EML4)))){
-    logic_EML4_breakpoint = T
-    fusion_position_2 <- paste0("chr2:",
-                                names(which.max(res$breakpoint_EML4)))
-}else{
-    fusion_position_2 <- paste0("chr2:","NA")
-    logic_EML4_breakpoint = F
-}
-fusion_position <- paste0(fusion_position_1,";",fusion_position_2)
-if(logic_ALK_breakpoint){
-    MAF_num <- round((clipped_reads/res$read_depth_ALK)*100,digits = 2)
-    MAF <- paste0(MAF_num,"%")
-    ALK_depth <- as.character(res$read_depth_ALK)
-}else{
-    MAF <- NA
-    ALK_depth <- NA
-}
