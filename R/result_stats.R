@@ -2,7 +2,7 @@
 #' 
 #' This function takes the AVENIO_results_patients.rds file and generates
 #' different explorative stats on the dataset
-#' @importFrom dplyr left_join select mutate `%>%` filter arrange count
+#' @importFrom dplyr left_join select mutate `%>%` filter arrange count ungroup
 #' @importFrom readxl read_xlsx
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom stringr str_split_i
@@ -231,6 +231,40 @@ result_stats <- function(Info = NULL, silent = FALSE,
         }
     }
     if(!silent){
+        message("Extracting DNAfusion information")
+        DNAfusion_pos <- combined_df %>% 
+            dplyr::filter(grepl("DNAfusion",Flags)) %>% 
+            filter(!grepl("_BC",sample_index))
+        patient_project_count <- DNAfusion_pos %>% 
+            dplyr::select(CPR,Project) %>% 
+            unique() %>% 
+            dplyr::group_by(Project) %>% 
+            dplyr::count() %>% 
+            arrange(desc(n)) %>% 
+            dplyr::ungroup() 
+        sample_project_count <- DNAfusion_pos %>% 
+            dplyr::select(sample_index,Project) %>% 
+            unique() %>% 
+            dplyr::group_by(Project) %>% 
+            dplyr::count() %>% 
+            arrange(desc(n)) %>% 
+            dplyr::ungroup() 
+        fusion_variant_count <- DNAfusion_pos %>% 
+            dplyr::select(CPR,Variant.Description) %>% 
+            unique() %>% 
+            dplyr::group_by(Variant.Description) %>% 
+            dplyr::count() %>% 
+            arrange(desc(n)) %>% 
+            dplyr::ungroup() 
+        NC_fusions <- DNAfusion_pos %>% 
+            dplyr::filter(Variant.Description == "Not classified") %>% 
+            dplyr::select(sample_index, Project,
+                          Genomic.Position,Exon.Number,
+                          Variant.Depth, Variant.Description,
+                          Run_ID,Sample_note) %>% 
+            arrange(Project,sample_index)
+    }
+    if(!silent){
         message("Formatting output")
     }
     res <- list(Basestats = basestats,
@@ -240,6 +274,10 @@ result_stats <- function(Info = NULL, silent = FALSE,
                 Relevant_SNV = gene_df_SNV_no_BC,
                 Relevant_INDEL = gene_df_INDEL_no_BC,
                 BC_in_plasma = BC_in_cfDNA,
+                Fusions_project = patient_project_count,
+                Fusions_sample = sample_project_count,
+                Fusions_variant = fusion_variant_count,
+                Fusions_NC = NC_fusions,
                 Lengths = df_length,
                 Depths = df_depth,
                 Reads = df_reads,
