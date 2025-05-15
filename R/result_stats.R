@@ -232,38 +232,38 @@ result_stats <- function(Info = NULL, silent = FALSE,
     }
     if(!silent){
         message("Extracting DNAfusion information")
-        DNAfusion_pos <- combined_df %>% 
-            dplyr::filter(grepl("DNAfusion",Flags)) %>% 
-            filter(!grepl("_BC",sample_index))
-        patient_project_count <- DNAfusion_pos %>% 
-            dplyr::select(CPR,Project) %>% 
-            unique() %>% 
-            dplyr::group_by(Project) %>% 
-            dplyr::count() %>% 
-            arrange(desc(n)) %>% 
-            dplyr::ungroup() 
-        sample_project_count <- DNAfusion_pos %>% 
-            dplyr::select(sample_index,Project) %>% 
-            unique() %>% 
-            dplyr::group_by(Project) %>% 
-            dplyr::count() %>% 
-            arrange(desc(n)) %>% 
-            dplyr::ungroup() 
-        fusion_variant_count <- DNAfusion_pos %>% 
-            dplyr::select(CPR,Variant.Description) %>% 
-            unique() %>% 
-            dplyr::group_by(Variant.Description) %>% 
-            dplyr::count() %>% 
-            arrange(desc(n)) %>% 
-            dplyr::ungroup() 
-        NC_fusions <- DNAfusion_pos %>% 
-            dplyr::filter(Variant.Description == "Not classified") %>% 
-            dplyr::select(sample_index, Project,
-                          Genomic.Position,Exon.Number,
-                          Variant.Depth, Variant.Description,
-                          Run_ID,Sample_note) %>% 
-            arrange(Project,sample_index)
     }
+    DNAfusion_pos <- combined_df %>% 
+        dplyr::filter(grepl("DNAfusion",Flags)) %>% 
+        filter(!grepl("_BC",sample_index))
+    patient_project_count <- DNAfusion_pos %>% 
+        dplyr::select(CPR,Project) %>% 
+        unique() %>% 
+        dplyr::group_by(Project) %>% 
+        dplyr::count() %>% 
+        arrange(desc(n)) %>% 
+        dplyr::ungroup() 
+    sample_project_count <- DNAfusion_pos %>% 
+        dplyr::select(sample_index,Project) %>% 
+        unique() %>% 
+        dplyr::group_by(Project) %>% 
+        dplyr::count() %>% 
+        arrange(desc(n)) %>% 
+        dplyr::ungroup() 
+    fusion_variant_count <- DNAfusion_pos %>% 
+        dplyr::select(CPR,Variant.Description) %>% 
+        unique() %>% 
+        dplyr::group_by(Variant.Description) %>% 
+        dplyr::count() %>% 
+        arrange(desc(n)) %>% 
+        dplyr::ungroup() 
+    NC_fusions <- DNAfusion_pos %>% 
+        dplyr::filter(Variant.Description == "Not classified") %>% 
+        dplyr::select(sample_index, Project,
+                      Genomic.Position,Exon.Number,
+                      Variant.Depth, Variant.Description,
+                      Run_ID,Sample_note) %>% 
+        arrange(Project,sample_index)
     if(!silent){
         message("Formatting output")
     }
