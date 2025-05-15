@@ -303,3 +303,7 @@ AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses")
 dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AajqaHzI9_hCH4wYCbDAIYx4"
 master_list <- add_run_to_list(master_list = master_list,
                                Directory = dir)
+
+create_simple_output(master_list, CPR = "2309772396")
+master_list[["2309772396"]]
+

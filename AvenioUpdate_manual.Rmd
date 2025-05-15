@@ -414,6 +414,12 @@ they are found the BC sample as well. Then the results dataset is updated with
 the new runs and existing runs are updated after the BAM files have been
 reanalyzed. 
 
+In addition to this, the newly added samples will also be analyzed with
+[`DNAfusion`](https://bioconductor.org/packages/3.21/bioc/html/DNAfusion.html)
+which is our most sensitive method for detecting EML4-ALK fusions. 
+If a fusion is identified we try and classify the fusion variant using the 
+classification from [this publication](https://doi.org/10.1016/j.lungcan.2021.06.012)
+
 #### `sample_index` (**Not mandatory read**)
 
 The variable `sample_index` is created for all samples when `add_run_to_list()`
@@ -693,6 +699,10 @@ If the mutation is not not found in the Avenio system, but only found when
 the BAM file is anlyzed the flag is set to "BAM". Then, the **MAF** and 
 **variant depth** is also determined from the BAM file, whereas the standard
 MAF and variant depth is determined from the Avenio system.
+
+"DNAfusion" is shown in **Flags** if the EML4-ALK fusion is detected by 
+`DNAfusion`. If the fusion is also detected in the Avenio system, that fusion
+is maintained in the output but is not indicated in **Flags**
 
 If a mutation is found in a BC sample and the identical mutation
 is also found in a non_BC sample the flag is set to "BC_mut" in 
@@ -1054,12 +1064,45 @@ result_stats_Info() %>%
 
 ```
 
-# list_rebuild.R (**Not mandatory read**)
+# `DNAfusion` implementation (**Not mandatory read**)
+
+As described above `DNAfusion` is used to analyze all patients for EML4-ALK
+gene fusions. When a run is added, the BAM files from that run are investigated
+with `DNAfusion` before the samples are combined with other sequencing runs 
+from the same patients. 
+
+The following two functions from `DNAfusion` are used
+
+```{r, eval=FALSE,message=F}
+res <- DNAfusion::EML4_ALK_detection(file = "FILE.bam")
+var_res <- DNAfusion::find_variants(file = "FILE.bam")
+```
+
+Based on the output of these two functions a new mutation is classified for 
+that sample and added as a results row for that patient. The relevant variables
+that are based on the `DNAfusion` results include:
+
+1. `Flags` - Set as "DNAfusion" to illustrate it is detected by `DNAfusion`
+2. `Mutation.Class` - Set to "FUSION" similar to Avenio format
+3. `Gene` - Set to "ALK;EML4" similar to Avenio format
+4. `Variant.Description` - Classifies the EML4-ALK fusion variant if possible
+5. `Allelle.Fraction` - The fraction of softclipped reads at EML4 divided by the coverage at the ALK breakpoint
+6. `Genomic.Position` - The breakpoint positions in ALK and EML4
+7. `Variant.Depth` - The number of softclipped reads at EML4 breakpoint
+8. `Unique.Depth` - The unique number of reads at the ALK breakpoint
+9. `Exon.Number` - Illustrates which intron the breakpoint occurs in for ALK and EML4
+
+These results are also maintanied when exploring the results with 
+`create_simple_output()`
+
+# list_rebuild.R AND AVENIO_runs.xlsx recovery (**Not mandatory read**)
 
 **Only if absolutely necessary** on the 
 [github page](https://github.com/CTrierMaansson/AvenioUpdate) there is a
 file called `list_rebuild.R`. This file is used to rebuild the 
 AVENIO_results_patients.rds in the case the file is **lost or corrupted.**
+Or in case an error to the data set has been found and all samples need to 
+be reanalyzed. 
 
 The file only works if the AVENIO_runs.xlsx file is not lost. 
 
@@ -1076,6 +1119,11 @@ explore_AVENIO_runs(silent = TRUE,
 ```
 
 And you can then use `add_run_to_list()` to add the missing runs to the dataset
+
+**In case the AVENIO_runs.xslx file is lost**, a backup of this file can be 
+found on **genomeDK** at /faststorage/project/alabs_projects/Avenio_BAM/.
+This file is being updated every month by Christoffer to ensure it is 
+relatively up to date at all times. 
 
 \newpage
 # Session info (**Not mandatory read**)

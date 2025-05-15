@@ -10,7 +10,6 @@
 
 
 
-<meta name="date" content="2025-03-21" />
 
 <title>AvenioUpdate </title>
 
@@ -678,7 +677,7 @@ Denmark<br><a class="author_email" href="mailto:#"><a href="mailto:ctm@clin.au.d
 <h4 class="author">Lærke Rosenlund Nielsen</h4>
 <address class="author_afil">
 Department of Clinical Biochemistry, Aarhus University Hospital,
-Denmark<br><h4 class="date">21 mar 2025</h4>
+Denmark<br><h4 class="date">15 maj 2025</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 This manual describes how to use AvenioUpdate to update and extract
@@ -759,9 +758,11 @@ mandatory read</strong>)</a>
 <li><a href="#output-description-1" id="toc-output-description-1"><span class="toc-section-number">5.4.3</span> Output description</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#list_rebuild.r-not-mandatory-read" id="toc-list_rebuild.r-not-mandatory-read"><span class="toc-section-number">6</span> list_rebuild.R (<strong>Not
-mandatory read</strong>)</a></li>
-<li><a href="#session-info-not-mandatory-read" id="toc-session-info-not-mandatory-read"><span class="toc-section-number">7</span> Session info (<strong>Not mandatory
+<li><a href="#dnafusion-implementation-not-mandatory-read" id="toc-dnafusion-implementation-not-mandatory-read"><span class="toc-section-number">6</span> <code>DNAfusion</code>
+implementation (<strong>Not mandatory read</strong>)</a></li>
+<li><a href="#list_rebuild.r-and-avenio_runs.xlsx-recovery-not-mandatory-read" id="toc-list_rebuild.r-and-avenio_runs.xlsx-recovery-not-mandatory-read"><span class="toc-section-number">7</span> list_rebuild.R AND AVENIO_runs.xlsx
+recovery (<strong>Not mandatory read</strong>)</a></li>
+<li><a href="#session-info-not-mandatory-read" id="toc-session-info-not-mandatory-read"><span class="toc-section-number">8</span> Session info (<strong>Not mandatory
 read</strong>)</a></li>
 </ul>
 </div>
@@ -808,17 +809,22 @@ page</a> as demonstrated below:</p>
 following command:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
 <p>Which should give an output like this:</p>
-<pre><code>#&gt;              Name                                                                  Description
-#&gt; 1       Basestats                  Number of samples, runs, patients, different materials etc.
-#&gt; 2    Projectstats                               Number of patients and samples in each project
-#&gt; 3   All_mutations                      Number of times each gene is mutated across all samples
-#&gt; 4    Relevant_SNV         Number of SNVs detected not classified as BC or synonymous mutations
-#&gt; 5  Relevant_INDEL       Number of INDELs detected not classified as BC or synonymous mutations
-#&gt; 6    BC_in_plasma Number of times each gene is mutated in plasma but classified as BC mutation
-#&gt; 7         Lengths                   Distribution of fragmentlengths across different materials
-#&gt; 8          Depths                     Distribution of unique depths across different materials
-#&gt; 9           Reads                      Distribution of mapped reads across different materials
-#&gt; 10      On_target                Distribution of on target percents across different materials</code></pre>
+<pre><code>#&gt;               Name                                                                  Description
+#&gt; 1        Basestats                  Number of samples, runs, patients, different materials etc.
+#&gt; 2     Projectstats                               Number of patients and samples in each project
+#&gt; 3          Missing  Samples present in AVENIO_runs.xlsx but not present in the results data set
+#&gt; 4    All_mutations                      Number of times each gene is mutated across all samples
+#&gt; 5     Relevant_SNV         Number of SNVs detected not classified as BC or synonymous mutations
+#&gt; 6   Relevant_INDEL       Number of INDELs detected not classified as BC or synonymous mutations
+#&gt; 7     BC_in_plasma Number of times each gene is mutated in plasma but classified as BC mutation
+#&gt; 8  Fusions_project  Number of patients for each project with detectable EML4-ALK with DNAfusion
+#&gt; 9   Fusions_sample   Number of samples for each project with detectable EML4-ALK with DNAfusion
+#&gt; 10 Fusions_variant                                Number of patients with each EML4-ALK variant
+#&gt; 11      Fusions_NC                          Information on the non classified EML4-ALK variants
+#&gt; 12         Lengths                   Distribution of fragmentlengths across different materials
+#&gt; 13          Depths                     Distribution of unique depths across different materials
+#&gt; 14           Reads                      Distribution of mapped reads across different materials
+#&gt; 15       On_target                Distribution of on target percents across different materials</code></pre>
 <p><em>Sometimes</em> installing <code>devtools</code> does not
 configure <code>git</code> correctly with R and you therefore have to
 install <code>git</code> manually.</p>
@@ -927,22 +933,80 @@ Material
 1401362941
 </td>
 <td style="text-align:left;">
-60
+pt15
 </td>
 <td style="text-align:left;">
-NARLAL
+Batezo
 </td>
 <td style="text-align:left;">
-2019-11-13
+2021-02-04
 </td>
 <td style="text-align:left;">
-20221125
+20221221
 </td>
 <td style="text-align:left;">
-AXVif6nxsixGLZDnsTvDtQLo
+AVhAZ6wwwchE4IIQa6lOQhN4
 </td>
 <td style="text-align:left;">
-60A
+pippin_batezo_15
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:left;">
+size_selection
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1902514323
+</td>
+<td style="text-align:left;">
+pt20
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2021-03-18
+</td>
+<td style="text-align:left;">
+Copy_FaXb_20230112
+</td>
+<td style="text-align:left;">
+AEepGWqCaABI04g5DQESU97x
+</td>
+<td style="text-align:left;">
+pippin_batezo_20
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:left;">
+size_selection
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2409291076
+</td>
+<td style="text-align:left;">
+J7B949NF6EFG82VI
+</td>
+<td style="text-align:left;">
+MonAlec
+</td>
+<td style="text-align:left;">
+2024-07-31
+</td>
+<td style="text-align:left;">
+20240828
+</td>
+<td style="text-align:left;">
+AYUQsRurkNxKlZxM6mns82Dz
+</td>
+<td style="text-align:left;">
+mona_1210570213_240731
 </td>
 <td style="text-align:left;">
 BL
@@ -953,25 +1017,54 @@ cfDNA
 </tr>
 <tr>
 <td style="text-align:left;">
-1401362941
+2803595505
 </td>
 <td style="text-align:left;">
-60
+3537
 </td>
 <td style="text-align:left;">
-NARLAL
+Josephine-MRD
 </td>
 <td style="text-align:left;">
-2020-02-05
+2013-05-14
 </td>
 <td style="text-align:left;">
-20221125
+20220325
 </td>
 <td style="text-align:left;">
-AXVif6nxsixGLZDnsTvDtQLo
+AOiXc8th1tJMS6kdDAg812fA
 </td>
 <td style="text-align:left;">
-60B
+3537bl
+</td>
+<td style="text-align:left;">
+BL
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2803595505
+</td>
+<td style="text-align:left;">
+3537
+</td>
+<td style="text-align:left;">
+Josephine-MRD
+</td>
+<td style="text-align:left;">
+2013-07-01
+</td>
+<td style="text-align:left;">
+20220325
+</td>
+<td style="text-align:left;">
+AOiXc8th1tJMS6kdDAg812fA
+</td>
+<td style="text-align:left;">
+3537post1
 </td>
 <td style="text-align:left;">
 Tx
@@ -982,54 +1075,25 @@ cfDNA
 </tr>
 <tr>
 <td style="text-align:left;">
-1902514323
+1809485424
 </td>
 <td style="text-align:left;">
-SEAVIJ1HQS7PSXM1
+pt17
 </td>
 <td style="text-align:left;">
-MonAlec
+Batezo
 </td>
 <td style="text-align:left;">
-2020-02-17
+2021-02-15
 </td>
 <td style="text-align:left;">
-Copy_rceq_Monalec21042020
+Copy_FaXb_20230112
 </td>
 <td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
+AEepGWqCaABI04g5DQESU97x
 </td>
 <td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-BL
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2409291076
-</td>
-<td style="text-align:left;">
-pt26
-</td>
-<td style="text-align:left;">
-cfChIP
-</td>
-<td style="text-align:left;">
-2017-12-07
-</td>
-<td style="text-align:left;">
-20230127
-</td>
-<td style="text-align:left;">
-AKorzNtokqVHNY5ZPcDPHeY3
-</td>
-<td style="text-align:left;">
-pippin_260123_1
+pippin_batezo_17
 </td>
 <td style="text-align:left;">
 Unknown
@@ -1040,45 +1104,45 @@ size_selection
 </tr>
 <tr>
 <td style="text-align:left;">
-2803595505
+2801452016
 </td>
 <td style="text-align:left;">
-pt31
+pt16
 </td>
 <td style="text-align:left;">
-cfChIP
+Batezo
 </td>
 <td style="text-align:left;">
-2018-05-25
+2021-02-05
 </td>
 <td style="text-align:left;">
-20231020
+20221221
 </td>
 <td style="text-align:left;">
-AJD93ZaVEQxGcbVGcJdZZW94
+AVhAZ6wwwchE4IIQa6lOQhN4
 </td>
 <td style="text-align:left;">
-pt31bc
+pippin_batezo_16
 </td>
 <td style="text-align:left;">
-BC
+Unknown
 </td>
 <td style="text-align:left;">
-BC
+size_selection
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2803595505
+2109514436
 </td>
 <td style="text-align:left;">
-pt31
+pt36
 </td>
 <td style="text-align:left;">
 cfChIP
 </td>
 <td style="text-align:left;">
-2018-05-25
+2018-08-27
 </td>
 <td style="text-align:left;">
 20220204
@@ -1087,71 +1151,13 @@ cfChIP
 AY-MEcYGsnlEp70J19fZmwOJ
 </td>
 <td style="text-align:left;">
-H-1169-ChIP
+D-1578-ChIP
 </td>
 <td style="text-align:left;">
 Unknown
 </td>
 <td style="text-align:left;">
 cfChIP
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2803595505
-</td>
-<td style="text-align:left;">
-pt31
-</td>
-<td style="text-align:left;">
-cfChIP
-</td>
-<td style="text-align:left;">
-2018-05-25
-</td>
-<td style="text-align:left;">
-20230127
-</td>
-<td style="text-align:left;">
-AKorzNtokqVHNY5ZPcDPHeY3
-</td>
-<td style="text-align:left;">
-pippin_260123_6
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-<td style="text-align:left;">
-size_selection
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1809485424
-</td>
-<td style="text-align:left;">
-26
-</td>
-<td style="text-align:left;">
-Pembrolizumab
-</td>
-<td style="text-align:left;">
-2017-11-02
-</td>
-<td style="text-align:left;">
-20210210
-</td>
-<td style="text-align:left;">
-AFzPNBUnw3NMOKplSiKRCqMU
-</td>
-<td style="text-align:left;">
-OLINK_PT26_PRAE
-</td>
-<td style="text-align:left;">
-BL
-</td>
-<td style="text-align:left;">
-cfDNA
 </td>
 </tr>
 </tbody>
@@ -1388,6 +1394,12 @@ identified in the non-BC samples are flagged as BC mutations if they are
 found the BC sample as well. Then the results dataset is updated with
 the new runs and existing runs are updated after the BAM files have been
 reanalyzed.</p>
+<p>In addition to this, the newly added samples will also be analyzed
+with <a href="https://bioconductor.org/packages/3.21/bioc/html/DNAfusion.html"><code>DNAfusion</code></a>
+which is our most sensitive method for detecting EML4-ALK fusions. If a
+fusion is identified we try and classify the fusion variant using the
+classification from <a href="https://doi.org/10.1016/j.lungcan.2021.06.012">this
+publication</a></p>
 <div id="sample_index-not-mandatory-read" class="section level4" number="4.1.1.1">
 <h4><span class="header-section-number">4.1.1.1</span>
 <code>sample_index</code> (<strong>Not mandatory read</strong>)</h4>
@@ -2733,6 +2745,10 @@ but only found when the BAM file is anlyzed the flag is set to “BAM”.
 Then, the <strong>MAF</strong> and <strong>variant depth</strong> is
 also determined from the BAM file, whereas the standard MAF and variant
 depth is determined from the Avenio system.</p>
+<p>“DNAfusion” is shown in <strong>Flags</strong> if the EML4-ALK fusion
+is detected by <code>DNAfusion</code>. If the fusion is also detected in
+the Avenio system, that fusion is maintained in the output but is not
+indicated in <strong>Flags</strong></p>
 <p>If a mutation is found in a BC sample and the identical mutation is
 also found in a non_BC sample the flag is set to “BC_mut” in the non_BC
 samples. This happens irrespective if the mutation is only found in BAM
@@ -2837,10 +2853,21 @@ AE5hBlinjEZN6ZZ1L7898Rzc
 </tr>
 <tr>
 <td style="text-align:left;">
+AEdiX1AaYJBFM4G7307KEA2u
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+FIOL6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 AEepGWqCaABI04g5DQESU97x
 </td>
 <td style="text-align:right;">
-13
+14
 </td>
 <td style="text-align:left;">
 Copy_FaXb_20230112
@@ -2862,7 +2889,7 @@ AEHqc78-RkhKwqARpiG9V9Qi
 AEjxrRrIVjJGzbUFckTwpTpp
 </td>
 <td style="text-align:right;">
-10
+12
 </td>
 <td style="text-align:left;">
 Copy_hjRD_202008212
@@ -2877,17 +2904,6 @@ AeUIQZkyte1MjIyV0h0MS0aI
 </td>
 <td style="text-align:left;">
 20211201
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-AEusTCGgvJ1NrKQysOxTwSBe
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:left;">
-20220413
 </td>
 </tr>
 </tbody>
@@ -2922,6 +2938,62 @@ Analysis.ID
 <tbody>
 <tr>
 <td style="text-align:left;">
+MonAlec_00QWTDYUH1E0VRM8_200217
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_SEAVIJ1HQS7PSXM1_200217
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_9XPREVQOLXK3JE4S_200304
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_9XPREVQOLXK3JE4S_200401
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Batezo_pt08_200316
 </td>
 <td style="text-align:left;">
@@ -2950,10 +3022,94 @@ AGU232uEYZZKe4oI95IrJu7o
 </tr>
 <tr>
 <td style="text-align:left;">
+Batezo_pt11_200414
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt06_200211
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt09_200320
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt09_200416
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_YBNHFHWVB0HBC3YY_200211
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Batezo_pt05_200204
 </td>
 <td style="text-align:left;">
 6
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt07_200306
+</td>
+<td style="text-align:left;">
+8
 </td>
 <td style="text-align:left;">
 Copy_rceq_Monalec21042020
@@ -2982,6 +3138,20 @@ Batezo_pt10_200415
 </td>
 <td style="text-align:left;">
 11
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Madsen_A10_200407
+</td>
+<td style="text-align:left;">
+16
 </td>
 <td style="text-align:left;">
 Copy_rceq_Monalec21042020
@@ -3099,7 +3269,7 @@ Notes
 <tbody>
 <tr>
 <td style="text-align:left;">
-2801452016
+3008369755
 </td>
 <td style="text-align:left;">
 Pembrolizumab_10_180912
@@ -3146,7 +3316,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2801452016
+3008369755
 </td>
 <td style="text-align:left;">
 Pembrolizumab_10_180912
@@ -3193,7 +3363,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2801452016
+3008369755
 </td>
 <td style="text-align:left;">
 Pembrolizumab_10_181024
@@ -3239,7 +3409,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2109514436
+1909208904
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181024
@@ -3286,7 +3456,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2109514436
+1909208904
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181024
@@ -3332,7 +3502,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2109514436
+1909208904
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181024
@@ -3378,53 +3548,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2109514436
-</td>
-<td style="text-align:left;">
-Pembrolizumab_11_181228
-</td>
-<td style="text-align:left;">
-SNV
-</td>
-<td style="text-align:left;">
-NRXN1
-</td>
-<td style="text-align:left;">
-p.Asn190Thr;p.Asn190Thr
-</td>
-<td style="text-align:left;">
-Missense;Missense
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-0.69%
-</td>
-<td style="text-align:left;">
-16
-</td>
-<td style="text-align:left;">
-2313
-</td>
-<td style="text-align:left;">
-20230818
-</td>
-<td style="text-align:left;">
-pembro11week9
-</td>
-<td style="text-align:left;">
-Tx
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2109514436
+1909208904
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181228
@@ -3470,7 +3594,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-3008369755
+2709397795
 </td>
 <td style="text-align:left;">
 Pembrolizumab_12_180629
@@ -3516,45 +3640,92 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-3008369755
+2709397795
 </td>
 <td style="text-align:left;">
-Pembrolizumab_12_180629_BC
+Pembrolizumab_12_180629
 </td>
 <td style="text-align:left;">
 SNV
 </td>
 <td style="text-align:left;">
-USP29
+TP53
 </td>
 <td style="text-align:left;">
-p.Asp790His
+p.Ser215Ile;p.Ser215Ile;p.Ser215Ile;p.Ser215Ile;p.Ser204Ile
 </td>
 <td style="text-align:left;">
-Missense
+Missense;Missense;Missense;Missense;Missense
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-0.54%
+0.31%
 </td>
 <td style="text-align:left;">
-6
+9
 </td>
 <td style="text-align:left;">
-1121
+2902
 </td>
 <td style="text-align:left;">
-20230927
+20201217 monbazo olink1
 </td>
 <td style="text-align:left;">
-lunge1388_BC
+olink_pt12_prae
 </td>
 <td style="text-align:left;">
-BC
+BL
 </td>
 <td style="text-align:left;">
-BC
+cfDNA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2709397795
+</td>
+<td style="text-align:left;">
+Pembrolizumab_12_180817
+</td>
+<td style="text-align:left;">
+CNV
+</td>
+<td style="text-align:left;">
+EGFR
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+N/A
+</td>
+<td style="text-align:left;">
+20210216
+</td>
+<td style="text-align:left;">
+OLINK_PT12_BP3
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
 </td>
 <td style="text-align:left;">
 NA
@@ -3595,7 +3766,7 @@ determined by <code>Info</code>.</p>
 <span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># Getting the information of total entries</span></span>
 <span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>results<span class="sc">$</span>Total_entries</span></code></pre></div>
 <p>Should return:</p>
-<pre><code>#&gt; [1] 1134</code></pre>
+<pre><code>#&gt; [1] 1500</code></pre>
 <p>And:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">Info =</span> <span class="st">&quot;Required&quot;</span>,</span>
@@ -3636,31 +3807,118 @@ Sample_note
 <tbody>
 <tr>
 <td style="text-align:left;">
-1007491766
+3103530120
 </td>
 <td style="text-align:left;">
-pt08
+pt12
 </td>
 <td style="text-align:left;">
 Batezo
 </td>
 <td style="text-align:left;">
-2020-03-16
+2020-07-13
 </td>
 <td style="text-align:left;">
-20231016
+20200724
 </td>
 <td style="text-align:left;">
-ALsopAc5KC1Bx7pJLiHZ-eJR
+ASZMkYMxgytHgov13wWty29S
 </td>
 <td style="text-align:left;">
-pt8bc
+6
 </td>
 <td style="text-align:left;">
-BC
+cfDNA
 </td>
 <td style="text-align:left;">
-BC
+Unknown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1102610063
+</td>
+<td style="text-align:left;">
+pt02
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2019-11-04
+</td>
+<td style="text-align:left;">
+Monalec_Batezo_2
+</td>
+<td style="text-align:left;">
+AYO0H3fNbPBEOKwJA9dv9IH0
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1908692159
+</td>
+<td style="text-align:left;">
+pt03
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2019-11-20
+</td>
+<td style="text-align:left;">
+Monalec_Batezo_2
+</td>
+<td style="text-align:left;">
+AYO0H3fNbPBEOKwJA9dv9IH0
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2607630782
+</td>
+<td style="text-align:left;">
+pt07
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2020-03-06
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+Unknown
 </td>
 </tr>
 <tr>
@@ -3694,115 +3952,28 @@ Unknown
 </tr>
 <tr>
 <td style="text-align:left;">
-1007491766
+2712330026
 </td>
 <td style="text-align:left;">
-pt08
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2020-03-16
-</td>
-<td style="text-align:left;">
-20221221
-</td>
-<td style="text-align:left;">
-AVhAZ6wwwchE4IIQa6lOQhN4
-</td>
-<td style="text-align:left;">
-pippin_batezo_8
-</td>
-<td style="text-align:left;">
-size_selection
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1101551004
-</td>
-<td style="text-align:left;">
-pt20
+pt10
 </td>
 <td style="text-align:left;">
 Batezo
 </td>
 <td style="text-align:left;">
-2021-03-18
+2020-03-25
 </td>
 <td style="text-align:left;">
-20231016
+Copy_rceq_Monalec21042020
 </td>
 <td style="text-align:left;">
-ALsopAc5KC1Bx7pJLiHZ-eJR
+AGU232uEYZZKe4oI95IrJu7o
 </td>
 <td style="text-align:left;">
-pt20bc
-</td>
-<td style="text-align:left;">
-BC
-</td>
-<td style="text-align:left;">
-BC
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1101551004
-</td>
-<td style="text-align:left;">
-pt20
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2021-03-18
-</td>
-<td style="text-align:left;">
-20210415
-</td>
-<td style="text-align:left;">
-ABSYoqHZHR9Gvo_Z0scoIQ8w
-</td>
-<td style="text-align:left;">
-753
+10
 </td>
 <td style="text-align:left;">
 cfDNA
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1101551004
-</td>
-<td style="text-align:left;">
-pt20
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2021-03-18
-</td>
-<td style="text-align:left;">
-Copy_FaXb_20230112
-</td>
-<td style="text-align:left;">
-AEepGWqCaABI04g5DQESU97x
-</td>
-<td style="text-align:left;">
-pippin_batezo_20
-</td>
-<td style="text-align:left;">
-size_selection
 </td>
 <td style="text-align:left;">
 Unknown
@@ -3981,7 +4152,7 @@ n
 TP53
 </td>
 <td style="text-align:right;">
-426
+573
 </td>
 </tr>
 <tr>
@@ -3989,15 +4160,7 @@ TP53
 EGFR
 </td>
 <td style="text-align:right;">
-355
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-KIT
-</td>
-<td style="text-align:right;">
-181
+458
 </td>
 </tr>
 <tr>
@@ -4005,7 +4168,15 @@ KIT
 APC
 </td>
 <td style="text-align:right;">
-179
+271
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+KIT
+</td>
+<td style="text-align:right;">
+256
 </td>
 </tr>
 <tr>
@@ -4013,23 +4184,7 @@ APC
 USP29
 </td>
 <td style="text-align:right;">
-170
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PDZRN3
-</td>
-<td style="text-align:right;">
-161
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PIK3CG
-</td>
-<td style="text-align:right;">
-155
+242
 </td>
 </tr>
 <tr>
@@ -4037,7 +4192,23 @@ PIK3CG
 MET
 </td>
 <td style="text-align:right;">
-153
+226
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PDZRN3
+</td>
+<td style="text-align:right;">
+225
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PIK3CG
+</td>
+<td style="text-align:right;">
+225
 </td>
 </tr>
 <tr>
@@ -4045,7 +4216,7 @@ MET
 NA
 </td>
 <td style="text-align:right;">
-139
+214
 </td>
 </tr>
 <tr>
@@ -4053,7 +4224,7 @@ NA
 KRAS
 </td>
 <td style="text-align:right;">
-129
+201
 </td>
 </tr>
 </tbody>
@@ -4080,7 +4251,7 @@ n
 Patients
 </td>
 <td style="text-align:right;">
-443
+643
 </td>
 </tr>
 <tr>
@@ -4088,7 +4259,7 @@ Patients
 Samples
 </td>
 <td style="text-align:right;">
-1038
+1500
 </td>
 </tr>
 <tr>
@@ -4096,7 +4267,7 @@ Samples
 Runs
 </td>
 <td style="text-align:right;">
-112
+131
 </td>
 </tr>
 <tr>
@@ -4104,7 +4275,7 @@ Runs
 Mutations
 </td>
 <td style="text-align:right;">
-3956
+5813
 </td>
 </tr>
 <tr>
@@ -4112,7 +4283,7 @@ Mutations
 cfDNA
 </td>
 <td style="text-align:right;">
-842
+1215
 </td>
 </tr>
 <tr>
@@ -4120,7 +4291,7 @@ cfDNA
 BC
 </td>
 <td style="text-align:right;">
-150
+228
 </td>
 </tr>
 <tr>
@@ -4128,7 +4299,7 @@ BC
 size_selection
 </td>
 <td style="text-align:right;">
-26
+35
 </td>
 </tr>
 <tr>
@@ -4136,7 +4307,7 @@ size_selection
 cfChIP
 </td>
 <td style="text-align:right;">
-16
+17
 </td>
 </tr>
 <tr>
@@ -4144,7 +4315,7 @@ cfChIP
 reanalyze
 </td>
 <td style="text-align:right;">
-4
+5
 </td>
 </tr>
 <tr>
@@ -4152,7 +4323,7 @@ reanalyze
 Tx
 </td>
 <td style="text-align:right;">
-444
+745
 </td>
 </tr>
 <tr>
@@ -4160,7 +4331,7 @@ Tx
 BL
 </td>
 <td style="text-align:right;">
-350
+385
 </td>
 </tr>
 <tr>
@@ -4168,7 +4339,7 @@ BL
 Unknown
 </td>
 <td style="text-align:right;">
-94
+142
 </td>
 </tr>
 </tbody>
@@ -4215,6 +4386,15 @@ Number of patients and samples in each project
 </tr>
 <tr>
 <td style="text-align:left;">
+Missing
+</td>
+<td style="text-align:left;">
+Samples present in AVENIO_runs.xlsx but not present in the results data
+set
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 All_mutations
 </td>
 <td style="text-align:left;">
@@ -4244,6 +4424,40 @@ BC_in_plasma
 <td style="text-align:left;">
 Number of times each gene is mutated in plasma but classified as BC
 mutation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fusions_project
+</td>
+<td style="text-align:left;">
+Number of patients for each project with detectable EML4-ALK with
+DNAfusion
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fusions_sample
+</td>
+<td style="text-align:left;">
+Number of samples for each project with detectable EML4-ALK with
+DNAfusion
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fusions_variant
+</td>
+<td style="text-align:left;">
+Number of patients with each EML4-ALK variant
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fusions_NC
+</td>
+<td style="text-align:left;">
+Information on the non classified EML4-ALK variants
 </td>
 </tr>
 <tr>
@@ -4283,13 +4497,51 @@ Distribution of on target percents across different materials
 </div>
 </div>
 </div>
-<div id="list_rebuild.r-not-mandatory-read" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> list_rebuild.R
-(<strong>Not mandatory read</strong>)</h1>
+<div id="dnafusion-implementation-not-mandatory-read" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> <code>DNAfusion</code>
+implementation (<strong>Not mandatory read</strong>)</h1>
+<p>As described above <code>DNAfusion</code> is used to analyze all
+patients for EML4-ALK gene fusions. When a run is added, the BAM files
+from that run are investigated with <code>DNAfusion</code> before the
+samples are combined with other sequencing runs from the same
+patients.</p>
+<p>The following two functions from <code>DNAfusion</code> are used</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> DNAfusion<span class="sc">::</span><span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> <span class="st">&quot;FILE.bam&quot;</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>var_res <span class="ot">&lt;-</span> DNAfusion<span class="sc">::</span><span class="fu">find_variants</span>(<span class="at">file =</span> <span class="st">&quot;FILE.bam&quot;</span>)</span></code></pre></div>
+<p>Based on the output of these two functions a new mutation is
+classified for that sample and added as a results row for that patient.
+The relevant variables that are based on the <code>DNAfusion</code>
+results include:</p>
+<ol style="list-style-type: decimal">
+<li><code>Flags</code> - Set as “DNAfusion” to illustrate it is detected
+by <code>DNAfusion</code></li>
+<li><code>Mutation.Class</code> - Set to “FUSION” similar to Avenio
+format</li>
+<li><code>Gene</code> - Set to “ALK;EML4” similar to Avenio format</li>
+<li><code>Variant.Description</code> - Classifies the EML4-ALK fusion
+variant if possible</li>
+<li><code>Allelle.Fraction</code> - The fraction of softclipped reads at
+EML4 divided by the coverage at the ALK breakpoint</li>
+<li><code>Genomic.Position</code> - The breakpoint positions in ALK and
+EML4</li>
+<li><code>Variant.Depth</code> - The number of softclipped reads at EML4
+breakpoint</li>
+<li><code>Unique.Depth</code> - The unique number of reads at the ALK
+breakpoint</li>
+<li><code>Exon.Number</code> - Illustrates which intron the breakpoint
+occurs in for ALK and EML4</li>
+</ol>
+<p>These results are also maintanied when exploring the results with
+<code>create_simple_output()</code></p>
+</div>
+<div id="list_rebuild.r-and-avenio_runs.xlsx-recovery-not-mandatory-read" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> list_rebuild.R AND
+AVENIO_runs.xlsx recovery (<strong>Not mandatory read</strong>)</h1>
 <p><strong>Only if absolutely necessary</strong> on the <a href="https://github.com/CTrierMaansson/AvenioUpdate">github page</a>
 there is a file called <code>list_rebuild.R</code>. This file is used to
 rebuild the AVENIO_results_patients.rds in the case the file is
-<strong>lost or corrupted.</strong></p>
+<strong>lost or corrupted.</strong> Or in case an error to the data set
+has been found and all samples need to be reanalyzed.</p>
 <p>The file only works if the AVENIO_runs.xlsx file is not lost.</p>
 <p><code>list_rebuild.R</code> has to be updated manually alongside
 AVENIO_runs.xlsx, but Christoffer will make sure this happens relatively
@@ -4297,21 +4549,30 @@ regularly.</p>
 <p>When the entire script has been run you should be able to investigate
 which runs (if any) that have not been added to the dataset but are
 present in the AVENIO_runs.xlsx file using:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
 <p>And you can then use <code>add_run_to_list()</code> to add the
 missing runs to the dataset</p>
+<p><strong>In case the AVENIO_runs.xslx file is lost</strong>, a backup
+of this file can be found on <strong>genomeDK</strong> at
+/faststorage/project/alabs_projects/Avenio_BAM/. This file is being
+updated every month by Christoffer to ensure it is relatively up to date
+at all times.</p>
 <div style="page-break-after: always;"></div>
 </div>
-<div id="session-info-not-mandatory-read" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Session info
+<div id="session-info-not-mandatory-read" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Session info
 (<strong>Not mandatory read</strong>)</h1>
 <p>It is good practice to include this information in tutorials and
 manuals to ensure reproducibility and for troubleshooting if something
 does not work. If your code works, discount this section.</p>
-<pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
+<pre><code>#&gt; Warning in system2(&quot;quarto&quot;, &quot;-V&quot;, stdout = TRUE, env = paste0(&quot;TMPDIR=&quot;, :
+#&gt; kørende kommando &#39;&quot;quarto&quot;
+#&gt; TMPDIR=C:/Users/chris/AppData/Local/Temp/Rtmpag7WVl/file69f06e27e8f -V&#39; havde
+#&gt; status 1
+#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value
-#&gt;  version  R version 4.4.2 (2024-10-31 ucrt)
+#&gt;  version  R version 4.5.0 (2025-04-11 ucrt)
 #&gt;  os       Windows 11 x64 (build 26100)
 #&gt;  system   x86_64, mingw32
 #&gt;  ui       RTerm
@@ -4319,17 +4580,19 @@ does not work. If your code works, discount this section.</p>
 #&gt;  collate  Danish_Denmark.utf8
 #&gt;  ctype    Danish_Denmark.utf8
 #&gt;  tz       Europe/Copenhagen
-#&gt;  date     2025-03-21
+#&gt;  date     2025-05-15
 #&gt;  pandoc   3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+#&gt;  quarto   NA @ C:\\PROGRA~1\\RStudio\\RESOUR~1\\app\\bin\\quarto\\bin\\quarto.exe
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package      * version date (UTC) lib source
-#&gt;  AvenioUpdate * 1.4.1   2025-03-21 [1] Github (CTrierMaansson/AvenioUpdate@f62c716)
-#&gt;  crayon       * 1.5.3   2024-06-20 [1] CRAN (R 4.4.0)
-#&gt;  dplyr        * 1.1.4   2023-11-17 [1] CRAN (R 4.4.0)
+#&gt;  AvenioUpdate * 1.8.0   2025-05-15 [1] Github (CTrierMaansson/AvenioUpdate@f1278c0)
+#&gt;  crayon       * 1.5.3   2024-06-20 [1] CRAN (R 4.5.0)
+#&gt;  dplyr        * 1.1.4   2023-11-17 [1] CRAN (R 4.5.0)
 #&gt; 
-#&gt;  [1] C:/Users/chris/AppData/Local/R/win-library/4.4
-#&gt;  [2] C:/Program Files/R/R-4.4.2/library
+#&gt;  [1] C:/Users/chris/AppData/Local/R/win-library/4.5
+#&gt;  [2] C:/Program Files/R/R-4.5.0/library
+#&gt;  * ── Packages attached to the search path.
 #&gt; 
 #&gt; ──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>
