@@ -6,9 +6,25 @@
 #' @importFrom lubridate ymd
 add_samples <- function(Directory,runs,synology_path){
     `%ni%` <- Negate(`%in%`)
+    bname <- basename(Directory)
+    Analysis_type <- unlist(lapply(strsplit(bname,"-"), "[[", 1))
+    if(Analysis_type %ni% c("Tissue","Plasma")){
+        stop(paste0("The final directory entered as Directory has to ",
+                    "start with 'Plasma-' or Tissue-"))
+    }
     Run_ID <- gsub(
         paste0(synology_path,"AVENIO_results/Plasma-"),
         "",Directory)
+    if(Analysis_type == "Plasma"){
+        Run_ID <- gsub(
+            paste0(synology_path,"AVENIO_results/Plasma-"),
+            "",Directory)
+    }    
+    if(Analysis_type == "Tissue"){
+        Run_ID <- gsub(
+            paste0(synology_path,"AVENIO_results/Tissue-"),
+            "",Directory)
+    }
     zip_file <- paste0(Directory,"/","all_CSVs-",Run_ID,".zip")
     sample_file <- paste0(Directory,"/SampleMetrics.csv")
     run_ID_short <- substr(Run_ID,1,8)

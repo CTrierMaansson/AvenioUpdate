@@ -22,9 +22,9 @@ wrapper_tjek_bam_indel<-function(df,synology_path){
         sampleID<-df_nested$Sample.ID[i]
         panelID<-df_nested$Panel[i]
         panelID<-ifelse(panelID == "Surveillance v2","Surveillance-v2",panelID)
-        path_sample_mappe<-paste0(path_AVENIO_results,
-                                  "/Plasma-",
-                                  analyseID,
+        path_sample_mappe<-paste0(list.files(path_AVENIO_results,
+                                             pattern = analyseID,
+                                             full.names = T),
                                   "/",
                                   sampleID,
                                   "-",

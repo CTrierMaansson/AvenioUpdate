@@ -22,9 +22,9 @@ wrapper_tjek_bam_snv<-function(df,synology_path){
         sampleID<-df_nested$Sample.ID[i]
         panelID<-df_nested$Panel[i]
         panelID<-ifelse(panelID == "Surveillance v2","Surveillance-v2",panelID)
-        path_sample_mappe<-paste0(path_AVENIO_results,
-                                  "/Plasma-",
-                                  analyseID,
+        path_sample_mappe<-paste0(list.files(path_AVENIO_results,
+                                             pattern = analyseID,
+                                             full.names = T),
                                   "/",
                                   sampleID,
                                   "-",
@@ -46,10 +46,11 @@ wrapper_tjek_bam_snv<-function(df,synology_path){
                 analyseID2<-df_patient_other_samples$Analysis.ID[j]
                 sampleID2<-df_patient_other_samples$Sample.ID[j]
                 panelID2<-df_patient_other_samples$Panel[j]
-                panelID2<-ifelse(panelID2 == "Surveillance v2","Surveillance-v2",panelID2)
-                path_sample_mappe2<-paste0(path_AVENIO_results,
-                                           "/Plasma-",
-                                           analyseID2,
+                panelID2<-ifelse(panelID2 == "Surveillance v2","Surveillance-v2",
+                                 panelID2)
+                path_sample_mappe2<-paste0(list.files(path_AVENIO_results,
+                                                      pattern = analyseID2,
+                                                      full.names = T),
                                            "/",
                                            sampleID2,
                                            "-",
