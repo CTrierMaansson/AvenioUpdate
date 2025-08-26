@@ -8,22 +8,7 @@ add_DNAfusion_res <- function(df,
                               sample_info){
     `%ni%` <- Negate(`%in%`)
     unique_samples <- unique(df$sample_index)
-    sample_info <- sample_info %>% 
-        dplyr::mutate(date_check = lubridate::ymd(Sample_date)) %>% 
-        dplyr::filter(!is.na(date_check)) %>%
-        dplyr::mutate(sample_index = paste0(Project,"_",
-                                            Name_in_project,"_",
-                                            substr(stringr::str_split_i(
-                                                as.character(Sample_date),"-",1),
-                                                3,4),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",2),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",3))) %>% 
-        dplyr::mutate(
-            sample_index = ifelse(Material != "cfDNA",
-                                  paste0(sample_index,"_",Material),
-                                  sample_index))
+    sample_info <- create_sample_index(sample_info)
     for(i in 1:length(unique_samples)){
         sample_ind <- unique_samples[i]
         sample_info <- df %>% 

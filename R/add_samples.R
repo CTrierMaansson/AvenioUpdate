@@ -96,9 +96,21 @@ add_samples <- function(Directory,runs,synology_path){
             )
             ) %>% 
             dplyr::mutate(
-                sample_index = ifelse(Material != "cfDNA",
-                                      paste0(sample_index,"_",Material),
-                                      sample_index))
+                sample_index = ifelse(Material == "cfDNA",
+                                      sample_index,
+                                      ifelse(Material == "tissue",
+                                             paste0(sample_index,"_",
+                                                    Material,"_",
+                                                    Sample_note),
+                                             ifelse(Material == "reanalyze",
+                                                    ifelse(Sample_note == "BC",
+                                                           paste0(sample_index,"_",
+                                                                  Material,"_",
+                                                                  Sample_note),
+                                                           paste0(sample_index,"_",
+                                                                  Material)),
+                                                    paste0(sample_index,"_",
+                                                           Material)))))
     }
     AVENIO_runs_select_merge <- AVENIO_runs_select %>% 
         dplyr::select(Sample_name,sample_index) %>% 

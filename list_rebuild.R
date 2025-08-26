@@ -245,7 +245,22 @@ add_samples_mod <- function(Directory){
                                          substr(str_split_i(as.character(Sample_date),"-",1),3,4),
                                          str_split_i(as.character(Sample_date),"-",2),
                                          str_split_i(as.character(Sample_date),"-",3))) %>% 
-            mutate(sample_index = ifelse(Material != "cfDNA",paste0(sample_index,"_",Material),sample_index))
+            dplyr::mutate(
+                sample_index = ifelse(Material == "cfDNA",
+                                      sample_index,
+                                      ifelse(Material == "tissue",
+                                             paste0(sample_index,"_",
+                                                    Material,"_",
+                                                    Sample_note),
+                                             ifelse(Material == "reanalyze",
+                                                    ifelse(Sample_note == "BC",
+                                                           paste0(sample_index,"_",
+                                                                  Material,"_",
+                                                                  Sample_note),
+                                                           paste0(sample_index,"_",
+                                                                  Material)),
+                                                    paste0(sample_index,"_",
+                                                           Material)))))
     }
     AVENIO_runs_select_merge <- AVENIO_runs_select %>% 
         dplyr::select(Sample_name,sample_index)
@@ -293,7 +308,7 @@ included_analyses(master_list)
 re_added_analyses <- added_runs[1:2]
 
 for(i in 3:length(added_plasma_runs)){
-    message(paste0("Adding run ",i," of ",length(added_plasma_runs)))
+    message(paste0("Adding 'Plasma' run ",i," of ",length(added_plasma_runs)))
     dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_plasma_runs[i])
     master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
     master_list <- AvenioUpdate::add_run_to_list(
@@ -303,7 +318,7 @@ for(i in 3:length(added_plasma_runs)){
     re_added_analyses[i] <- added_plasma_runs[i]
 }
 for(i in 1:length(added_tissue_runs)){
-    message(paste0("Adding run ",i," of ",length(added_tissue_runs)))
+    message(paste0("Adding 'Tissue' run ",i," of ",length(added_tissue_runs)))
     dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Tissue-",added_tissue_runs[i])
     master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
     master_list <- AvenioUpdate::add_run_to_list(
@@ -332,7 +347,7 @@ mon <- extract_project(master_list, project = "MonAlec")
 library(dplyr)
 mon %>% 
     filter(grepl("DNAfusion",Flags))
-
+library(AvenioUpdate)
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 master_list <- AvenioUpdate::add_run_to_list(
     master_list = master_list,

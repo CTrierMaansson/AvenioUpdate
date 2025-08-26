@@ -74,20 +74,7 @@ create_simple_output <- function(df_list,CPR,synonymous = TRUE,
                              col_types = c(rep("guess",4),"date",rep("guess",6)))
     message("Selecting relevant sample")
     AVENIO_sele <- AVENIO_runs[AVENIO_runs$CPR == CPR,]
-    AVENIO_sele <- AVENIO_sele %>% 
-        dplyr::mutate(sample_index = paste0(Project,"_",
-                                            Name_in_project,"_",
-                                            substr(stringr::str_split_i(
-                                                as.character(Sample_date),"-",1),
-                                                3,4),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",2),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",3))) %>% 
-        dplyr::mutate(
-            sample_index = ifelse(Material != "cfDNA",
-                                  paste0(sample_index,"_",Material),
-                                  sample_index)) %>% 
+    AVENIO_sele <- create_sample_index(AVENIO_sele) %>% 
         dplyr::select(sample_index,Sample_note,Material,Notes) %>% 
         dplyr::filter(!is.na(sample_index))
     message("Merging run and variant information")

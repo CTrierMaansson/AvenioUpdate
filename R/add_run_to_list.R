@@ -125,22 +125,7 @@ add_run_to_list <- function(master_list, Directory,
         dplyr::ungroup() %>% 
         dplyr::filter(n > 1) %>% 
         dplyr::left_join(runs_project_cpr_name,by = "CPR_project")
-    AVENIO_runs_sample_index <- AVENIO_runs %>% 
-        dplyr::mutate(date_check = lubridate::ymd(Sample_date)) %>% 
-        dplyr::filter(!is.na(date_check)) %>%
-        dplyr::mutate(sample_index = paste0(Project,"_",
-                                            Name_in_project,"_",
-                                            substr(stringr::str_split_i(
-                                                as.character(Sample_date),"-",1),
-                                                3,4),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",2),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",3))) %>% 
-        dplyr::mutate(
-            sample_index = ifelse(Material != "cfDNA",
-                                  paste0(sample_index,"_",Material),
-                                  sample_index))
+    AVENIO_runs_sample_index <- create_sample_index(AVENIO_runs) %>% 
     AVENIO_indeces_count <- AVENIO_runs_sample_index %>% 
         dplyr::select(sample_index) %>% 
         dplyr::group_by(sample_index) %>% 

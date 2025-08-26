@@ -66,22 +66,7 @@ result_stats <- function(Info = NULL, silent = FALSE,
     if(!silent){
         message("Creating sample_index variable")
     }
-    Avenio_runs <- Avenio_runs %>% 
-        dplyr::mutate(sample_index = paste0(Project,"_",
-                                            Name_in_project,"_",
-                                            substr(stringr::str_split_i(
-                                                as.character(Sample_date),"-",1),
-                                                3,4),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",2),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",3)
-        )
-        ) %>% 
-        dplyr::mutate(
-            sample_index = ifelse(Material != "cfDNA",
-                                  paste0(sample_index,"_",Material),
-                                  sample_index))
+    Avenio_runs <- create_sample_index(Avenio_runs)
     if(!silent){
         message("Combining run and patient information")
     }

@@ -80,22 +80,7 @@ extract_project <- function(df_list,
     message("Reading AVENIO_runs.xlsx file")
     AVENIO_runs <- readxl::read_xlsx(paste0(synology_path,"AVENIO_runs.xlsx"),
                                      col_types = c(rep("guess",4),"date",rep("guess",6))) 
-    AVENIO_runs <- AVENIO_runs %>% 
-        dplyr::mutate(sample_index = paste0(Project,"_",
-                                            Name_in_project,"_",
-                                            substr(stringr::str_split_i(
-                                                as.character(Sample_date),"-",1),
-                                                3,4),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",2),
-                                            stringr::str_split_i(
-                                                as.character(Sample_date),"-",3)
-        )
-        ) %>% 
-        dplyr::mutate(
-            sample_index = ifelse(Material != "cfDNA",
-                                  paste0(sample_index,"_",Material),
-                                  sample_index))
+    AVENIO_runs <- create_sample_index(AVENIO_runs)
     if(project %ni% AVENIO_runs$Project){
         stop("project is invalid. Does not appear in AVENIO_runs.xlsx\nSee available projects with result_stats(Info = 'Projectstats')")
     }
