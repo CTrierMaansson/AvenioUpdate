@@ -2,7 +2,7 @@
 #' 
 #' This function takes the main dataset and creates an overview of how many 
 #' samples from each NGS run is included in the dataset
-#' @importFrom dplyr select `%>%` filter group_by left_join count ungroup arrange
+#' @importFrom dplyr select `%>%` filter group_by left_join count ungroup arrange mutate
 #' @param master_list The `list` of `data.frames` which contains all information
 #'  on the patients. This is read using 
 #'  readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
@@ -32,6 +32,10 @@ included_analyses <- function(master_list){
         dplyr::select(sample_index,Sample.ID,Analysis.Name,Analysis.ID) %>% 
         unique()
     rownames(combined_df) <- NULL
+    combined_df <- combined_df %>% 
+        dplyr::mutate(Analysis.Type = ifelse(grepl("tissue",sample_index),
+                                             "Tissue",
+                                             "Plasma"))
     unique_IDs <- unique(combined_df$Analysis.ID)
     res_list <- list()
     for(i in 1:length(unique_IDs)){
@@ -42,7 +46,7 @@ included_analyses <- function(master_list){
         names(res_list)[i] <- ID
     }
     combined_sele <- combined_df %>% 
-        dplyr::select(Analysis.ID, Analysis.Name) %>% 
+        dplyr::select(Analysis.ID, Analysis.Name,Analysis.Type) %>% 
         unique()
     combined_sum <- combined_df %>% 
         dplyr::group_by(Analysis.ID) %>% 

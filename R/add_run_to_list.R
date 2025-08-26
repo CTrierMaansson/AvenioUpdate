@@ -48,6 +48,12 @@ add_run_to_list <- function(master_list, Directory,
     if (!isScalarCharacter(Directory)) {
         stop("Directory has to be a character")
     }
+    bname <- basename(Directory)
+    Analysis_type <- unlist(lapply(strsplit(bname,"-"), "[[", 1))
+    if(Analysis_type %ni% c("Tissue","Plasma")){
+        stop(paste0("The final directory entered as Directory has to ",
+                    "start with 'Plasma-' or Tissue-"))
+    }
     if (!file.exists(Directory)) {
         stop("The path entered as Directory does not exist")
     }
@@ -65,10 +71,19 @@ add_run_to_list <- function(master_list, Directory,
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
     message("Reading run information")
-    ID <- gsub(
-        paste0(synology_path,"AVENIO_results/Plasma-"),
-        "",Directory)
-    run_ID_short <- substr(ID,1,8)
+    
+    if(Analysis_type == "Plasma"){
+        ID <- gsub(
+            paste0(synology_path,"AVENIO_results/Plasma-"),
+            "",Directory)
+        run_ID_short <- substr(ID,1,8)
+    }    
+    if(Analysis_type == "Tissue"){
+        ID <- gsub(
+            paste0(synology_path,"AVENIO_results/Tissue-"),
+            "",Directory)
+        run_ID_short <- substr(ID,1,8)
+    }
     AVENIO_runs <- readxl::read_xlsx(
         paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6)))

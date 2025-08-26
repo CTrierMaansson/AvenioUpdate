@@ -1,6 +1,6 @@
 .onAttach <- function(libname, pkgname) {
     current_version <- packageVersion(pkgname)
-    required_version <- "1.8"
+    required_version <- "1.9"
     
     if (current_version <= package_version(required_version)) {
         packageStartupMessage(
