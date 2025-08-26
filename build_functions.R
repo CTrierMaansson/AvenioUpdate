@@ -235,6 +235,7 @@ length(master_list)
 #### Creating package ####
 setwd("C:/Users/chris/OneDrive/1PhD/AvenioUpdate")
 devtools::document()
+devtools::build()
 
 devtools::install_github("CTrierMaansson/AvenioUpdate",force = T)
 

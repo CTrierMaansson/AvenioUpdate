@@ -6,6 +6,7 @@
 add_DNAfusion_res <- function(df,
                               repo_path,
                               sample_info){
+    `%ni%` <- Negate(`%in%`)
     unique_samples <- unique(df$sample_index)
     sample_info <- sample_info %>% 
         dplyr::mutate(date_check = lubridate::ymd(Sample_date)) %>% 
@@ -107,10 +108,18 @@ add_DNAfusion_res <- function(df,
                                  Variant.Depth = as.character(clipped_reads),
                                  Unique.Depth = ALK_depth,
                                  Exon.Number = exon)
-            sample_info_unique <- sample_info %>% 
-                dplyr::select(colnames(df)[c(1,4:15,47:84)]) %>% 
-                unique() %>% 
-                dplyr::left_join(res_df, by = "sample_index")
+            if(sample_info$Sample.Type[1] == "Plasma"){
+                sample_info_unique <- sample_info %>% 
+                    dplyr::select(colnames(df)[c(1,4:15,47:84)]) %>% 
+                    unique() %>% 
+                    dplyr::left_join(res_df, by = "sample_index")
+            }
+            if(sample_info$Sample.Type[1] == "Tissue"){
+                sample_info_unique <- sample_info %>% 
+                    dplyr::select(colnames(df)[c(1,4:15,45:81)]) %>% 
+                    unique() %>% 
+                    dplyr::left_join(res_df, by = "sample_index")
+            }
             sample_res <- sample_info %>% 
                 dplyr::mutate(Variant.Depth = as.character(Variant.Depth)) %>% 
                 dplyr::mutate(
