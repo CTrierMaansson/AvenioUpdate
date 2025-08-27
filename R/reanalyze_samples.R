@@ -39,10 +39,21 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
                          " and variants are marked accordingly"))
             sample_BC <- sample_df %>% 
                 dplyr::filter(grepl("_BC", sample_index))
+            certain_BC <- sample_BC %>% 
+                filter(!grepl("BAM",Flags) | Variant.Depth > 2)
+            uncertain_BC <- sample_BC %>% 
+                filter(grepl("BAM",Flags) & Variant.Depth < 3)
             sample_other <- sample_df %>% 
                 dplyr::filter(!grepl("_BC", sample_index))
             if(nrow(sample_other) > 0){
-                sample_BC <- sample_BC %>% 
+                certain_BC <- certain_BC %>% 
+                    dplyr::mutate(identifier = paste0(
+                        Gene,
+                        "_",
+                        Coding.Change,
+                        "_",
+                        Genomic.Position))
+                uncertain_BC <- uncertain_BC %>% 
                     dplyr::mutate(identifier = paste0(
                         Gene,
                         "_",
@@ -58,14 +69,19 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
                         Genomic.Position)) %>% 
                     dplyr::mutate(Flags = ifelse(is.na(Flags),"",Flags)) %>% 
                     dplyr::mutate(Flags = 
-                                      ifelse(identifier %in% sample_BC$identifier,
+                                      ifelse(identifier %in% certain_BC$identifier,
                                              ifelse(grepl("BC_mut",Flags),
                                                     Flags,ifelse(nchar(Flags)>0,
                                                                  paste0(Flags,", BC_mut"),
                                                                  paste0("BC_mut"))),
-                                             Flags)) %>%  
-                    dplyr::select(-identifier)
-                sample_BC <- sample_BC %>% 
+                                             Flags)) %>%
+                    dplyr::mutate(Flags = 
+                                      ifelse(identifier %in% uncertain_BC$identifier,
+                                             ifelse(grepl("BC_mut",Flags),
+                                                    Flags,ifelse(nchar(Flags)>0,
+                                                                 paste0(Flags,", uncertain_BC_mut"),
+                                                                 paste0("uncertain_BC_mut"))),
+                                             Flags)) %>%
                     dplyr::select(-identifier)
                 sample_df <- rbind(sample_other,sample_BC) %>% 
                     dplyr::arrange(sample_index,Gene)
