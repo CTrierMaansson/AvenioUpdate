@@ -5,7 +5,7 @@ create_df_list <- function(sample_df,runs){
     samples <- unique(sample_df$sample_index)
     unique_patients <- unique(runs$CPR)
     df_list <- list()
-    runs <- create_sample_index(df)
+    runs <- create_sample_index(sample_df)
     for (i in 1:length(unique_patients)){
         CPR_patient <- unique_patients[i]
         patient_df <- runs %>% 
