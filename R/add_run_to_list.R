@@ -125,7 +125,7 @@ add_run_to_list <- function(master_list, Directory,
         dplyr::ungroup() %>% 
         dplyr::filter(n > 1) %>% 
         dplyr::left_join(runs_project_cpr_name,by = "CPR_project")
-    AVENIO_runs_sample_index <- create_sample_index(AVENIO_runs) %>% 
+    AVENIO_runs_sample_index <- create_sample_index(AVENIO_runs)
     AVENIO_indeces_count <- AVENIO_runs_sample_index %>% 
         dplyr::select(sample_index) %>% 
         dplyr::group_by(sample_index) %>% 
