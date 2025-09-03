@@ -16,7 +16,7 @@ add_bam_mutation<-function(df_mut,Sample1,Sample2,GenomicPosition,
         dplyr::select(dplyr::any_of(redundant_cols))
     list_sample2 <- list_sample2 %>% 
         dplyr::select(-dplyr::any_of(redundant_cols))
-    merged_list <- bind_cols(list_sample1_red,list_sample2)
+    merged_list <- bind_cols(list_sample1_red,list_sample2) 
     merged_list$Variant.Depth <- as.character(VariantDepth)
     merged_list$Unique.Depth <- as.character(UniqueDepth)
     merged_list$Allele.Fraction <- stringr::str_glue(
