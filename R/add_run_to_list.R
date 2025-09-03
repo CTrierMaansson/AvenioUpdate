@@ -68,7 +68,7 @@ add_run_to_list <- function(master_list, Directory,
         stop("force_execution has to be a TRUE or FALSE")
     }
     master_list <- lapply(master_list, function(df){
-        df <- lapply(df, as.character)
+        df[] <- lapply(df, as.character)
         return(df)
     })
     unlisted_before <- do.call(dplyr::bind_rows,master_list) %>% 
@@ -271,7 +271,7 @@ add_run_to_list <- function(master_list, Directory,
         if(length(reanalyzed) >= length(master_list)){
             n_patients_after <- length(reanalyzed)
             reanalyzed <- lapply(reanalyzed, function(df){
-                df <- lapply(df, as.character)
+                df[] <- lapply(df, as.character)
                 return(df)
             })
             unlisted_after <- do.call(dplyr::bind_rows,reanalyzed) %>% 

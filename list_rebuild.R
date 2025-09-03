@@ -311,7 +311,7 @@ included_analyses(master_list)
 
 re_added_analyses <- added_runs[1:2]
 
-for(i in 132:length(added_plasma_runs)){
+for(i in 3:length(added_plasma_runs)){
     message(paste0("Adding 'Plasma' run ",i," of ",length(added_plasma_runs)))
     dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_plasma_runs[i])
     master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
@@ -331,8 +331,8 @@ for(i in 1:length(added_tissue_runs)){
         force_execution = TRUE)
     re_added_analyses[length(re_added_analyses)+1] <- added_tissue_runs[i]
 }
+
 re_added_analyses == added_runs
-added_runs[132]
 library(AvenioUpdate)
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 analyses <- AvenioUpdate::included_analyses(master_list)
@@ -341,21 +341,3 @@ AvenioUpdate::result_stats()$Basestats
 AvenioUpdate::result_stats()$Missing
 AvenioUpdate::explore_AVENIO_runs(Info = "Unincluded_analyses")
 
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AajqaHzI9_hCH4wYCbDAIYx4"
-master_list <- add_run_to_list(master_list = master_list,
-                               Directory = dir)
-
-create_simple_output(master_list, CPR = "2309772396")
-master_list[["2309772396"]]
-AvenioUpdate::add_new_key(key = "tumor_Tx",variable = "Sample_note")
-
-tmp <- extract_project(master_list,project = "FIOL")
-library(dplyr)
-tmp_sele <- tmp %>% 
-    filter(grepl("BC_mut",Flags) | Material == "BC") %>% 
-    select(sample_index,Flags,Material,Gene, Allele.Fraction,Variant.Depth)
-print(tmp_sele,max = 5000)
-tmp_mon <- extract_project(master_list,project = "MonAlec")
-tmp_mon %>% 
-    filter(grepl("DNAfusion",Flags)) %>% 
-    select(sample_index,Flags,Material,Gene, Allele.Fraction,Variant.Depth)

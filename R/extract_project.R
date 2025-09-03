@@ -93,7 +93,7 @@ extract_project <- function(df_list,
         stop("No patients are available in the selected project")
     }
     df_list <- lapply(df_list, function(df){
-        df <- lapply(df, as.character)
+        df[] <- lapply(df, as.character)
         return(df)
     })
     combined_df <- do.call(dplyr::bind_rows,df_list)

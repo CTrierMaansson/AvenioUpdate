@@ -29,7 +29,7 @@ included_analyses <- function(master_list){
         }
     }
     master_list <- lapply(master_list, function(df){
-        df <- lapply(df, as.character)
+        df[] <- lapply(df, as.character)
         return(df)
     })
     combined_df <- do.call(dplyr::bind_rows,master_list) %>% 

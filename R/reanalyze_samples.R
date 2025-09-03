@@ -7,7 +7,7 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
     existing <- names(df_list)[names(df_list) %in% names(master_list)]
     if(length(existing)<1){
         df_list <- lapply(df_list, function(df){
-            df <- lapply(df, as.character)
+            df[] <- lapply(df, as.character)
             return(df)
         })
         test_df <- do.call(dplyr::bind_rows,df_list) %>% 
@@ -17,12 +17,12 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
     }else{
         master_sele <- master_list[names(master_list) %in% existing]
         master_sele <- lapply(master_sele, function(df){
-            df <- lapply(df, as.character)
+            df[] <- lapply(df, as.character)
             return(df)
         })
         master_sele_df <- do.call(dplyr::bind_rows,master_sele)
         df_list <- lapply(df_list, function(df){
-            df <- lapply(df, as.character)
+            df[] <- lapply(df, as.character)
             return(df)
         })
         test_df <- do.call(dplyr::bind_rows,df_list) %>% 

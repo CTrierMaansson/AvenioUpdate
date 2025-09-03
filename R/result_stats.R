@@ -50,7 +50,7 @@ result_stats <- function(Info = NULL, silent = FALSE,
         message("Creating combined data.frame")
     }
     master_list <- lapply(master_list, function(df){
-        df <- lapply(df, as.character)
+        df[] <- lapply(df, as.character)
         return(df)
     })
     combined_df <- do.call(dplyr::bind_rows,master_list)
