@@ -1,5 +1,5 @@
 #' @noRd
-#' @importFrom dplyr filter `%>%` any_of select left_join
+#' @importFrom dplyr filter `%>%` any_of select left_join bind_cols
 #' @importFrom stringr str_glue
 add_bam_mutation<-function(df_mut,Sample1,Sample2,GenomicPosition,
                            VariantDepth,UniqueDepth){
@@ -12,13 +12,11 @@ add_bam_mutation<-function(df_mut,Sample1,Sample2,GenomicPosition,
     
     
     redundant_cols <- redundant_columns()
-    sample_redundant_cols <- redundant_cols[redundant_cols!="sample_index"]
     list_sample1_red <- list_sample1 %>% 
         dplyr::select(dplyr::any_of(redundant_cols))
     list_sample2 <- list_sample2 %>% 
-        dplyr::select(-dplyr::any_of(sample_redundant_cols))
-    merged_list <- list_sample1_red %>% 
-        dplyr::left_join(list_sample2, by = "sample_index")
+        dplyr::select(-dplyr::any_of(redundant_cols))
+    merged_list <- bind_cols(list_sample1_red,list_sample2)
     merged_list$Variant.Depth <- as.character(VariantDepth)
     merged_list$Unique.Depth <- as.character(UniqueDepth)
     merged_list$Allele.Fraction <- stringr::str_glue(
