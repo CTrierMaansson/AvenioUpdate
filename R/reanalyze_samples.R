@@ -1,22 +1,35 @@
 #' @noRd
-#' @importFrom dplyr arrange `%>%` filter mutate select
+#' @importFrom dplyr arrange `%>%` filter mutate select bind_rows mutate_all
 #' @importFrom stringr str_split_i
 #' @importFrom readxl read_xlsx
 reanalyze_samples <- function(master_list, df_list,synology_path){
     `%ni%` <- Negate(`%in%`)
     existing <- names(df_list)[names(df_list) %in% names(master_list)]
     if(length(existing)<1){
-        test_df <- do.call(rbind,df_list) %>% 
+        df_list <- lapply(df_list, function(df){
+            df <- lapply(df, as.character)
+            return(df)
+        })
+        test_df <- do.call(dplyr::bind_rows,df_list) %>% 
+            dplyr::bind_rows(master_sele_df) %>% 
             dplyr::arrange(sample_index,Gene) %>% 
             unique()
-    }
-    else{
+    }else{
         master_sele <- master_list[names(master_list) %in% existing]
-        test_df <- do.call(rbind,append(master_sele,df_list)) %>% 
+        master_sele <- lapply(master_sele, function(df){
+            df <- lapply(df, as.character)
+            return(df)
+        })
+        master_sele_df <- do.call(dplyr::bind_rows,master_sele)
+        df_list <- lapply(df_list, function(df){
+            df <- lapply(df, as.character)
+            return(df)
+        })
+        test_df <- do.call(dplyr::bind_rows,df_list) %>% 
+            dplyr::bind_rows(master_sele_df) %>% 
             dplyr::arrange(sample_index,Gene) %>% 
             unique()
     }
-    
     rownames(test_df) <- NULL
     validated_samples <- add_variants_from_bam_files(test_df,synology_path)
     Avenio_runs <- readxl::read_xlsx(

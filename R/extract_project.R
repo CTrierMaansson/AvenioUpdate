@@ -4,7 +4,7 @@
 #' located at "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
 #' and a project ID and creates a simple overview of the mutations identified
 #' for the patients in that project
-#' @importFrom dplyr left_join select mutate tibble `%>%` filter arrange
+#' @importFrom dplyr left_join select mutate tibble `%>%` filter arrange bind_rows
 #' @importFrom readxl read_xlsx
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom stringr str_split_i
@@ -92,7 +92,11 @@ extract_project <- function(df_list,
     if(is.null(AVENIO_runs_sele)){
         stop("No patients are available in the selected project")
     }
-    combined_df <- do.call(rbind,df_list)
+    df_list <- lapply(df_list, function(df){
+        df <- lapply(df, as.character)
+        return(df)
+    })
+    combined_df <- do.call(dplyr::bind_rows,df_list)
     rownames(combined_df) <- NULL
     df <- combined_df %>% 
         unique() %>% 

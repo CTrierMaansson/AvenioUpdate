@@ -5,7 +5,7 @@
 #' the patient is added to the list. If a patient ID/CPR is present in the list 
 #' the new NGS data is added under that patient and all the BAM files for that
 #' patient is manually checked for mutations. 
-#' @importFrom dplyr select `%>%` filter mutate group_by count ungroup left_join
+#' @importFrom dplyr select `%>%` filter mutate group_by count ungroup left_join bind_rows
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom readxl read_xlsx
 #' @importFrom stringr str_split_i
@@ -67,7 +67,11 @@ add_run_to_list <- function(master_list, Directory,
     if (!isScalarLogical(force_execution)) {
         stop("force_execution has to be a TRUE or FALSE")
     }
-    unlisted_before <- do.call(rbind,master_list) %>% 
+    master_list <- lapply(master_list, function(df){
+        df <- lapply(df, as.character)
+        return(df)
+    })
+    unlisted_before <- do.call(dplyr::bind_rows,master_list) %>% 
         dplyr::select(sample_index,Analysis.ID,Sample.ID) %>% 
         unique()
     message("Reading run information")
@@ -266,7 +270,11 @@ add_run_to_list <- function(master_list, Directory,
     if(is.list(reanalyzed)){
         if(length(reanalyzed) >= length(master_list)){
             n_patients_after <- length(reanalyzed)
-            unlisted_after <- do.call(rbind,reanalyzed) %>% 
+            reanalyzed <- lapply(reanalyzed, function(df){
+                df <- lapply(df, as.character)
+                return(df)
+            })
+            unlisted_after <- do.call(dplyr::bind_rows,reanalyzed) %>% 
                 dplyr::select(Analysis.Name,Sample.ID) %>% 
                 unique()
             n_runs_after <- nrow(unlisted_after)

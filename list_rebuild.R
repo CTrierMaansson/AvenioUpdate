@@ -129,7 +129,6 @@ added_plasma_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                        "AKOq_6jg8QBEtJ56mdDQRhCY",
                        "ALiWTGK4o89L_p-HAAVLa-g6",
                        "AQ7WUkiPdghLrbVZxFDZgvTx",
-                       "AS9tve0kT4dHr6nyDAvSIeN2",
                        "AF_AzT3BtZNNAKdXMLlgL-kO",
                        "AFlB-kA2v09FcaDKD6YokkZ9",
                        "AIdbUPY2zoxL3IQqtbzznOr0",
@@ -138,7 +137,10 @@ added_plasma_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                        "AN2HN25vi9JOLpbvICWovem4",
                        "AUoX7CUl_R9Km4NN5S6981gL",
                        "AZGYvMNad0NF_4sFhHvANYtT")
-added_tissue_runs <- c("ALfftHDzDf9Evo2fz0r1muEC")
+added_tissue_runs <- c("ALfftHDzDf9Evo2fz0r1muEC",
+                       "ATEhuqON-6JAd6U8JpC7MgB-",
+                       "ASmjSYbVP6BP6K6aVqLLEoWH",
+                       "AXxH7uutar1EC47veUUoN3Jp")
 
 added_runs <- c(added_plasma_runs,
                 added_tissue_runs)
@@ -180,9 +182,10 @@ if(any(nchar(added_runs) != 24)){
 #### Adding run ####
 
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AajqaHzI9_hCH4wYCbDAIYx4"
-master_list <- add_run_to_list(master_list = master_list,
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEdiX1AaYJBFM4G7307KEA2u"
+master_list <- AvenioUpdate::add_run_to_list(master_list = master_list,
                                Directory = dir)
+
 #### Recreating AVENIO_results_patients.rds ####
 
 #If the "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
@@ -308,7 +311,7 @@ included_analyses(master_list)
 
 re_added_analyses <- added_runs[1:2]
 
-for(i in 3:length(added_plasma_runs)){
+for(i in 132:length(added_plasma_runs)){
     message(paste0("Adding 'Plasma' run ",i," of ",length(added_plasma_runs)))
     dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_plasma_runs[i])
     master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
@@ -329,6 +332,7 @@ for(i in 1:length(added_tissue_runs)){
     re_added_analyses[length(re_added_analyses)+1] <- added_tissue_runs[i]
 }
 re_added_analyses == added_runs
+added_runs[132]
 library(AvenioUpdate)
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 analyses <- AvenioUpdate::included_analyses(master_list)
@@ -343,15 +347,15 @@ master_list <- add_run_to_list(master_list = master_list,
 
 create_simple_output(master_list, CPR = "2309772396")
 master_list[["2309772396"]]
+AvenioUpdate::add_new_key(key = "tumor_Tx",variable = "Sample_note")
 
-mon <- extract_project(master_list, project = "MonAlec")
+tmp <- extract_project(master_list,project = "FIOL")
 library(dplyr)
-mon %>% 
-    filter(grepl("DNAfusion",Flags))
-library(AvenioUpdate)
-master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-master_list <- AvenioUpdate::add_run_to_list(
-    master_list = master_list,
-    Directory <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Tissue-ALfftHDzDf9Evo2fz0r1muEC",
-    force_execution = TRUE)
-
+tmp_sele <- tmp %>% 
+    filter(grepl("BC_mut",Flags) | Material == "BC") %>% 
+    select(sample_index,Flags,Material,Gene, Allele.Fraction,Variant.Depth)
+print(tmp_sele,max = 5000)
+tmp_mon <- extract_project(master_list,project = "MonAlec")
+tmp_mon %>% 
+    filter(grepl("DNAfusion",Flags)) %>% 
+    select(sample_index,Flags,Material,Gene, Allele.Fraction,Variant.Depth)

@@ -2,7 +2,7 @@
 #' 
 #' This function takes the AVENIO_results_patients.rds file and generates
 #' different explorative stats on the dataset
-#' @importFrom dplyr left_join select mutate `%>%` filter arrange count ungroup
+#' @importFrom dplyr left_join select mutate `%>%` filter arrange count ungroup bind_rows
 #' @importFrom readxl read_xlsx
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #' @importFrom stringr str_split_i
@@ -49,7 +49,11 @@ result_stats <- function(Info = NULL, silent = FALSE,
     if(!silent){
         message("Creating combined data.frame")
     }
-    combined_df <- do.call(rbind,master_list)
+    master_list <- lapply(master_list, function(df){
+        df <- lapply(df, as.character)
+        return(df)
+    })
+    combined_df <- do.call(dplyr::bind_rows,master_list)
     if(!silent){
         message("Reading AVENIO_runs.xlsx")
     }
@@ -110,7 +114,7 @@ result_stats <- function(Info = NULL, silent = FALSE,
     if(!silent){
         message("Finding unincluded samples")
     }
-    total_df <- do.call(rbind,master_list)
+    total_df <- do.call(dplyr::bind_rows,master_list)
     rownames(total_df) <- NULL
     added_samples <- unique(total_df$sample_index)
     xlsx_samples <- unique(Avenio_runs$sample_index)

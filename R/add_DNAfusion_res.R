@@ -1,5 +1,5 @@
 #' @noRd
-#' @importFrom dplyr filter `%>%` mutate select bind_rows left_join arrange
+#' @importFrom dplyr filter `%>%` mutate select bind_rows left_join arrange any_of
 #' @importFrom stringr str_split_i
 #' @importFrom lubridate ymd
 #' @importFrom DNAfusion EML4_ALK_analysis find_variants
@@ -9,6 +9,8 @@ add_DNAfusion_res <- function(df,
     `%ni%` <- Negate(`%in%`)
     unique_samples <- unique(df$sample_index)
     sample_info <- create_sample_index(sample_info)
+    redundant_cols <- redundant_columns()
+    sample_redundant_cols <- redundant_cols[redundant_cols%ni%c("Flags")]
     for(i in 1:length(unique_samples)){
         sample_ind <- unique_samples[i]
         sample_info <- df %>% 
@@ -78,7 +80,6 @@ add_DNAfusion_res <- function(df,
                 fusion_variant <- "Not classified"
             }
             res_df <- data.frame(sample_index = sample_ind,
-                                 Sample.ID = sampleID,
                                  Flags = "DNAfusion",
                                  Mutation.Class = "FUSION",
                                  Gene = "ALK;EML4",
@@ -93,18 +94,10 @@ add_DNAfusion_res <- function(df,
                                  Variant.Depth = as.character(clipped_reads),
                                  Unique.Depth = ALK_depth,
                                  Exon.Number = exon)
-            if(sample_info$Sample.Type[1] == "Plasma"){
-                sample_info_unique <- sample_info %>% 
-                    dplyr::select(colnames(df)[c(1,4:15,47:84)]) %>% 
-                    unique() %>% 
-                    dplyr::left_join(res_df, by = "sample_index")
-            }
-            if(sample_info$Sample.Type[1] == "Tissue"){
-                sample_info_unique <- sample_info %>% 
-                    dplyr::select(colnames(df)[c(1,4:15,45:81)]) %>% 
-                    unique() %>% 
-                    dplyr::left_join(res_df, by = "sample_index")
-            }
+            sample_info_unique <- sample_info %>% 
+                dplyr::select(any_of(sample_redundant_cols)) %>% 
+                unique() %>% 
+                dplyr::left_join(res_df, by = "sample_index")
             sample_res <- sample_info %>% 
                 dplyr::mutate(Variant.Depth = as.character(Variant.Depth)) %>% 
                 dplyr::mutate(
