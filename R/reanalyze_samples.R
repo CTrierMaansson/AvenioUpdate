@@ -11,7 +11,6 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
             return(df)
         })
         test_df <- do.call(dplyr::bind_rows,df_list) %>% 
-            dplyr::bind_rows(master_sele_df) %>% 
             dplyr::arrange(sample_index,Gene) %>% 
             unique()
     }else{
