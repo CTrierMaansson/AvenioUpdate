@@ -83,34 +83,7 @@ add_samples <- function(Directory,runs,synology_path){
         combined_samples <- variants_select
     }
     if(!"sample_index" %in% colnames(AVENIO_runs_select)){
-        AVENIO_runs_select <- AVENIO_runs_select %>% 
-            dplyr::mutate(sample_index = paste0(Project,"_",
-                                                Name_in_project,"_",
-                                                substr(stringr::str_split_i(
-                                                    as.character(Sample_date),"-",1),
-                                                    3,4),
-                                                stringr::str_split_i(
-                                                    as.character(Sample_date),"-",2),
-                                                stringr::str_split_i(
-                                                    as.character(Sample_date),"-",3)
-            )
-            ) %>% 
-            dplyr::mutate(
-                sample_index = ifelse(Material == "cfDNA",
-                                      sample_index,
-                                      ifelse(Material == "tissue",
-                                             paste0(sample_index,"_",
-                                                    Material,"_",
-                                                    Sample_note),
-                                             ifelse(Material == "reanalyze",
-                                                    ifelse(Sample_note == "BC",
-                                                           paste0(sample_index,"_",
-                                                                  Material,"_",
-                                                                  Sample_note),
-                                                           paste0(sample_index,"_",
-                                                                  Material)),
-                                                    paste0(sample_index,"_",
-                                                           Material)))))
+        AVENIO_runs_select <- create_sample_index(AVENIO_runs_select) 
     }
     AVENIO_runs_select_merge <- AVENIO_runs_select %>% 
         dplyr::select(Sample_name,sample_index) %>% 
