@@ -136,7 +136,8 @@ added_plasma_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                        "AIJcFvMcwONPLZCB6thhkiPj",
                        "AN2HN25vi9JOLpbvICWovem4",
                        "AUoX7CUl_R9Km4NN5S6981gL",
-                       "AZGYvMNad0NF_4sFhHvANYtT")
+                       "AZGYvMNad0NF_4sFhHvANYtT",
+                       "AT6FIbIHWOxJ2YEzv2zpRCF_")
 added_tissue_runs <- c("ALfftHDzDf9Evo2fz0r1muEC",
                        "ATEhuqON-6JAd6U8JpC7MgB-",
                        "ASmjSYbVP6BP6K6aVqLLEoWH",
@@ -182,7 +183,7 @@ if(any(nchar(added_runs) != 24)){
 #### Adding run ####
 
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AEdiX1AaYJBFM4G7307KEA2u"
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AT6FIbIHWOxJ2YEzv2zpRCF_"
 master_list <- AvenioUpdate::add_run_to_list(master_list = master_list,
                                Directory = dir)
 
@@ -299,7 +300,7 @@ create_df_list_mod <- function(sample_df){
     return(df_list)
 }
 master_list <- create_df_list_mod(combined_samples1)
-
+saveRDS(master_list,file = "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 dir <- paste0("//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-",added_runs[2])
 
 master_list <- AvenioUpdate::add_run_to_list(
@@ -319,7 +320,7 @@ for(i in 3:length(added_plasma_runs)){
         master_list = master_list,
         Directory = dir,
         force_execution = TRUE)
-    re_added_analyses[i] <- added_plasma_runs[i]
+    re_added_analyses[length(re_added_analyses)+1] <- added_plasma_runs[i]
 }
 for(i in 1:length(added_tissue_runs)){
     message(paste0("Adding 'Tissue' run ",i," of ",length(added_tissue_runs)))
@@ -332,7 +333,7 @@ for(i in 1:length(added_tissue_runs)){
     re_added_analyses[length(re_added_analyses)+1] <- added_tissue_runs[i]
 }
 
-re_added_analyses == added_runs
+sort(re_added_analyses) == sort(added_runs)
 library(AvenioUpdate)
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 analyses <- AvenioUpdate::included_analyses(master_list)

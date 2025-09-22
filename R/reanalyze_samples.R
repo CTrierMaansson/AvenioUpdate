@@ -52,9 +52,13 @@ reanalyze_samples <- function(master_list, df_list,synology_path){
             sample_BC <- sample_df %>% 
                 dplyr::filter(grepl("_BC", sample_index))
             certain_BC <- sample_BC %>% 
-                filter(!grepl("BAM",Flags) | Variant.Depth > 2)
+                dplyr::filter(!grepl("N/A",Variant.Depth)) %>% 
+                dplyr::mutate(Variant.Depth = as.numeric(Variant.Depth)) %>% 
+                dplyr::filter(!grepl("BAM",Flags) | Variant.Depth > 2)
             uncertain_BC <- sample_BC %>% 
-                filter(grepl("BAM",Flags) & Variant.Depth < 3)
+                dplyr::filter(!grepl("N/A",Variant.Depth)) %>% 
+                dplyr::mutate(Variant.Depth = as.numeric(Variant.Depth)) %>% 
+                dplyr::filter(grepl("BAM",Flags) & Variant.Depth < 3)
             sample_other <- sample_df %>% 
                 dplyr::filter(!grepl("_BC", sample_index))
             if(nrow(sample_other) > 0){
