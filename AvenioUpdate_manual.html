@@ -677,7 +677,7 @@ Denmark<br><a class="author_email" href="mailto:#"><a href="mailto:ctm@clin.au.d
 <h4 class="author">Lærke Rosenlund Nielsen</h4>
 <address class="author_afil">
 Department of Clinical Biochemistry, Aarhus University Hospital,
-Denmark<br><h4 class="date">15 maj 2025</h4>
+Denmark<br><h4 class="date">20 okt 2025</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 This manual describes how to use AvenioUpdate to update and extract
@@ -708,6 +708,7 @@ file</a>
 AVENIO_results_patients.rds (<strong>Not mandatory
 read</strong>)</a></li>
 </ul></li>
+<li><a href="#synology-path" id="toc-synology-path"><span class="toc-section-number">3.3</span> Synology path</a></li>
 </ul></li>
 <li><a href="#main-functions" id="toc-main-functions"><span class="toc-section-number">4</span> Main functions</a>
 <ul>
@@ -748,12 +749,13 @@ mandatory read</strong>)</a>
 <li><a href="#explore_avenio_runs" id="toc-explore_avenio_runs"><span class="toc-section-number">5.3</span>
 <code>explore_AVENIO_runs()</code></a>
 <ul>
-<li><a href="#example-5" id="toc-example-5"><span class="toc-section-number">5.3.1</span> Example</a></li>
-<li><a href="#output-description" id="toc-output-description"><span class="toc-section-number">5.3.2</span> Output description</a></li>
+<li><a href="#output-5" id="toc-output-5"><span class="toc-section-number">5.3.1</span> Output</a></li>
+<li><a href="#example-5" id="toc-example-5"><span class="toc-section-number">5.3.2</span> Example</a></li>
+<li><a href="#output-description" id="toc-output-description"><span class="toc-section-number">5.3.3</span> Output description</a></li>
 </ul></li>
 <li><a href="#result_stats" id="toc-result_stats"><span class="toc-section-number">5.4</span> <code>result_stats()</code></a>
 <ul>
-<li><a href="#output-5" id="toc-output-5"><span class="toc-section-number">5.4.1</span> Output</a></li>
+<li><a href="#output-6" id="toc-output-6"><span class="toc-section-number">5.4.1</span> Output</a></li>
 <li><a href="#example-6" id="toc-example-6"><span class="toc-section-number">5.4.2</span> Example</a></li>
 <li><a href="#output-description-1" id="toc-output-description-1"><span class="toc-section-number">5.4.3</span> Output description</a></li>
 </ul></li>
@@ -849,7 +851,10 @@ order to use the package you must have access to the Synology folder.
 How to obtain this, is found in <a href="/Dropbox/Lung%20cancer%20group/How-to%20guides">/Dropbox/Lung
 cancer group/How-to guides</a> . Once you have gained access to the
 Synology you must stay connected using the Ethernet cable connection
-<strong>IPv4-DNA-server: 10.83.252.137</strong>.</p>
+<strong>IPv4-adress: 10.124.6.78</strong> (health.client.au) or
+<strong>IPv4-adress: 10.60.24.79</strong> (onerm). Notice how
+<strong>both</strong> AU and region networks can establish the
+connection to synology.</p>
 <div id="the-avenio_runs.xlsx-file" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> The AVENIO_runs.xlsx
 file</h2>
@@ -865,10 +870,11 @@ consistency across all our projects. Yes! Very neat!</p>
 <p><strong>THIS FILE IS UPDATED MANUALLY</strong></p>
 <p>The file can be opened in excel where the samples can be added
 accordingly. It is <strong>VERY</strong> important that samples/entries
-are not deleted from the file. Currently, we have no backup of the data
-(given it is sensitive) included in the file. If you make errors when
-entering your information, no worries, this can be fixed without any
-repercussions. However, it is very difficult to obtain deleted data.</p>
+are not deleted from the file. Christoffer makes sure there is a backup
+of the file on GenomeDK, which is updated regularly. If you make errors
+when entering your information, no worries, this can be fixed without
+any repercussions. However, it is very difficult to obtain deleted
+data.</p>
 <p>So as long as you don’t delete anything or change entries not
 belonging to you all is fine!</p>
 <p><strong>Nevertheless, there are some rules regarding the
@@ -933,138 +939,22 @@ Material
 1401362941
 </td>
 <td style="text-align:left;">
-pt15
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2021-02-04
-</td>
-<td style="text-align:left;">
-20221221
-</td>
-<td style="text-align:left;">
-AVhAZ6wwwchE4IIQa6lOQhN4
-</td>
-<td style="text-align:left;">
-pippin_batezo_15
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-<td style="text-align:left;">
-size_selection
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1902514323
-</td>
-<td style="text-align:left;">
-pt20
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2021-03-18
-</td>
-<td style="text-align:left;">
-Copy_FaXb_20230112
-</td>
-<td style="text-align:left;">
-AEepGWqCaABI04g5DQESU97x
-</td>
-<td style="text-align:left;">
-pippin_batezo_20
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-<td style="text-align:left;">
-size_selection
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2409291076
-</td>
-<td style="text-align:left;">
-J7B949NF6EFG82VI
+AW373401PDZHAA5W
 </td>
 <td style="text-align:left;">
 MonAlec
 </td>
 <td style="text-align:left;">
-2024-07-31
+2024-06-28
 </td>
 <td style="text-align:left;">
-20240828
+20241030
 </td>
 <td style="text-align:left;">
-AYUQsRurkNxKlZxM6mns82Dz
+AKmgHQ2-w3RHTqVjtWTKLz60
 </td>
 <td style="text-align:left;">
-mona_1210570213_240731
-</td>
-<td style="text-align:left;">
-BL
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2803595505
-</td>
-<td style="text-align:left;">
-3537
-</td>
-<td style="text-align:left;">
-Josephine-MRD
-</td>
-<td style="text-align:left;">
-2013-05-14
-</td>
-<td style="text-align:left;">
-20220325
-</td>
-<td style="text-align:left;">
-AOiXc8th1tJMS6kdDAg812fA
-</td>
-<td style="text-align:left;">
-3537bl
-</td>
-<td style="text-align:left;">
-BL
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2803595505
-</td>
-<td style="text-align:left;">
-3537
-</td>
-<td style="text-align:left;">
-Josephine-MRD
-</td>
-<td style="text-align:left;">
-2013-07-01
-</td>
-<td style="text-align:left;">
-20220325
-</td>
-<td style="text-align:left;">
-AOiXc8th1tJMS6kdDAg812fA
-</td>
-<td style="text-align:left;">
-3537post1
+mona_0912742407_RS_2L
 </td>
 <td style="text-align:left;">
 Tx
@@ -1075,74 +965,190 @@ cfDNA
 </tr>
 <tr>
 <td style="text-align:left;">
+1902514323
+</td>
+<td style="text-align:left;">
+pt19
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2021-03-15
+</td>
+<td style="text-align:left;">
+20210415
+</td>
+<td style="text-align:left;">
+ABSYoqHZHR9Gvo_Z0scoIQ8w
+</td>
+<td style="text-align:left;">
+742prae
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1902514323
+</td>
+<td style="text-align:left;">
+pt19
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2021-04-08
+</td>
+<td style="text-align:left;">
+20210616
+</td>
+<td style="text-align:left;">
+ADNC-IlUdsROnLSz2AnnTpGz
+</td>
+<td style="text-align:left;">
+BATEZ_2_1301410014
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1902514323
+</td>
+<td style="text-align:left;">
+pt19
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2021-05-21
+</td>
+<td style="text-align:left;">
+20210616
+</td>
+<td style="text-align:left;">
+ADNC-IlUdsROnLSz2AnnTpGz
+</td>
+<td style="text-align:left;">
+BATEZ_PROG3_1301410014
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1902514323
+</td>
+<td style="text-align:left;">
+pt19
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2021-03-15
+</td>
+<td style="text-align:left;">
+20231016
+</td>
+<td style="text-align:left;">
+ALsopAc5KC1Bx7pJLiHZ-eJR
+</td>
+<td style="text-align:left;">
+pt19bc
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+BC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2409291076
+</td>
+<td style="text-align:left;">
+2900
+</td>
+<td style="text-align:left;">
+Josephine-MRD
+</td>
+<td style="text-align:left;">
+2013-04-22
+</td>
+<td style="text-align:left;">
+20220408
+</td>
+<td style="text-align:left;">
+ASl7tgQWvuhA44Kx9otONfK0
+</td>
+<td style="text-align:left;">
+2900post2
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2803595505
+</td>
+<td style="text-align:left;">
+3296
+</td>
+<td style="text-align:left;">
+Josephine-MRD
+</td>
+<td style="text-align:left;">
+2012-11-09
+</td>
+<td style="text-align:left;">
+20220504
+</td>
+<td style="text-align:left;">
+AceQabkgtrVDvohQ_gcEx7Yf
+</td>
+<td style="text-align:left;">
+3296bc
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+BC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 1809485424
 </td>
 <td style="text-align:left;">
-pt17
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2021-02-15
-</td>
-<td style="text-align:left;">
-Copy_FaXb_20230112
-</td>
-<td style="text-align:left;">
-AEepGWqCaABI04g5DQESU97x
-</td>
-<td style="text-align:left;">
-pippin_batezo_17
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-<td style="text-align:left;">
-size_selection
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2801452016
-</td>
-<td style="text-align:left;">
-pt16
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2021-02-05
-</td>
-<td style="text-align:left;">
-20221221
-</td>
-<td style="text-align:left;">
-AVhAZ6wwwchE4IIQa6lOQhN4
-</td>
-<td style="text-align:left;">
-pippin_batezo_16
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-<td style="text-align:left;">
-size_selection
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2109514436
-</td>
-<td style="text-align:left;">
-pt36
+pt28
 </td>
 <td style="text-align:left;">
 cfChIP
 </td>
 <td style="text-align:left;">
-2018-08-27
+2017-12-27
 </td>
 <td style="text-align:left;">
 20220204
@@ -1151,7 +1157,7 @@ cfChIP
 AY-MEcYGsnlEp70J19fZmwOJ
 </td>
 <td style="text-align:left;">
-D-1578-ChIP
+G-514-ChIP
 </td>
 <td style="text-align:left;">
 Unknown
@@ -1175,8 +1181,7 @@ The number is used to extract the information from each patient in
 <code>create_simple_output()</code>.</p>
 <p>As explained below, AVENIO_results_patients.rds is a named
 <code>list</code> of <code>data.frames</code> where each
-<code>data.frame</code> is named after the CPR number of the
-patient.</p>
+<code>data.frame</code> is named with the CPR number of the patient.</p>
 <p>Therefore you will able to explore all Avenio information, including
 sample metrics using:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
@@ -1351,6 +1356,33 @@ have been analyzed for that patient these variants are being
 investigated in the original BAM files for the patient.</p>
 </div>
 </div>
+<div id="synology-path" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Synology path</h2>
+<p>The pacakge is dependent on access to the synology folder which can
+be established through the how-to-guide: <a href="/Dropbox/Lung%20cancer%20group/How-to%20guides">/Dropbox/Lung
+cancer group/How-to guides</a> . At times, this connection is
+established though different mechanisms and this can affect the path to
+the synology folder. The <em>correct</em> path is
+<code>//Synology_m1/Synology_folder</code> and the path which is
+hardcoded into all the functions. This is also the path which is used in
+this manual.</p>
+<p>However, if the connection to the synology folder only can get
+established through the IP adress. Then the path could be:
+<code>//10.124.39.251/Synology_folder/</code>. This path can then be
+used to change the hardcoded path for the different functions. If this
+is the case then all functions has to be run using:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># defining path</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>syn_path <span class="ot">&lt;-</span> <span class="st">&quot;//10.124.39.251/Synology_folder/AVENIO/&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#Example of function needing the synology_path argument</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">add_run_to_list</span>(...,</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                <span class="at">synology_path =</span> syn_path)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># &#39;...&#39; means &quot;additional arguments&quot;</span></span></code></pre></div>
+<p>And the results file can only be read using:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#Reading the Avenio results:</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//10.124.39.251/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span></code></pre></div>
+</div>
 </div>
 <div id="main-functions" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Main functions</h1>
@@ -1419,36 +1451,36 @@ file using the following variables:</p>
 <li>Material</li>
 </ol>
 <p>And the following code:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Reading the AVENIO_runs.xlsx file</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx&quot;</span>, <span class="co"># path to file</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>        <span class="at">col_types =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;guess&quot;</span>,<span class="dv">4</span>), <span class="co">#Ensuring correct formatting of dates</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                      <span class="st">&quot;date&quot;</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                      <span class="fu">rep</span>(<span class="st">&quot;guess&quot;</span>,<span class="dv">6</span>)))</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="do">###SOME ADDITIONAL CODE NOT RELEVANT FOR THIS MANUAL####</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    <span class="at">sample_index =</span> <span class="fu">paste0</span>(</span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>      Project, <span class="co">#Add project information</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>      <span class="st">&quot;_&quot;</span>,</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>      Name_in_project, <span class="co">#Add patient ID in project</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>      <span class="st">&quot;_&quot;</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>      <span class="fu">substr</span>( <span class="co">#Formatting date information</span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>        stringr<span class="sc">::</span><span class="fu">str_split_i</span>(<span class="fu">as.character</span>(Sample_date), <span class="st">&quot;-&quot;</span>,<span class="dv">1</span>),<span class="dv">3</span>,<span class="dv">4</span>), <span class="co">#Adding year information</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_split_i</span>(<span class="fu">as.character</span>(Sample_date),<span class="st">&quot;-&quot;</span>,<span class="dv">2</span>), <span class="co">#Adding month information</span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_split_i</span>(<span class="fu">as.character</span>(Sample_date),<span class="st">&quot;-&quot;</span>,<span class="dv">3</span>))) <span class="sc">%&gt;%</span>  <span class="co">#Adding date in month information</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>( <span class="co">#Formatting material information</span></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>    <span class="at">sample_index =</span> <span class="fu">ifelse</span>(</span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>      Material <span class="sc">!=</span> <span class="st">&quot;cfDNA&quot;</span>, <span class="co"># Selecting samples NOT cfDNA</span></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>      <span class="fu">paste0</span>(sample_index,<span class="st">&quot;_&quot;</span>,Material), <span class="co"># Adding material if NOT cfDNA</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>      sample_index)) <span class="co"># Skipping material addition if material is cfDNA</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Reading the AVENIO_runs.xlsx file</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_runs.xlsx&quot;</span>, <span class="co"># path to file</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>        <span class="at">col_types =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;guess&quot;</span>,<span class="dv">4</span>), <span class="co">#Ensuring correct formatting of dates</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                      <span class="st">&quot;date&quot;</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>                      <span class="fu">rep</span>(<span class="st">&quot;guess&quot;</span>,<span class="dv">6</span>)))</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="do">###SOME ADDITIONAL CODE NOT RELEVANT FOR THIS MANUAL####</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>    <span class="at">sample_index =</span> <span class="fu">paste0</span>(</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>      Project, <span class="co">#Add project information</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>      <span class="st">&quot;_&quot;</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>      Name_in_project, <span class="co">#Add patient ID in project</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>      <span class="st">&quot;_&quot;</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>      <span class="fu">substr</span>( <span class="co">#Formatting date information</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>        stringr<span class="sc">::</span><span class="fu">str_split_i</span>(<span class="fu">as.character</span>(Sample_date), <span class="st">&quot;-&quot;</span>,<span class="dv">1</span>),<span class="dv">3</span>,<span class="dv">4</span>), <span class="co">#Adding year information</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_split_i</span>(<span class="fu">as.character</span>(Sample_date),<span class="st">&quot;-&quot;</span>,<span class="dv">2</span>), <span class="co">#Adding month information</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_split_i</span>(<span class="fu">as.character</span>(Sample_date),<span class="st">&quot;-&quot;</span>,<span class="dv">3</span>))) <span class="sc">%&gt;%</span>  <span class="co">#Adding date in month information</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>( <span class="co">#Formatting material information</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>    <span class="at">sample_index =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>      Material <span class="sc">!=</span> <span class="st">&quot;cfDNA&quot;</span>, <span class="co"># Selecting samples NOT cfDNA</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>      <span class="fu">paste0</span>(sample_index,<span class="st">&quot;_&quot;</span>,Material), <span class="co"># Adding material if NOT cfDNA</span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>      sample_index)) <span class="co"># Skipping material addition if material is cfDNA</span></span></code></pre></div>
 <p>As can be seen above the <code>sample_index</code> is formatted as
 <strong>Project_Name_YYMMDD_(Material)</strong>.</p>
 <p>The material is only added if the material is <strong>not</strong>
@@ -1467,23 +1499,23 @@ sample context.</p>
 <code>master_list</code> (named <code>list</code> of
 <code>data.frames</code>). This is automatically saved as the
 AVENIO_results_patients.rds file and now</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span></code></pre></div>
 <p>Means <code>results</code> now contain the Avenio results updated
 with the most recent samples.</p>
 </div>
 <div id="example" class="section level3" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> Example</h3>
 <p>An example of how the function is used is shown below:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Example path to the specific run</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>test_path <span class="ot">&lt;-</span> <span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O&quot;</span> </span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># Updating the results file</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">add_run_to_list</span>(<span class="at">master_list =</span> results,</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>                           <span class="at">Directory =</span> test_path)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Example path to the specific run</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>test_path <span class="ot">&lt;-</span> <span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANei_Hsi__lGmaJ1k_Ji_d3O&quot;</span> </span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># Updating the results file</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">add_run_to_list</span>(<span class="at">master_list =</span> results,</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>                           <span class="at">Directory =</span> test_path)</span></code></pre></div>
 </div>
 <div id="end-messages" class="section level3" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> End messages</h3>
@@ -1551,7 +1583,7 @@ and AVENIO_results_patients.rds files. (Default:
 </ol>
 <p>Current included entries for Project, Sample_note, and Material can
 be viewed with:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_keys.rds&quot;</span>)</span></code></pre></div>
 <div id="output-1" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Output</h3>
 <p>There is no output of this function, just a message telling you what
@@ -1560,8 +1592,8 @@ variable has been updated with the new key</p>
 <div id="example-1" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Example</h3>
 <p>An example of how the function can be used</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">add_new_key</span>(<span class="at">key =</span> <span class="st">&quot;test&quot;</span>,</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>            <span class="at">variable =</span> <span class="st">&quot;Project&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">add_new_key</span>(<span class="at">key =</span> <span class="st">&quot;test&quot;</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>            <span class="at">variable =</span> <span class="st">&quot;Project&quot;</span>)</span></code></pre></div>
 <p>This should print the following messages</p>
 <pre><code>#&gt; Adding the new key: &#39;test&#39; for the variable: &#39;Project&#39;.
 #&gt; DONE!</code></pre>
@@ -1633,19 +1665,19 @@ files also can be extraced in this simple format.</p>
 <h3><span class="header-section-number">4.3.2</span> Example</h3>
 <p>An example of how the function is used is shown below: <em>Again, the
 CPR number is not a real CPR number</em></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># Extracting the simple output</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>overview <span class="ot">&lt;-</span> <span class="fu">create_simple_output</span>(<span class="at">df_list =</span> results,</span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>                                 <span class="at">CPR =</span> <span class="st">&quot;1401362941&quot;</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>                                 <span class="at">synonymous =</span> F)</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co"># CPR number</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>overview[[<span class="dv">1</span>]] </span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># Data.frame with the 14 variables</span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>overview[[<span class="dv">2</span>]] </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Extracting the simple output</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>overview <span class="ot">&lt;-</span> <span class="fu">create_simple_output</span>(<span class="at">df_list =</span> results,</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>                                 <span class="at">CPR =</span> <span class="st">&quot;1401362941&quot;</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>                                 <span class="at">synonymous =</span> F)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co"># CPR number</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>overview[[<span class="dv">1</span>]] </span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co"># Data.frame with the 14 variables</span></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>overview[[<span class="dv">2</span>]] </span></code></pre></div>
 <p>Which gives the following output:</p>
 <pre><code>#&gt; [1] &quot;1401362941&quot;</code></pre>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
@@ -2805,25 +2837,25 @@ system</li>
 file</li>
 </ol>
 <p>Available entries can be shown using the following:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="fu">names</span>(analyses[[<span class="st">&quot;Details:&quot;</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="fu">names</span>(analyses[[<span class="st">&quot;Details:&quot;</span>]])</span></code></pre></div>
 <p><strong>OR</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>analyses[[<span class="st">&quot;Overview:&quot;</span>]]<span class="sc">$</span>Analysis.ID</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>analyses[[<span class="st">&quot;Overview:&quot;</span>]]<span class="sc">$</span>Analysis.ID</span></code></pre></div>
 </div>
 <div id="example-3" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Example</h3>
 <p>An example of how the function is used is shown below:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># Extract included analyses</span></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co"># Getting an overview of the analyses</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>analyses[[<span class="st">&quot;Overview:&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co"># Extract included analyses</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co"># Getting an overview of the analyses</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>analyses[[<span class="st">&quot;Overview:&quot;</span>]]</span></code></pre></div>
 <p>Which should result in something like this:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -2836,6 +2868,9 @@ n
 </th>
 <th style="text-align:left;">
 Analysis.Name
+</th>
+<th style="text-align:left;">
+Analysis.Type
 </th>
 </tr>
 </thead>
@@ -2850,16 +2885,22 @@ AE5hBlinjEZN6ZZ1L7898Rzc
 <td style="text-align:left;">
 20210204
 </td>
+<td style="text-align:left;">
+Plasma
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 AEdiX1AaYJBFM4G7307KEA2u
 </td>
 <td style="text-align:right;">
-1
+16
 </td>
 <td style="text-align:left;">
 FIOL6
+</td>
+<td style="text-align:left;">
+Plasma
 </td>
 </tr>
 <tr>
@@ -2872,16 +2913,22 @@ AEepGWqCaABI04g5DQESU97x
 <td style="text-align:left;">
 Copy_FaXb_20230112
 </td>
+<td style="text-align:left;">
+Plasma
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 AEHqc78-RkhKwqARpiG9V9Qi
 </td>
 <td style="text-align:right;">
-5
+13
 </td>
 <td style="text-align:left;">
 20211111
+</td>
+<td style="text-align:left;">
+Plasma
 </td>
 </tr>
 <tr>
@@ -2894,29 +2941,35 @@ AEjxrRrIVjJGzbUFckTwpTpp
 <td style="text-align:left;">
 Copy_hjRD_202008212
 </td>
+<td style="text-align:left;">
+Plasma
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 AeUIQZkyte1MjIyV0h0MS0aI
 </td>
 <td style="text-align:right;">
-8
+9
 </td>
 <td style="text-align:left;">
 20211201
+</td>
+<td style="text-align:left;">
+Plasma
 </td>
 </tr>
 </tbody>
 </table>
 <p>And the second entry is viewed using:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># Extract included analyses</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Exploring specific run</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>analyses[[<span class="st">&quot;Details:&quot;</span>]][[<span class="st">&quot;AGU232uEYZZKe4oI95IrJu7o&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># Extract included analyses</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>analyses <span class="ot">&lt;-</span> <span class="fu">included_analyses</span>(results)</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co"># Exploring specific run</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>analyses[[<span class="st">&quot;Details:&quot;</span>]][[<span class="st">&quot;AGU232uEYZZKe4oI95IrJu7o&quot;</span>]]</span></code></pre></div>
 <p>Which should result in something like this:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -2933,29 +2986,18 @@ Analysis.Name
 <th style="text-align:left;">
 Analysis.ID
 </th>
+<th style="text-align:left;">
+Analysis.Type
+</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-MonAlec_00QWTDYUH1E0VRM8_200217
+Batezo_pt05_200204
 </td>
 <td style="text-align:left;">
-4
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MonAlec_SEAVIJ1HQS7PSXM1_200217
-</td>
-<td style="text-align:left;">
-3
+6
 </td>
 <td style="text-align:left;">
 Copy_rceq_Monalec21042020
@@ -2963,75 +3005,8 @@ Copy_rceq_Monalec21042020
 <td style="text-align:left;">
 AGU232uEYZZKe4oI95IrJu7o
 </td>
-</tr>
-<tr>
 <td style="text-align:left;">
-MonAlec_9XPREVQOLXK3JE4S_200304
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MonAlec_9XPREVQOLXK3JE4S_200401
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Batezo_pt08_200316
-</td>
-<td style="text-align:left;">
-9
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Batezo_pt11_200326
-</td>
-<td style="text-align:left;">
-12
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Batezo_pt11_200414
-</td>
-<td style="text-align:left;">
-13
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
+Plasma
 </td>
 </tr>
 <tr>
@@ -3047,61 +3022,8 @@ Copy_rceq_Monalec21042020
 <td style="text-align:left;">
 AGU232uEYZZKe4oI95IrJu7o
 </td>
-</tr>
-<tr>
 <td style="text-align:left;">
-Batezo_pt09_200320
-</td>
-<td style="text-align:left;">
-14
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Batezo_pt09_200416
-</td>
-<td style="text-align:left;">
-15
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MonAlec_YBNHFHWVB0HBC3YY_200211
-</td>
-<td style="text-align:left;">
-5
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Batezo_pt05_200204
-</td>
-<td style="text-align:left;">
-6
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
+Plasma
 </td>
 </tr>
 <tr>
@@ -3117,6 +3039,60 @@ Copy_rceq_Monalec21042020
 <td style="text-align:left;">
 AGU232uEYZZKe4oI95IrJu7o
 </td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt08_200316
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt09_200320
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt09_200416
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3130,6 +3106,9 @@ Copy_rceq_Monalec21042020
 </td>
 <td style="text-align:left;">
 AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
 </td>
 </tr>
 <tr>
@@ -3145,6 +3124,43 @@ Copy_rceq_Monalec21042020
 <td style="text-align:left;">
 AGU232uEYZZKe4oI95IrJu7o
 </td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt11_200326
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Batezo_pt11_200414
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3158,6 +3174,94 @@ Copy_rceq_Monalec21042020
 </td>
 <td style="text-align:left;">
 AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_00QWTDYUH1E0VRM8_200217
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_9XPREVQOLXK3JE4S_200304
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_9XPREVQOLXK3JE4S_200401
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_SEAVIJ1HQS7PSXM1_200217
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonAlec_YBNHFHWVB0HBC3YY_200211
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Copy_rceq_Monalec21042020
+</td>
+<td style="text-align:left;">
+AGU232uEYZZKe4oI95IrJu7o
+</td>
+<td style="text-align:left;">
+Plasma
 </td>
 </tr>
 </tbody>
@@ -3207,14 +3311,14 @@ AVENIO_runs.xlsx</p>
 <p>An example of how the function is used is shown below: <em>Again, the
 CPR number is not a real CPR number</em>. The output is quite large
 (many rows) so I have only included 10 rows</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co"># Extracting project information</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="fu">extract_project</span>(<span class="at">df_list =</span> results,</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>                <span class="at">project =</span> <span class="st">&quot;Pembrolizumab&quot;</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>                <span class="at">synonymous =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>                <span class="at">simple =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Reading the results file</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds&quot;</span>) </span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># Extracting project information</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="fu">extract_project</span>(<span class="at">df_list =</span> results,</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>                <span class="at">project =</span> <span class="st">&quot;Pembrolizumab&quot;</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>                <span class="at">synonymous =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>                <span class="at">simple =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Which gives the following output:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3269,7 +3373,7 @@ Notes
 <tbody>
 <tr>
 <td style="text-align:left;">
-3008369755
+2801452016
 </td>
 <td style="text-align:left;">
 Pembrolizumab_10_180912
@@ -3316,54 +3420,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-3008369755
-</td>
-<td style="text-align:left;">
-Pembrolizumab_10_180912
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-20201217 monbazo olink1
-</td>
-<td style="text-align:left;">
-olink_pt10_prae
-</td>
-<td style="text-align:left;">
-BL
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-3008369755
+2801452016
 </td>
 <td style="text-align:left;">
 Pembrolizumab_10_181024
@@ -3409,7 +3466,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-1909208904
+2109514436
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181024
@@ -3456,7 +3513,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-1909208904
+2109514436
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181024
@@ -3502,7 +3559,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-1909208904
+2109514436
 </td>
 <td style="text-align:left;">
 Pembrolizumab_11_181024
@@ -3548,42 +3605,43 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-1909208904
+2109514436
 </td>
 <td style="text-align:left;">
-Pembrolizumab_11_181228
+Pembrolizumab_11_181024
 </td>
 <td style="text-align:left;">
 SNV
 </td>
 <td style="text-align:left;">
-TP53
+GJA8
 </td>
 <td style="text-align:left;">
-p.Gln136<em>;p.Gln136</em>;p.Gln136<em>;p.Gln136</em>;p.Gln125*
+p.Val257Leu
 </td>
 <td style="text-align:left;">
-Stop gained;Stop gained;Stop gained;Stop gained;Stop gained
+Missense
 </td>
 <td style="text-align:left;">
+BC_mut
 </td>
 <td style="text-align:left;">
-2.32%
+0.22%
 </td>
 <td style="text-align:left;">
-70
+12
 </td>
 <td style="text-align:left;">
-3018
+5344
 </td>
 <td style="text-align:left;">
-20230818
+20201217 monbazo olink1
 </td>
 <td style="text-align:left;">
-pembro11week9
+olink_pt11_prae
 </td>
 <td style="text-align:left;">
-Tx
+BL
 </td>
 <td style="text-align:left;">
 cfDNA
@@ -3594,7 +3652,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2709397795
+3008369755
 </td>
 <td style="text-align:left;">
 Pembrolizumab_12_180629
@@ -3640,7 +3698,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2709397795
+3008369755
 </td>
 <td style="text-align:left;">
 Pembrolizumab_12_180629
@@ -3686,34 +3744,80 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-2709397795
+3008369755
+</td>
+<td style="text-align:left;">
+Pembrolizumab_12_180629_BC
+</td>
+<td style="text-align:left;">
+SNV
+</td>
+<td style="text-align:left;">
+APC
+</td>
+<td style="text-align:left;">
+p.Ser837*
+</td>
+<td style="text-align:left;">
+Stop gained
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.13%
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+976
+</td>
+<td style="text-align:left;">
+20230927
+</td>
+<td style="text-align:left;">
+lunge1388_BC
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3008369755
 </td>
 <td style="text-align:left;">
 Pembrolizumab_12_180817
 </td>
 <td style="text-align:left;">
-CNV
+SNV
 </td>
 <td style="text-align:left;">
-EGFR
+LRRTM4
 </td>
 <td style="text-align:left;">
-N/A
+p.Arg198<em>;p.Arg199</em>;p.Arg198<em>;p.Arg199</em>
 </td>
 <td style="text-align:left;">
-N/A
+Stop gained;Stop gained;Stop gained;Stop gained
 </td>
 <td style="text-align:left;">
-N/A
+BAM
 </td>
 <td style="text-align:left;">
-N/A
+0.12%
 </td>
 <td style="text-align:left;">
-N/A
+9
 </td>
 <td style="text-align:left;">
-N/A
+7329
 </td>
 <td style="text-align:left;">
 20210216
@@ -3752,25 +3856,28 @@ should be displayed. If <code>silent = FALSE</code> (default) messages
 are displayed</li>
 <li><code>synology_path</code> which is the path to the Avenio_runs.xlsx
 and AVENIO_results_patients.rds files. (Default:
-“//Synology_m1/Synology_folder/AVENIO/”) ### Output</li>
+“//Synology_m1/Synology_folder/AVENIO/”)</li>
 </ol>
+<div id="output-5" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Output</h3>
 <p>A <code>list</code> with different information on the
 AVENIO_runs.xslx (<code>Info = NULL</code>) or the specific object as
 determined by <code>Info</code>.</p>
-<div id="example-5" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Example</h3>
+</div>
+<div id="example-5" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Example</h3>
 <p>Two examples of how the function is used is shown below:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Exploring the AVENIO_runs.xlsx file</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># Getting the information of total entries</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>results<span class="sc">$</span>Total_entries</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Exploring the AVENIO_runs.xlsx file</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># Getting the information of total entries</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>results<span class="sc">$</span>Total_entries</span></code></pre></div>
 <p>Should return:</p>
-<pre><code>#&gt; [1] 1500</code></pre>
+<pre><code>#&gt; [1] 1916</code></pre>
 <p>And:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">Info =</span> <span class="st">&quot;Required&quot;</span>,</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>                    <span class="at">silent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Getting the information on the samples with all the required information</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">Info =</span> <span class="st">&quot;Required&quot;</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>                    <span class="at">silent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
@@ -3807,31 +3914,147 @@ Sample_note
 <tbody>
 <tr>
 <td style="text-align:left;">
-3103530120
+2405460036
 </td>
 <td style="text-align:left;">
-pt12
+pt01
 </td>
 <td style="text-align:left;">
 Batezo
 </td>
 <td style="text-align:left;">
-2020-07-13
+2019-10-25
 </td>
 <td style="text-align:left;">
-20200724
+Copy_mrAB_Monalec_batezo_1
 </td>
 <td style="text-align:left;">
-ASZMkYMxgytHgov13wWty29S
+AajqaHzI9_hCH4wYCbDAIYx4
 </td>
 <td style="text-align:left;">
-6
+12
 </td>
 <td style="text-align:left;">
 cfDNA
 </td>
 <td style="text-align:left;">
 Unknown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2405460036
+</td>
+<td style="text-align:left;">
+pt01
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2019-10-02
+</td>
+<td style="text-align:left;">
+Copy_WQIe_Monalec_batezo_m_salic
+</td>
+<td style="text-align:left;">
+ARkgLARFX_lCQL3jQm9qG7IA
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2405460036
+</td>
+<td style="text-align:left;">
+pt01
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2020-04-14
+</td>
+<td style="text-align:left;">
+Copy_hjRD_202008212
+</td>
+<td style="text-align:left;">
+AEjxrRrIVjJGzbUFckTwpTpp
+</td>
+<td style="text-align:left;">
+B6
+</td>
+<td style="text-align:left;">
+cfDNA
+</td>
+<td style="text-align:left;">
+Tx
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2405460036
+</td>
+<td style="text-align:left;">
+pt01
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2019-10-25
+</td>
+<td style="text-align:left;">
+Copy_supo_20230303
+</td>
+<td style="text-align:left;">
+AGwQDzxcqrdDlpzlcS10s1En
+</td>
+<td style="text-align:left;">
+pippin_febr_Louise_1
+</td>
+<td style="text-align:left;">
+size_selection
+</td>
+<td style="text-align:left;">
+Unknown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2405460036
+</td>
+<td style="text-align:left;">
+pt01
+</td>
+<td style="text-align:left;">
+Batezo
+</td>
+<td style="text-align:left;">
+2019-10-25
+</td>
+<td style="text-align:left;">
+20231004
+</td>
+<td style="text-align:left;">
+AU-GJVH_R-RAXa0UUil1MCik
+</td>
+<td style="text-align:left;">
+pt01bc
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:left;">
+BC
 </td>
 </tr>
 <tr>
@@ -3863,135 +4086,19 @@ cfDNA
 Unknown
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-1908692159
-</td>
-<td style="text-align:left;">
-pt03
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2019-11-20
-</td>
-<td style="text-align:left;">
-Monalec_Batezo_2
-</td>
-<td style="text-align:left;">
-AYO0H3fNbPBEOKwJA9dv9IH0
-</td>
-<td style="text-align:left;">
-8
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2607630782
-</td>
-<td style="text-align:left;">
-pt07
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2020-03-06
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-<td style="text-align:left;">
-8
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1007491766
-</td>
-<td style="text-align:left;">
-pt08
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2020-03-16
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-<td style="text-align:left;">
-9
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2712330026
-</td>
-<td style="text-align:left;">
-pt10
-</td>
-<td style="text-align:left;">
-Batezo
-</td>
-<td style="text-align:left;">
-2020-03-25
-</td>
-<td style="text-align:left;">
-Copy_rceq_Monalec21042020
-</td>
-<td style="text-align:left;">
-AGU232uEYZZKe4oI95IrJu7o
-</td>
-<td style="text-align:left;">
-10
-</td>
-<td style="text-align:left;">
-cfDNA
-</td>
-<td style="text-align:left;">
-Unknown
-</td>
-</tr>
 </tbody>
 </table>
 </div>
-<div id="output-description" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Output
+<div id="output-description" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Output
 description</h3>
 <p>The output of the function is a named <code>list</code> with
 different entries. I have included a function
 (<code>explore_AVENIO_runs_Info()</code>) which displays a brief
 explanation of each entry. The function has no mandatory arguments. To
 view the explanations run the following command:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in explore_AVENIO_runs()</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs_Info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in explore_AVENIO_runs()</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="fu">explore_AVENIO_runs_Info</span>()</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -4120,7 +4227,7 @@ are displayed</li>
 and AVENIO_results_patients.rds files. (Default:
 “//Synology_m1/Synology_folder/AVENIO/”)</li>
 </ol>
-<div id="output-5" class="section level3" number="5.4.1">
+<div id="output-6" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> Output</h3>
 <p>A <code>list</code> with different stats on
 AVENIO_results_patients.rds (<code>Info = NULL</code>) or the specific
@@ -4129,11 +4236,11 @@ object as determined by <code>Info</code>.</p>
 <div id="example-6" class="section level3" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> Example</h3>
 <p>Two examples of how the function is used is shown below:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Exploring the results file</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Getting the information on all mutations</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>results<span class="sc">$</span>All_mutations</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Exploring the results file</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Getting the information on all mutations</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>results<span class="sc">$</span>All_mutations</span></code></pre></div>
 <p>Should return:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -4149,18 +4256,18 @@ n
 <tbody>
 <tr>
 <td style="text-align:left;">
-TP53
+EGFR
 </td>
 <td style="text-align:right;">
-573
+829
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-EGFR
+TP53
 </td>
 <td style="text-align:right;">
-458
+756
 </td>
 </tr>
 <tr>
@@ -4168,7 +4275,7 @@ EGFR
 APC
 </td>
 <td style="text-align:right;">
-271
+393
 </td>
 </tr>
 <tr>
@@ -4176,31 +4283,7 @@ APC
 KIT
 </td>
 <td style="text-align:right;">
-256
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-USP29
-</td>
-<td style="text-align:right;">
-242
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MET
-</td>
-<td style="text-align:right;">
-226
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PDZRN3
-</td>
-<td style="text-align:right;">
-225
+359
 </td>
 </tr>
 <tr>
@@ -4208,15 +4291,39 @@ PDZRN3
 PIK3CG
 </td>
 <td style="text-align:right;">
-225
+320
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-NA
+USP29
 </td>
 <td style="text-align:right;">
-214
+312
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MET
+</td>
+<td style="text-align:right;">
+303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PDZRN3
+</td>
+<td style="text-align:right;">
+297
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BRCA2
+</td>
+<td style="text-align:right;">
+261
 </td>
 </tr>
 <tr>
@@ -4224,15 +4331,15 @@ NA
 KRAS
 </td>
 <td style="text-align:right;">
-201
+231
 </td>
 </tr>
 </tbody>
 </table>
 <p>And:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Getting basic statistics on the NGS results</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>             <span class="at">Info =</span> <span class="st">&quot;Basestats&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Getting basic statistics on the NGS results</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="fu">result_stats</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>             <span class="at">Info =</span> <span class="st">&quot;Basestats&quot;</span>)</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -4251,7 +4358,7 @@ n
 Patients
 </td>
 <td style="text-align:right;">
-643
+744
 </td>
 </tr>
 <tr>
@@ -4259,7 +4366,7 @@ Patients
 Samples
 </td>
 <td style="text-align:right;">
-1500
+1916
 </td>
 </tr>
 <tr>
@@ -4267,7 +4374,7 @@ Samples
 Runs
 </td>
 <td style="text-align:right;">
-131
+145
 </td>
 </tr>
 <tr>
@@ -4275,7 +4382,7 @@ Runs
 Mutations
 </td>
 <td style="text-align:right;">
-5813
+7745
 </td>
 </tr>
 <tr>
@@ -4283,7 +4390,7 @@ Mutations
 cfDNA
 </td>
 <td style="text-align:right;">
-1215
+1491
 </td>
 </tr>
 <tr>
@@ -4291,7 +4398,15 @@ cfDNA
 BC
 </td>
 <td style="text-align:right;">
-228
+299
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tissue
+</td>
+<td style="text-align:right;">
+59
 </td>
 </tr>
 <tr>
@@ -4315,7 +4430,7 @@ cfChIP
 reanalyze
 </td>
 <td style="text-align:right;">
-5
+15
 </td>
 </tr>
 <tr>
@@ -4323,7 +4438,7 @@ reanalyze
 Tx
 </td>
 <td style="text-align:right;">
-745
+922
 </td>
 </tr>
 <tr>
@@ -4331,7 +4446,7 @@ Tx
 BL
 </td>
 <td style="text-align:right;">
-385
+482
 </td>
 </tr>
 <tr>
@@ -4340,6 +4455,30 @@ Unknown
 </td>
 <td style="text-align:right;">
 142
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tumor_BL
+</td>
+<td style="text-align:right;">
+50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tumor_Tx
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Post-Tx
+</td>
+<td style="text-align:right;">
+6
 </td>
 </tr>
 </tbody>
@@ -4353,8 +4492,8 @@ different entries. I have included a function
 (<code>result_stats_Info()</code>) which displays a brief explanation of
 each entry. The function has no mandatory arguments. To view the
 explanations run the following command:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in result_stats()</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Getting explanations for entries in result_stats()</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="fu">result_stats_Info</span>()</span></code></pre></div>
 <p>Should return something like:</p>
 <table class=" lightable-paper" style="font-size: 12px; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -4506,8 +4645,8 @@ from that run are investigated with <code>DNAfusion</code> before the
 samples are combined with other sequencing runs from the same
 patients.</p>
 <p>The following two functions from <code>DNAfusion</code> are used</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> DNAfusion<span class="sc">::</span><span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> <span class="st">&quot;FILE.bam&quot;</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>var_res <span class="ot">&lt;-</span> DNAfusion<span class="sc">::</span><span class="fu">find_variants</span>(<span class="at">file =</span> <span class="st">&quot;FILE.bam&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> DNAfusion<span class="sc">::</span><span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> <span class="st">&quot;FILE.bam&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>var_res <span class="ot">&lt;-</span> DNAfusion<span class="sc">::</span><span class="fu">find_variants</span>(<span class="at">file =</span> <span class="st">&quot;FILE.bam&quot;</span>)</span></code></pre></div>
 <p>Based on the output of these two functions a new mutation is
 classified for that sample and added as a results row for that patient.
 The relevant variables that are based on the <code>DNAfusion</code>
@@ -4549,8 +4688,8 @@ regularly.</p>
 <p>When the entire script has been run you should be able to investigate
 which runs (if any) that have not been added to the dataset but are
 present in the AVENIO_runs.xlsx file using:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">explore_AVENIO_runs</span>(<span class="at">silent =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>                    <span class="at">Info =</span> <span class="st">&quot;Unincluded_analyses&quot;</span>)</span></code></pre></div>
 <p>And you can then use <code>add_run_to_list()</code> to add the
 missing runs to the dataset</p>
 <p><strong>In case the AVENIO_runs.xslx file is lost</strong>, a backup
@@ -4568,7 +4707,7 @@ manuals to ensure reproducibility and for troubleshooting if something
 does not work. If your code works, discount this section.</p>
 <pre><code>#&gt; Warning in system2(&quot;quarto&quot;, &quot;-V&quot;, stdout = TRUE, env = paste0(&quot;TMPDIR=&quot;, :
 #&gt; kørende kommando &#39;&quot;quarto&quot;
-#&gt; TMPDIR=C:/Users/chris/AppData/Local/Temp/Rtmpag7WVl/file69f06e27e8f -V&#39; havde
+#&gt; TMPDIR=C:/Users/chris/AppData/Local/Temp/RtmpCuu5EW/file7b1c5fba13db -V&#39; havde
 #&gt; status 1
 #&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value
@@ -4580,13 +4719,13 @@ does not work. If your code works, discount this section.</p>
 #&gt;  collate  Danish_Denmark.utf8
 #&gt;  ctype    Danish_Denmark.utf8
 #&gt;  tz       Europe/Copenhagen
-#&gt;  date     2025-05-15
+#&gt;  date     2025-10-20
 #&gt;  pandoc   3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
 #&gt;  quarto   NA @ C:\\PROGRA~1\\RStudio\\RESOUR~1\\app\\bin\\quarto\\bin\\quarto.exe
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package      * version date (UTC) lib source
-#&gt;  AvenioUpdate * 1.8.0   2025-05-15 [1] Github (CTrierMaansson/AvenioUpdate@f1278c0)
+#&gt;  AvenioUpdate * 1.12.5  2025-09-22 [1] Github (CTrierMaansson/AvenioUpdate@5076cd5)
 #&gt;  crayon       * 1.5.3   2024-06-20 [1] CRAN (R 4.5.0)
 #&gt;  dplyr        * 1.1.4   2023-11-17 [1] CRAN (R 4.5.0)
 #&gt; 

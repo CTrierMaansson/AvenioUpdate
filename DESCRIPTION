@@ -1,6 +1,6 @@
 Package: AvenioUpdate
 Title: Update and exploration of Avenio data
-Version: 1.12.5
+Version: 1.13.0
 biocViews: TargetedResequencing, Genetics, Sequencing
 Authors@R:
   c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
@@ -12,7 +12,7 @@ Description: AvenioUpdate contains simple funcitons to update the list of
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Remotes: 
   bioc::BiocBaseUtils,
   bioc::IRanges,

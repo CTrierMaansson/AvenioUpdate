@@ -79,6 +79,9 @@ add_DNAfusion_res <- function(df,
                                ";EML4_i",NA)
                 fusion_variant <- "Not classified"
             }
+            if(fusion_position == "chr2:29223530;chr2:42295516"){
+                fusion_variant <- "Uncertain_variant"
+            }
             res_df <- data.frame(sample_index = sample_ind,
                                  Flags = "DNAfusion",
                                  Mutation.Class = "FUSION",

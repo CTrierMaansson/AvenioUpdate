@@ -127,7 +127,9 @@ the package you must have access to the Synology folder. How to obtain this,
 is found in 
 [/Dropbox/Lung cancer group/How-to guides](/Dropbox/Lung cancer group/How-to guides)
 . Once you have gained access to the Synology you must stay connected using 
-the Ethernet cable connection **IPv4-DNA-server: 10.83.252.137**. 
+the Ethernet cable connection **IPv4-adress: 10.124.6.78** (health.client.au) or 
+**IPv4-adress: 10.60.24.79** (onerm). Notice how **both**  AU and region 
+networks can establish the connection to synology. 
 
 ## The AVENIO_runs.xlsx file
 This file is at 
@@ -146,8 +148,8 @@ However...
 
 The file can be opened in excel where the samples can be added accordingly.
 It is **VERY** 
-important that samples/entries are not deleted from the file. Currently, we
-have no backup of the data (given it is sensitive) included in the file. 
+important that samples/entries are not deleted from the file. Christoffer makes 
+sure there is a backup of the file on GenomeDK, which is updated regularly. 
 If you make errors when entering your information, no worries, this can be fixed
 without any repercussions. However, it is very difficult to obtain deleted data.
 
@@ -208,7 +210,7 @@ The number is used to extract the information from each patient in
 `create_simple_output()`.
 
 As explained below, AVENIO_results_patients.rds is a named `list` of `data.frames`
-where each `data.frame` is named after the CPR number of the patient.
+where each `data.frame` is named with the CPR number of the patient.
 
 Therefore you will able to explore all Avenio information, including sample
 metrics using:
@@ -377,6 +379,42 @@ the `data.frames`.
 This is also to register that the sample has been analyzed and if other samples 
 with detectable variants have been analyzed for that patient these variants are
 being investigated in the original BAM files for the patient.
+
+## Synology path
+
+The pacakge is dependent on access to the synology folder which can be 
+established through the how-to-guide:
+[/Dropbox/Lung cancer group/How-to guides](/Dropbox/Lung cancer group/How-to guides)
+. At times, this connection is established though different mechanisms and this
+can affect the path to the synology folder. The *correct* path is 
+`//Synology_m1/Synology_folder/` and has been hard coded into all the
+functions. This is also the path which is used in this manual. 
+
+However, if the connection to the synology folder only can get 
+established through the IP adress. Then the path could be:
+`//10.124.39.251/Synology_folder/`. This path can then be used to change the 
+hard coded path for the different functions. 
+If this is the case then all functions has to be run using:
+
+```{r, eval=FALSE,message=F}
+# defining path
+syn_path <- "//10.124.39.251/Synology_folder/AVENIO/"
+
+#Example of function needing the synology_path argument
+add_run_to_list(...,
+                synology_path = syn_path)
+
+# '...' means "additional arguments"
+```
+
+And the results file can only be read using:
+
+```{r, eval = FALSE, message = F}
+#Reading the Avenio results:
+results <- readRDS("//10.124.39.251/Synology_folder/AVENIO/AVENIO_results_patients.rds") 
+
+```
+
 
 # Main functions
 
@@ -914,6 +952,7 @@ The function takes **NO** mandatory arguments, but takes three optional argument
 1. `Info` - Name of the information of interest, if `Info = NULL` (default) all information is displayed
 2. `silent` - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
 2. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
+
 ### Output
 
 A `list` with different information on the AVENIO_runs.xslx (`Info = NULL`)
@@ -1094,6 +1133,13 @@ that are based on the `DNAfusion` results include:
 
 These results are also maintanied when exploring the results with 
 `create_simple_output()`
+
+Upon exploration it was identified that the variant:
+`Genomic.Position = "chr2:29223530;chr2:42295516"` 
+was detected in several samples however, it could not be classified.
+If this variant is detected, the fusion is classified as:
+`Variant.Description = "Uncertain_variant"` and should be removed from 
+downstream analyses. 
 
 # list_rebuild.R AND AVENIO_runs.xlsx recovery (**Not mandatory read**)
 
