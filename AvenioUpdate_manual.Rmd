@@ -1103,6 +1103,60 @@ result_stats_Info() %>%
 
 ```
 
+## `unlist_frames()`
+
+This function takes the list of data.frames containing all mutation information
+and creates a single data.frame with the results allowing downstream `dplyr` 
+manipulation on all results
+
+The function takes one mandatory arguments:
+
+1. `df_list` which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+
+### Output
+
+A `data.frame` where each row is a mutated gene and all the variables from the 
+AVENIO `.csv` files. One additional variable is added `CPR` which is extracted 
+from the names in the input `df_list`.
+
+### Example
+
+An example of how the function is used is shown below:
+*Again, the CPR number is not a real CPR number*.
+The output is quite large (many rows) so I have only included 10 rows and
+selected specific variables of interest
+
+```{r, eval=FALSE,message=F}
+master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_df <- unlist_frames(master_list = master)
+print(master_df)
+```
+
+Which gives the following output:
+
+```{r, echo=FALSE,message=F}
+# Reading the results file
+master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+master_df <- unlist_frames(master_list = master)
+master_df %>% 
+  dplyr::slice(1,2,3,4,5,6,31,32,33,40) %>%
+  group_by(CPR) %>%
+  dplyr::reframe(sample_index = sample_index,
+                 CPR = paste0(floor(runif(1,10,31)),
+                              0,
+                              floor(runif(1,1,10)),
+                              floor(runif(1,20,100)),
+                              floor(runif(1,1000,10000))),
+                 Analysis.Name = Analysis.Name,
+                 Analysis.ID = Analysis.ID,
+                 Mutation.Class = Mutation.Class,
+                 Gene = Gene) %>%
+  knitr::kable() %>% 
+  kableExtra::kable_paper(font_size = 12,full_width = F)
+
+```
+
+
 # `DNAfusion` implementation (**Not mandatory read**)
 
 As described above `DNAfusion` is used to analyze all patients for EML4-ALK
