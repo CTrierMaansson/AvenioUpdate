@@ -1,10 +1,10 @@
-#' Remove all results for a sample_index 
+#' Remove all results for a specific sequencing run 
 #' 
-#' Remove results for a sample_index in cases of e.g., wrong entries in 
+#' Remove results for a run_ID in cases of e.g., wrong entries in 
 #' 'Avenio_runs.xlsx', errors during sequencing or the results are misleading
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical isCharacter
 #' @importFrom dplyr `%>%` filter as_tibble
-#' @param samples `Character` or `Character` `vector` of sample_index you want
+#' @param run `Character` or `Character` `vector` of run_IDs you want
 #'  removed from the results
 #' @param master_list The `list` of `data.frames` which contains all information on
 #'  on the patients. This is read using 
@@ -13,36 +13,36 @@
 #'  containing AVENIO_runs.xlsx & AVENIO_keys.rds. Default is 
 #'  "//Synology_m1/Synology_folder/AVENIO/"
 #' @param save `Boolean` Indicating whether the output without the specified 
-#'  `samples` should be automatically saved as 
+#'  `run` should be automatically saved as 
 #'  "//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds". 
 #'  Default = `FALSE`
 #' @param save_as Full path to the file you want to save the output as. 
 #'  Default = paste0(synology_path,"AVENIO_results_patients.rds")
 #' @return A `list` of `data.frames` with similar structure to `master_list`.
-#'  but with the sample_index defined with `samples` removed from the results
+#'  but with the run_ID defined with `run` removed from the results
 #'  
 #' @examples
 #' master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-#' #Removing a single sample from the results automatically
-#' rm_single_sample <- "PROJECT_PATIENT_260217"
-#' remove_sample_index(samples = rm_single_sample,
-#'                     master_list = master,
-#'                     save = TRUE)
+#' #Removing a single run from the results automatically
+#' rm_single_run <- "EXAMPLE_RUN123"
+#' remove_run(run = rm_single_run,
+#'            master_list = master,
+#'            save = TRUE)
 #' 
-#' #Removing several samples but without saving the results
-#' rm_several_samples <- c("PROJECT_PATIENT1_260217",
-#'                         "PROJECT_PATIENT2_260217",
-#'                         "PROJECT_PATIENT2_251023",
-#'                         "PROJECT_PATIENT3_250701")
-#' remove_sample_index(samples = rm_several_samples,
-#'                     master_list = master,
-#'                     save = FALSE)
+#' #Removing several runs but without saving the results
+#' rm_several_runs <- c("EXAMPLE_RUN123",
+#'                      "EXAMPLE_RUN456",
+#'                      "EXAMPLE_RUN789")
+#' remove_run(run = rm_several_runs,
+#'            master_list = master,
+#'            save = FALSE)
 #' @export
-remove_sample_index <- function(samples, master_list,
-                                synology_path = "//Synology_m1/Synology_folder/AVENIO/",
-                                save = FALSE,
-                                save_as = paste0(synology_path,
-                                                 "AVENIO_results_patients.rds")){
+remove_run <- function(run, 
+                       master_list,
+                       synology_path = "//Synology_m1/Synology_folder/AVENIO/",
+                       save = FALSE,
+                       save_as = paste0(synology_path,
+                                        "AVENIO_results_patients.rds")){
     `%ni%` <- Negate(`%in%`)
     if (!is.list(master_list)) {
         stop("master_list has to be a list")
@@ -65,8 +65,8 @@ remove_sample_index <- function(samples, master_list,
     if (!isScalarLogical(save)) {
         stop("save has to be a TRUE or FALSE")
     }
-    if (!isCharacter(samples)) {
-        stop("samples has to be a character")
+    if (!isCharacter(run)) {
+        stop("run has to be a character")
     }
     nchar_saveas <- nchar(save_as)
     if(substr(save_as,1,1) != "/"){
@@ -76,20 +76,20 @@ remove_sample_index <- function(samples, master_list,
         stop("The save_as has to end with .rds")
     }
     df <- unlist_frames(master_list = master_list)
-    initial_index <- unique(df$sample_index)
-    if(any(samples %ni% initial_index)){
-        wrong_samples <- paste(unique(samples[samples %ni% initial_index]),collapse = ", ")
-        stop("Error in samples\n",
-             "The following samples that you want to remove\n",
-              "are not present in master_list:\n",
-             wrong_samples,"\n")
+    initial_runs <- unique(df$Analysis.ID)
+    if(any(run %ni% initial_runs)){
+        wrong_runs <- paste(unique(run[run %ni% initial_runs]),collapse = ", ")
+        stop("Error in run\n",
+             "The following runs that you want to remove\n",
+             "are not present in master_list:\n",
+             wrong_runs,"\n")
     }
-    message(paste0("Removing\n",paste(samples,collapse = ", "),
+    message(paste0("Removing\n",paste(run,collapse = ", "),
                    "\nfrom master_list\n\n"))
     df_filtered <- df %>% 
-        filter(sample_index %ni% samples)
+        filter(Analysis.ID %ni% run)
     df_removed <- df %>% 
-        filter(sample_index %in% samples) %>% 
+        filter(Analysis.ID %in% run) %>% 
         select(CPR,sample_index, Analysis.ID, Flags, Gene,Coding.Change) %>% 
         unique() %>% 
         as_tibble()
@@ -122,10 +122,10 @@ remove_sample_index <- function(samples, master_list,
         }
     }
     if(!save){
-       n <- save_as_func(save_as_path = save_as)
+        n <- save_as_func(save_as_path = save_as)
         if(n == "1"){
-           file_exist_func(save_as_path = save_as,
-                           obj = df_list)
+            file_exist_func(save_as_path = save_as,
+                            obj = df_list)
         }
         if(n == "2"){
             message(paste0("Terminating code without saving the output ",

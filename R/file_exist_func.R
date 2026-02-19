@@ -24,7 +24,7 @@ file_exist_func <- function(save_as_path,obj){
         }
         if(m == "2")
             message("Select another filename using " ,
-                    "remove_sample_index(save_as = <'file_name'>)\n",
+                    "save_as = <'file_name'>\n",
                     "Or do not save the file")
     }
     if(!f_exist){
