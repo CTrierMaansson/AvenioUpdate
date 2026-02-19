@@ -138,7 +138,12 @@ added_plasma_runs <- c("AbpTmAnr_h9DPL1skMvyje5U",
                        "AUoX7CUl_R9Km4NN5S6981gL",
                        "AZGYvMNad0NF_4sFhHvANYtT",
                        "AT6FIbIHWOxJ2YEzv2zpRCF_",
-                       "AGNeTev9U9BMHo6tInOkkSH3")
+                       "AGNeTev9U9BMHo6tInOkkSH3",
+                       "ABfED3AlVn5ErZja8jBwQwQl",
+                       "AdDPzGMaAgBOZL8TLyjyOC45",
+                       "AWKiPCImAjtO55g8NpBC5iJR",
+                       "AXqpSUKD5BtPhqbd19_H-olb",
+                       "ANIbN9-w77NBxIH9iX0TmqAc")
 added_tissue_runs <- c("ALfftHDzDf9Evo2fz0r1muEC",
                        "ATEhuqON-6JAd6U8JpC7MgB-",
                        "ASmjSYbVP6BP6K6aVqLLEoWH",
@@ -151,40 +156,49 @@ library(AvenioUpdate)
 `%ni%` <- Negate(`%in%`)
 #### Test completeness of list####
 
-# Test entries not present in the dataset
+# Test all runs from dataset is included in added_runs
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
 
 analyses <- included_analyses(master_list)
 if(any(analyses[[1]]$Analysis.ID %ni% added_runs)){
     analysis_oi <- analyses[[1]]$Analysis.ID[analyses[[1]]$Analysis.ID %ni% added_runs]
-    print("These plasma or tissue run IDs are not included in this file:")
+    message("These plasma or tissue run IDs are not included in this file:")
     analysis_oi
 }else{
-    print("All relevant run IDs are in this file")
+    message("All relevant run IDs are in this file")
+}
+
+# Test if all entries in added_runs are in the dataset
+if(any(added_runs %ni% analyses[[1]]$Analysis.ID)){
+    analysis_oi <- added_runs[added_runs %ni% analyses[[1]]$Analysis.ID]
+    message("These plasma or tissue run IDs are not present in 'AVENIO_results_patients.rds' and should be excluded:")
+    analysis_oi
+}else{
+    message("All run IDs in added_runs are in also present in 'AVENIO_results_patients.rds'")
 }
 
 # Test if all entries are unique
 if(length(added_runs) != length(unique(added_runs))){
-    print("These run IDs are not unique")
+    message("These run IDs are not unique")
     poor_sample <- table(added_runs)[table(added_runs)!=1]
     poor_sample
 }else{
-    print("Run IDs are unique")
+    message("Run IDs are unique")
 }
 
 # Test if some entries not are 24 characters
 if(any(nchar(added_runs) != 24)){
     poor_sample <- added_runs[nchar(added_runs) != 24]
-    print("These run IDs are not 24 characters")
+    message("These run IDs are not 24 characters")
     poor_sample
 }else{
-    print("All run IDs are 24 characters")
+    message("All run IDs are 24 characters")
 }
 
 #### Adding run ####
 
 master_list <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
-dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-AT6FIbIHWOxJ2YEzv2zpRCF_"
+dir <- "//Synology_m1/Synology_folder/AVENIO/AVENIO_results/Plasma-ANIbN9-w77NBxIH9iX0TmqAc"
 master_list <- AvenioUpdate::add_run_to_list(master_list = master_list,
                                Directory = dir)
 
