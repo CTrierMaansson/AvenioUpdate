@@ -62,7 +62,6 @@ result_stats <- function(Info = NULL, silent = FALSE,
         paste0(synology_path,"AVENIO_runs.xlsx"),
         col_types = c(rep("guess",4),"date",rep("guess",6))) %>% 
         dplyr::mutate(date_check = lubridate::ymd(Sample_date)) %>% 
-        dplyr::filter(CPR %in% names(master_list)) %>% 
         select(CPR,Name_in_project, Project, Sample_date,
                Run_name, Run_ID, Sample_name, 
                Sample_note, Material,date_check) %>% 
@@ -121,7 +120,7 @@ result_stats <- function(Info = NULL, silent = FALSE,
     missing_samples <- xlsx_samples[xlsx_samples %ni% added_samples]
     problematic_df <- Avenio_runs %>% 
         dplyr::filter(sample_index %in% missing_samples) %>% 
-        dplyr::select(sample_index, Run_ID,Sample_name) %>% 
+        dplyr::select(CPR,sample_index, Run_ID,Sample_name) %>% 
         as.data.frame()
     if(!silent){
         message("Extracting project statistics")
