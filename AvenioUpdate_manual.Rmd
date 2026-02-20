@@ -59,9 +59,9 @@ As of late 2025 the package contains four **main** functions
 (`add_run_to_list()`, `add_new_key()`,`extract_project()` & `create_simple_output()`) 
 which are used to update the
 results file and get an overview of the results for a single patient.
-In addition, the package contains four **smaller** functions which are 
-used to get some statistics on the data we have collected and to make sure the
-results file is updated correctly. 
+In addition, the package contains some **smaller** functions which are 
+used to get some statistics on the data we have collected, remove entries from 
+results, and to make sure the results file is updated correctly. 
 
 # Installation
 
@@ -168,7 +168,14 @@ It is **VERY**
 important that samples/entries are not deleted from the file. Christoffer makes 
 sure there is a backup of the file on GenomeDK, which is updated regularly. 
 If you make errors when entering your information, no worries, this can be fixed
-without any repercussions. However, it is very difficult to obtain deleted data.
+without any repercussions.
+When executing `add_run_to_list()` to update the results, R runs several checks 
+on the information in AVENIO_runs.xlsx However not all errors can get caught so
+if you find an error in the AVENIO_runs.xlsx **after** `add_run_to_list()` is 
+done then the error has to be fixed with either `remove_run()` or 
+`remove_sample_index()` (see [below](#remove_functions).
+
+But most importantly. It is very hard to fetch deleted data. 
 
 So as long as you don't delete anything or change entries not belonging to 
 you all is fine!
@@ -538,7 +545,7 @@ results <- readRDS("//10.124.39.251/Synology_folder/AVENIO/AVENIO_results_patien
 # Main functions
 
 ## `add_run_to_list()`
-
+<a id="add_run_to_list"></a>
 As mentioned, this is the most important function in the package.
 The function is used to update the [AVENIO_results_patients.rds](#AVENIO_results_patients) file with any
 new information from the AVENIO_runs.xlsx file. 
@@ -1050,7 +1057,7 @@ The function takes **NO** mandatory arguments, but takes three optional argument
 
 1. `Info` - Name of the information of interest, if `Info = NULL` (default) all information is displayed
 2. `silent` - A `Boolean` determining if messages should be displayed. If `silent = FALSE` (default) messages are displayed
-2. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
+3. `synology_path` which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/") 
 
 ### Output
 
@@ -1258,6 +1265,93 @@ master_df %>%
 
 ```
 
+## `remove_sample_index()`
+<a id="remove_functions"></a>
+This functions removes all results for a given sample_index.
+This is useful where there are mistakes in the results connected to the sample_index
+or if the sample_index it self contains errors, 
+e.g., wrong Name_in_project or Sample_date
+
+The function takes two mandatory arguments and three optional 
+
+1. `samples` - A `Character` **or** `Character vector` with sample_index to be removed 
+2. `master_list` - Which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+3. `synology_path` - Which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/")
+4. `save` - A `Boolean` defining whether the results without `samples` should be saved (Default: `FALSE`)
+5. `save_as` - A `Character` defining the full path to where the output should be saved (Default: paste0(synology_path, "AVENIO_results_patients.rds"))
+
+If `save = FALSE`, during the execution the user will get 
+prompted if the results should be saved. Type 1 or 2 in the console in order to
+decide this. Moreover, if the file defined as `save_as` exists, the user has to 
+confirm with 1 or 2 if the file should get overwritten with the results returned
+by `remove_sample_index()`. these mechanisms have been implemented in order to
+minimize the risk of accidentally deleting contents from AVENIO_results_patients.rds
+
+### Output
+
+The output is similar to the structure of the output from `add_run_to_list()` but 
+without the specified sample_index
+
+### Example
+
+```{r, eval=FALSE,message=F}
+master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+rm_sample <- "PROJECT_PATIENT_260217"
+master <- remove_sample_index(samples = rm_sample,
+                              master_list = master,
+                              save = TRUE)
+```
+
+This removes the results from the sample_index "PROJECT_PATIENT_260217" and
+saves the updated results as 
+"//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
+
+## `remove_run()`
+This functions removes all results for a given Run_ID.
+This is useful where there are multiple mistakes in the results connected to the run
+or if several sample_index's contain errors, 
+e.g., wrong Name_in_project or Sample_date.
+
+The Run_ID is the radomly generated ID created by Avenio when the sequencing is initiated.
+Therefore it is the same type of ID which is used as `Directory` in
+`add_run_to_list()` (see [above](#add_run_to_list) )
+
+The function takes two mandatory arguments and three optional 
+
+1. `run` - A `Character` **or** `Character vector` with run_ID to be removed 
+2. `master_list` - Which is the AVENIO_results_patients.rds loaded in using `readRDS()`
+3. `synology_path` - Which is the path to the Avenio_runs.xlsx and AVENIO_results_patients.rds files. (Default: "//Synology_m1/Synology_folder/AVENIO/")
+4. `save` - A `Boolean` defining whether the results without `samples` should be saved (Default: `FALSE`)
+5. `save_as` - A `Character` defining the full path to where the output should be saved (Default: paste0(synology_path, "AVENIO_results_patients.rds"))
+
+If `save = FALSE`, during the execution the user will get 
+prompted if the results should be saved. Type 1 or 2 in the console in order to
+decide this. Moreover, if the file defined as `save_as` exists, the user has to 
+confirm with 1 or 2 if the file should get overwritten with the results returned
+by `remove_sample_index()`. these mechanisms have been implemented in order to
+minimize the risk of accidentally deleting contents from AVENIO_results_patients.rds
+
+### Output
+
+The output is similar to the structure of the output from `add_run_to_list()` but 
+without the specified run_ID
+
+### Example
+
+```{r, eval=FALSE,message=F}
+master <- readRDS("//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds")
+
+#Removing a single run from the results automatically
+rm_run <- "EXAMPLE_RUN123"
+remove_run(run = rm_run,
+           master_list = master,
+           save = TRUE)
+```
+
+This removes the results from the Run_ID "EXAMPLE_RUN123" and
+saves the updated results as 
+"//Synology_m1/Synology_folder/AVENIO/AVENIO_results_patients.rds"
 
 # `DNAfusion` implementation (**Not mandatory read**)
 
